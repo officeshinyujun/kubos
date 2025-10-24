@@ -1,0 +1,13 @@
+@use "../../constants/COLORS.scss" as colors;
+@use "../../constants/SPACING.scss" as spacing;
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    padding : spacing.$s12;
+    gap : spacing.$s12;
+    border-bottom : 1px solid colors.$border-primary;
+}
