@@ -1,0 +1,40 @@
+@use "@/constants/SPACING" as spacing;
+@use "@/constants/FONTS" as fonts;
+@use "@/constants/COLORS" as colors;
+
+
+.container{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding: spacing.$s20 spacing.$s12;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: spacing.$s16;
+    h1 {
+        font-size: fonts.$xl;
+        font-weight: fonts.$bold;
+        color: colors.$text-primary;
+    }
+}
+
+.contents{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: spacing.$s16;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding-bottom: spacing.$s8; // Add some space for scrollbar
+    -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
+    
+    // Hide scrollbar for cleaner look (optional)
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;  // IE and Edge
+    scrollbar-width: none;  // Firefox
+}

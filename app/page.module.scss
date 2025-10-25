@@ -1,4 +1,6 @@
 @use "../constants/COLORS.scss" as colors;
+@use "../constants/SPACING.scss" as spacing;
+@use "../constants/FONTS.scss" as font;
 
 .container {
     width: 100vw;
@@ -17,4 +19,35 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+.contents{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding : spacing.$s24;
+}
+
+.title{
+    font-size : spacing.$s24;
+    font-weight : 500;
+    color : colors.$text-primary;
+    line-height: 150%;
+}
+
+.userName{
+    font-size : spacing.$s24;
+    font-weight : 600;
+    color : colors.$brand-primary;
+    line-height: 150%;
+}
+
+.description{
+    color : colors.$text-secondary;
+    font-size: font.$md;
+    font-weight: font.$medium;
+    line-height: 150%;
 }

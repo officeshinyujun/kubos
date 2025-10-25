@@ -1,0 +1,32 @@
+@use "@/constants/SPACING" as spacing;
+@use "@/constants/FONTS" as fonts;
+@use "@/constants/COLORS" as colors;
+
+.container{
+    width: 400px;
+    min-width: 400px; // Prevent flex-shrink
+    height: 300px;
+    border: 1px solid colors.$border-primary;
+    border-radius: 16px;
+    display: inline-flex; // Change to inline-flex for better horizontal scrolling
+    flex-direction: column;
+    flex-shrink: 0; // Prevent the card from shrinking
+}
+
+.contents{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: spacing.$s20;
+    padding: spacing.$s20;
+    h1{
+        font-size: fonts.$lg;
+        font-weight: fonts.$bold;
+        color: colors.$text-primary;
+    }
+    p{
+        font-size: fonts.$md;
+        font-weight: fonts.$regular;
+        color: colors.$text-secondary;
+    }
+}

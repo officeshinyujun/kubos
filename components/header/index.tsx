@@ -6,7 +6,8 @@ import Image from 'next/image';
 export default function Header() {
     return (
         <header className={styles.container}>
-            <Image 
+            <div className={styles.logoContainer}>
+                <Image 
                 src={kubosLogo}
                 alt="Kubos Logo"
                 width={45}
@@ -17,6 +18,8 @@ export default function Header() {
                 alt="Kubos Logo Text"
                 width={87}
             />
+            </div>
+            <div className={styles.userProfile}/>
         </header>
     );
 }
