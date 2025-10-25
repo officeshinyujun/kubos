@@ -10,7 +10,7 @@ interface IProps  {
 export default function ProjectCard({title, editTime}: IProps) {
     return (
         <div className={s.container}>
-            <Image src={testImage} alt="project" width={400} height={230}/>
+            <Image src={testImage} alt="project" width={398} height={230} style={{borderRadius : 16}}/>
             <div className={s.contents}>
                 <h1>{title}</h1>
                 <p>{editTime}</p>

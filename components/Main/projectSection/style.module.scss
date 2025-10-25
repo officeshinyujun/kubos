@@ -7,7 +7,7 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
-    padding: spacing.$s20 spacing.$s12;
+    padding: spacing.$s12 spacing.$s20 ;
     justify-content: flex-start;
     flex-direction: column;
     gap: spacing.$s16;
@@ -16,6 +16,9 @@
         font-weight: fonts.$bold;
         color: colors.$text-primary;
     }
+    background-color: colors.$background-secondary;
+    border-radius: spacing.$s16;
+    border: 1px solid colors.$border-primary;
 }
 
 .contents{
