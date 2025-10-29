@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import s from "./page.module.scss";
 import SideBar from "@/components/Main/sideBar";
 import ProjectSection from "@/components/Main/projectSection";
+import TutorialSection from "@/components/Main/tutorialSection";
 
 export default function Home() {
 
@@ -18,6 +19,7 @@ export default function Home() {
             <p className={s.description}>오늘은 어떤 작품을 만드실건가요?</p>
           </div>
           <ProjectSection/>
+          <TutorialSection/>
         </div>
       </div>  
     </div>

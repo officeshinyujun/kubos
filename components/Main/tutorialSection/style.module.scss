@@ -1,0 +1,31 @@
+@use "@/constants/SPACING" as spacing;
+@use "@/constants/FONTS" as fonts;
+@use "@/constants/COLORS" as colors;
+
+
+.container{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding: spacing.$s12 spacing.$s20 ;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: spacing.$s16;
+    h1 {
+        font-size: fonts.$xl;
+        font-weight: fonts.$bold;
+        color: colors.$text-primary;
+    }
+    background-color: colors.$background-secondary;
+    border-radius: spacing.$s16;
+    border: 1px solid colors.$border-primary;
+}
+
+.contents{
+    width: 100%;
+    display: grid;
+    row-gap: 16px;
+    column-gap: 16px;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}

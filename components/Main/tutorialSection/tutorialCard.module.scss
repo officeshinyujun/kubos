@@ -1,0 +1,40 @@
+@use "@/constants/SPACING" as spacing;
+@use "@/constants/FONTS" as fonts;
+@use "@/constants/COLORS" as colors;
+
+.container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    .content{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: spacing.$s32;
+        border-radius: 8px;
+        border: 1px solid colors.$border-primary;
+        h1{
+            font-size: fonts.$xl;
+            font-weight: fonts.$medium;
+        }
+    }
+}
+
+.complete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: spacing.$s16;
+    background: rgba(17, 17, 17, 0.80);
+    backdrop-filter: blur(2px);
+    h1 {color : colors.$brand-primary !important;}
+}
+
+.incomplete{
+    background: linear-gradient(90deg, rgba(17, 17, 17, 0.20) 0%, #181818 100%);
+    h1 {color : colors.$text-primary !important;}
+}
