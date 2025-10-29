@@ -1,6 +1,6 @@
 import styles from "./style.module.scss";
-import kubosLogo from "../../assets/images/kubos_logo.svg";
-import kubosLogoText from "../../assets/images/kubos_logo_text.png";
+import kubosLogo from "@/assets/images/kubos_logo.svg";
+import kubosLogoText from "@/assets/images/kubos_logo_text.png";
 import Image from 'next/image';
 
 export default function Header() {

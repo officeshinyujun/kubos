@@ -1,4 +1,4 @@
-import Header from "@/components/header";
+import Header from "@/components/general/header";
 import s from "./page.module.scss";
 import SideBar from "@/components/Main/sideBar";
 import ProjectSection from "@/components/Main/projectSection";

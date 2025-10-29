@@ -1,0 +1,7 @@
+@use "@/constants/COLORS.scss" as colors;
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background: colors.$background-primary;
+}
