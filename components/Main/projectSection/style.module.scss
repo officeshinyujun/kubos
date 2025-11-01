@@ -1,37 +1,32 @@
-@use "@/constants/SPACING" as spacing;
-@use "@/constants/FONTS" as fonts;
-@use "@/constants/COLORS" as colors;
-
-
 .container{
     width: 100%;
     display: flex;
     align-items: flex-start;
-    padding: spacing.$s12 spacing.$s20 ;
+    padding: $s12 $s20 ;
     justify-content: flex-start;
     flex-direction: column;
-    gap: spacing.$s16;
+    gap: $s16;
     h1 {
-        font-size: fonts.$xl;
-        font-weight: fonts.$bold;
-        color: colors.$text-primary;
+        font-size: $xl;
+        font-weight: $bold;
+        color: $text-primary;
     }
-    background-color: colors.$background-secondary;
-    border-radius: spacing.$s16;
-    border: 1px solid colors.$border-primary;
+    background-color: $background-secondary;
+    border-radius: $s16;
+    border: 1px solid $border-primary;
 }
 
 .contents{
     width: 100%;
     display: flex;
     flex-direction: row;
-    gap: spacing.$s16;
+    gap: $s16;
     align-items: flex-start;
     justify-content: flex-start;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-    padding-bottom: spacing.$s8; // Add some space for scrollbar
+    padding-bottom: $s8; // Add some space for scrollbar
     -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
     
     // Hide scrollbar for cleaner look (optional)

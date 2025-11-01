@@ -1,16 +1,11 @@
-@use "@/constants/COLORS.scss" as colors;
-@use "@/constants/SPACING.scss" as spacing;
-@use "@/constants/FONTS.scss" as font;
-
-
 .container {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: spacing.$s20;
-    border-right: 1px solid colors.$border-primary;
+    padding: $s20;
+    border-right: 1px solid $border-primary;
 }
 
 .button{
@@ -19,10 +14,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: colors.$brand-primary;
+    background-color: $brand-primary;
     outline: none;
-    border-radius: spacing.$s16;
+    border-radius: $s16;
     border: none;
-    font-size: font.$md;
-    font-weight: font.$medium;
+    font-size: $md;
+    font-weight: $medium;
 }

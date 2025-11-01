@@ -1,15 +1,12 @@
-@use "@/constants/COLORS.scss" as colors;
-@use "@/constants/SPACING.scss" as spacing;
-
 .container{
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    padding : spacing.$s12;
-    gap : spacing.$s12;
-    border-bottom : 1px solid colors.$border-primary;
+    padding : $s12;
+    gap : $s12;
+    border-bottom : 1px solid $border-primary;
 }
 
 .logoContainer{
@@ -17,7 +14,7 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: row;
-    gap : spacing.$s12;
+    gap : $s12;
 }
 
 .userProfile{

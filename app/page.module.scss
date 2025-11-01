@@ -1,11 +1,7 @@
-@use "../constants/COLORS.scss" as colors;
-@use "../constants/SPACING.scss" as spacing;
-@use "../constants/FONTS.scss" as font;
-
 .container {
     width: 100vw;
     height: 100vh;
-    background-color: colors.$background-primary;
+    background-color: $background-primary;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -28,27 +24,27 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding : spacing.$s24;
-    gap: spacing.$s16;
+    padding : $s24;
+    gap: $s16;
 }
 
 .title{
-    font-size : spacing.$s24;
+    font-size : $s24;
     font-weight : 500;
-    color : colors.$text-primary;
+    color : $text-primary;
     line-height: 150%;
 }
 
 .userName{
-    font-size : spacing.$s24;
+    font-size : $s24;
     font-weight : 600;
-    color : colors.$brand-primary;
+    color : $brand-primary;
     line-height: 150%;
 }
 
 .description{
-    color : colors.$text-secondary;
-    font-size: font.$md;
-    font-weight: font.$medium;
+    color : $text-secondary;
+    font-size: $md;
+    font-weight: $medium;
     line-height: 150%;
 }

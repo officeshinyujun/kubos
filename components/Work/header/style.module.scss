@@ -1,28 +1,24 @@
-@use "@/constants/SPACING.scss" as spacing;
-@use "@/constants/FONTS.scss" as fonts;
-@use "@/constants/COLORS.scss" as colors;
-
 .container {
     width: 100%;
-    padding : spacing.$s12;
-    gap: spacing.$s16;
+    padding : $s12;
+    gap: $s16;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: row;
-    border-bottom : 1px solid colors.$border-primary;
+    border-bottom : 1px solid $border-primary;
     p{
-        font-size: fonts.$md;
-        font-weight: fonts.$semi-bold;
-        color: colors.$text-primary;
+        font-size: $md;
+        font-weight: $semi-bold;
+        color: $text-primary;
     }
     p:hover{
-        color: colors.$brand-primary;
+        color: $brand-primary;
         scale: 1.1;
         transition: all 0.3s ease-in-out;
     }
     p:not(:hover){
-        color: colors.$text-primary;
+        color: $text-primary;
         scale: 1;
         transition: all 0.3s ease-in-out;
     }

@@ -1,0 +1,13 @@
+.button{
+    width: 100%;
+    height: 50px;
+    border : 1px solid $border-primary;
+    color: $text-primary;
+    font-size: $md;
+    font-weight: $regular;
+    background-color: transparent;
+}
+
+.active {
+    background-color: $background-third;
+}
