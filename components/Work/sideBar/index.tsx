@@ -3,24 +3,20 @@
 import s from "./style.module.scss"
 import { useState } from "react";
 import TabButton from "./tabButton";
-import { ModelType, GroupType } from "@/types/model/modelType";
+import { ModelType, GroupType, LightType, CameraType } from "@/types/model/modelType";
+import ModelButton from "./buttons/modelButton";
+import GroupButton from "./buttons/groupButton";
+import LightButton from "./buttons/lightButton";
+import CameraButton from "./buttons/cameraButton";
 
 type TabType = "구조" | "코드" | "쉐이더";
 
 
-export default function WorkSideBar() {
 
-    const testData: (ModelType | GroupType)[] = [
+export default function WorkSideBar() {
+    const testData: (ModelType | GroupType | LightType | CameraType)[] = [
         {
             name: "cube1",
-            type: "cube",
-            locate: { x: 0, y: 0, z: 0 },
-            rotate: { x: 0, y: 0, z: 0 },
-            scale: { x: 1, y: 1, z: 1 },
-            shader: ""
-        },
-        {
-            name: "mesh1",
             type: "mesh",
             locate: { x: 0, y: 0, z: 0 },
             rotate: { x: 0, y: 0, z: 0 },
@@ -29,27 +25,129 @@ export default function WorkSideBar() {
             mesh: "box"
         },
         {
+            name: "light-1",
+            type: "light",
+            locate: { x: 0, y: 0, z: 0 },
+            rotate: { x: 0, y: 0, z: 0 },
+            scale: { x: 1, y: 1, z: 1 },
+            light: "ambient"
+        },
+        {
+            name: "camera-1",
+            type: "camera",
+            locate: { x: 0, y: 0, z: 0 },
+            rotate: { x: 0, y: 0, z: 0 },
+            scale: { x: 1, y: 1, z: 1 },
+            camera: "perspective"
+        },
+        {
             name: "group1",
             type: "group",
             children: [
                 {
                     name: "cube2",
-                    type: "cube",
+                    type: "mesh",
                     locate: { x: 0, y: 0, z: 0 },
                     rotate: { x: 0, y: 0, z: 0 },
-                    scale: { x: 1, y: 1, z: 1 }
+                    scale: { x: 1, y: 1, z: 1 },
+                    shader: "standard",
+                    mesh: "box"
                 }
             ]
         }
     ];
 
     const [tab, setTab] = useState<TabType>("구조");
+    const [active, setActive] = useState("");
+    const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
+
+    const toggleGroup = (groupName: string) => {
+        setExpandedGroups(prev => ({
+            ...prev,
+            [groupName]: !prev[groupName]
+        }));
+    };
+
     return (
         <div className={s.container}>
             <div className={s.buttons}>
                 <TabButton label="구조" onClick={() => setTab("구조")} isActive={tab === "구조"} />
                 <TabButton label="코드" onClick={() => setTab("코드")} isActive={tab === "코드"} />
                 <TabButton label="쉐이더" onClick={() => setTab("쉐이더")} isActive={tab === "쉐이더"} />
+            </div>
+            <div className={s.contents}>
+                {testData.map((item) => {
+                    if (item.type === "group") {
+                        const isExpanded = !!expandedGroups[item.name];
+                        return (
+                            <div key={item.name} className={s.group}>
+                                <GroupButton
+                                    name={item.name}
+                                    //@ts-ignore
+                                    isChildren={false}
+                                    isactive={active === item.name}
+                                    isExpanded={isExpanded}
+                                    edit={() => console.log("edit")}
+                                    onDelete={() => console.log("delete")}
+                                    onClick={() => {
+                                        setActive(item.name);
+                                        toggleGroup(item.name);
+                                    }}
+                                />
+                                {/* @ts-ignore */}
+                                {isExpanded && item.children.map(child => (
+                                    <div key={child.name} className={s.child}>
+                                        <ModelButton
+                                            name={child.name}
+                                            //@ts-ignore
+                                            isChildren={false}
+                                            isactive={active === child.name}
+                                            edit={() => console.log("edit")}
+                                            onDelete={() => console.log("delete")}
+                                            onClick={() => setActive(child.name)}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        );
+                    } else if (item.type === "light") {
+                        return (
+                            <LightButton
+                                key={item.name}
+                                name={item.name}
+                                isChildren={false}
+                                isactive={active === item.name}
+                                edit={() => console.log("edit")}
+                                onDelete={() => console.log("delete")}
+                                onClick={() => setActive(item.name)}
+                            />
+                        );
+                    } else if (item.type === "camera") {
+                        return (
+                            <CameraButton
+                                key={item.name}
+                                name={item.name}
+                                isChildren={false}
+                                isactive={active === item.name}
+                                edit={() => console.log("edit")}
+                                onDelete={() => console.log("delete")}
+                                onClick={() => setActive(item.name)}
+                            />
+                        );
+                    } else {
+                        return (
+                            <ModelButton
+                                key={item.name}
+                                name={item.name}
+                                isChildren={false}
+                                isactive={active === item.name}
+                                edit={() => console.log("edit")}
+                                onDelete={() => console.log("delete")}
+                                onClick={() => setActive(item.name)}
+                            />
+                        );
+                    }
+                })}
             </div>
         </div>
     );

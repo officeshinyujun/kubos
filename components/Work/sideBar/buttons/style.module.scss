@@ -1,0 +1,34 @@
+.container {
+    width: 100%;
+    padding : $s16;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $background-primary;
+    border-radius: $s12;
+}
+
+.active{
+    outline: 1px solid #3F3;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap : $s12;
+    p {
+        color: #FFF;
+        font-size: $s16;
+        font-weight: normal;
+        line-height: 150%; /* 24px */
+    }
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap : $s8;
+}
