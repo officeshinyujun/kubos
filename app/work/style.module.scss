@@ -1,5 +1,36 @@
 .container {
     width: 100vw;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     background: $background-primary;
+}
+
+.contents{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.three{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.window{
+    width: 100%;
+    min-height: 700px;
+}
+.add{
+    width: 100%;
+    height: 100%;
 }

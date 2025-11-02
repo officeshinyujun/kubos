@@ -1,0 +1,16 @@
+.container{
+    width: 200px;
+    padding : 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $s16;
+    background-color: $background-secondary;
+    color : $text-primary;
+    border-radius: $s8;
+    cursor: pointer;
+    p{
+        font-size: $md;
+        font-weight: $medium;
+    }
+}

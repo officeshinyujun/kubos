@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    padding: $s8 $s12;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-radius: $s12;
+    cursor: pointer;
+    p{
+        font-size: $s12;
+        font-weight: bold;
+    }
+}
+
+.active{
+    background: #00F000;
+    p{
+        color: #111;
+    }
+}
+
+.unactive{
+    background: $background-third;
+    p{
+        color: $text-primary;
+    }
+}

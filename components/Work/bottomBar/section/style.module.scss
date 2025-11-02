@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    gap : $s12;
+    padding : $s12 $s16;
+    justify-content: flex-start;
+    align-items: flex-start;
+    p{
+        color: $text-primary;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+    }
+}
+
+.contents{
+    display: grid;
+    height: 239px;
+    row-gap: 10px;
+    column-gap: 10px;
+    align-self: stretch;
+    
+}
+
+.mesh{
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.other {
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
