@@ -6,107 +6,107 @@ type SceneObject = ModelType | GroupType | LightType | CameraType;
 interface SceneState {
   objects: SceneObject[];
 
-  // 씬 전체 불러오기
   loadScene: (data: SceneObject[]) => void;
 
-  // Mesh / Group / Light / Camera 추가
-  addObject: (parentName: string | null, obj: SceneObject) => void;
+  addObject: (parentName: string | null, obj: Omit<ModelType, "name"> & { name: string }) => void;
   addGroup: (parentName: string | null, groupName: string) => void;
-  addLight: (parentName: string | null, light: Omit<LightType, 'name'>) => void;
-  addCamera: (parentName: string | null, camera: Omit<CameraType, 'name'>) => void;
+  addLight: (parentName: string | null, light: Omit<LightType, "name"> & { name: string }) => void;
+  addCamera: (parentName: string | null, camera: Omit<CameraType, "name"> & { name: string }) => void;
 
-  // 삭제
   removeObject: (name: string) => void;
-
-  // 수정
   updateObject: (name: string, updated: Partial<SceneObject>) => void;
 }
 
-export const useSceneStore = create<SceneState>((set) => ({
+export const useSceneStore = create<SceneState>((set, get) => ({
   objects: [],
 
   loadScene: (data) => set(() => ({ objects: structuredClone(data) })),
 
-  addObject: (parentName, obj) =>
-    set((state) => {
-      if (!parentName) return { objects: [...state.objects, obj] };
+  // ---------------------- Add Object ----------------------
+  addObject: (parentName, obj) => {
+    const { objects } = get();
+    const count = objects.filter((o) => o.type === "mesh").length;
+    const newObj = { ...obj, name: `${obj.name}-${count}` } as ModelType;
 
-      const addToGroup = (items: SceneObject[]): SceneObject[] =>
-        items.map((item) => {
-          if (item.type === "group" && item.name === parentName) {
-            return { ...item, children: [...item.children, obj] } as GroupType;
-          }
-          if (item.type === "group") {
-            return { ...item, children: addToGroup(item.children) } as GroupType;
-          }
-          return item;
-        });
+    if (!parentName) return set({ objects: [...objects, newObj] });
 
-      return { objects: addToGroup(state.objects) };
-    }),
+    const addToGroup = (items: SceneObject[]): SceneObject[] =>
+      items.map((item) => {
+        if (item.type === "group" && item.name === parentName) {
+          return { ...item, children: [...item.children, newObj] } as GroupType;
+        }
+        if (item.type === "group") {
+          return { ...item, children: addToGroup(item.children) } as GroupType;
+        }
+        return item;
+      });
+
+    set({ objects: addToGroup(objects) });
+  },
 
   addGroup: (parentName, groupName) => {
+    const { objects } = get();
     const newGroup: GroupType = { name: groupName, type: "group", children: [] };
-    set((state) => {
-      if (!parentName) return { objects: [...state.objects, newGroup] };
 
-      const addToGroup = (items: SceneObject[]): SceneObject[] =>
-        items.map((item) => {
-          if (item.type === "group" && item.name === parentName) {
-            return { ...item, children: [...item.children, newGroup] } as GroupType;
-          }
-          if (item.type === "group") {
-            return { ...item, children: addToGroup(item.children) } as GroupType;
-          }
-          return item;
-        });
+    if (!parentName) return set({ objects: [...objects, newGroup] });
 
-      return { objects: addToGroup(state.objects) };
-    });
+    const addToGroup = (items: SceneObject[]): SceneObject[] =>
+      items.map((item) => {
+        if (item.type === "group" && item.name === parentName) {
+          return { ...item, children: [...item.children, newGroup] } as GroupType;
+        }
+        if (item.type === "group") {
+          return { ...item, children: addToGroup(item.children) } as GroupType;
+        }
+        return item;
+      });
+
+    set({ objects: addToGroup(objects) });
   },
 
-  // ✅ Light 추가
   addLight: (parentName, light) => {
-    const lightObj: LightType = { ...light, name: `light-${Date.now()}`, type: "light" };
-    set((state) => {
-      if (!parentName) return { objects: [...state.objects, lightObj] };
+    const { objects } = get();
+    const count = objects.filter((o) => o.type === "light").length;
+    const lightObj: LightType = { ...light, name: `${light.name}-${count}`, type: "light" };
 
-      const addToGroup = (items: SceneObject[]): SceneObject[] =>
-        items.map((item) => {
-          if (item.type === "group" && item.name === parentName) {
-            return { ...item, children: [...item.children, lightObj] } as GroupType;
-          }
-          if (item.type === "group") {
-            return { ...item, children: addToGroup(item.children) } as GroupType;
-          }
-          return item;
-        });
+    if (!parentName) return set({ objects: [...objects, lightObj] });
 
-      return { objects: addToGroup(state.objects) };
-    });
+    const addToGroup = (items: SceneObject[]): SceneObject[] =>
+      items.map((item) => {
+        if (item.type === "group" && item.name === parentName) {
+          return { ...item, children: [...item.children, lightObj] } as GroupType;
+        }
+        if (item.type === "group") {
+          return { ...item, children: addToGroup(item.children) } as GroupType;
+        }
+        return item;
+      });
+
+    set({ objects: addToGroup(objects) });
   },
 
-  // ✅ Camera 추가
   addCamera: (parentName, camera) => {
-    const camObj: CameraType = { ...camera, name: `camera-${Date.now()}`, type: "camera" };
-    set((state) => {
-      if (!parentName) return { objects: [...state.objects, camObj] };
+    const { objects } = get();
+    const count = objects.filter((o) => o.type === "camera").length;
+    const camObj: CameraType = { ...camera, name: `${camera.name}-${count}`, type: "camera" };
 
-      const addToGroup = (items: SceneObject[]): SceneObject[] =>
-        items.map((item) => {
-          if (item.type === "group" && item.name === parentName) {
-            return { ...item, children: [...item.children, camObj] } as GroupType;
-          }
-          if (item.type === "group") {
-            return { ...item, children: addToGroup(item.children) } as GroupType;
-          }
-          return item;
-        });
+    if (!parentName) return set({ objects: [...objects, camObj] });
 
-      return { objects: addToGroup(state.objects) };
-    });
+    const addToGroup = (items: SceneObject[]): SceneObject[] =>
+      items.map((item) => {
+        if (item.type === "group" && item.name === parentName) {
+          return { ...item, children: [...item.children, camObj] } as GroupType;
+        }
+        if (item.type === "group") {
+          return { ...item, children: addToGroup(item.children) } as GroupType;
+        }
+        return item;
+      });
+
+    set({ objects: addToGroup(objects) });
   },
 
+  // ---------------------- Remove / Update ----------------------
   removeObject: (name) => {
     const removeRecursive = (items: SceneObject[]): SceneObject[] =>
       items
@@ -118,7 +118,7 @@ export const useSceneStore = create<SceneState>((set) => ({
           return item;
         });
 
-    set((state) => ({ objects: removeRecursive(state.objects) }));
+    set({ objects: removeRecursive(get().objects) });
   },
 
   updateObject: (name, updated) => {
@@ -132,6 +132,6 @@ export const useSceneStore = create<SceneState>((set) => ({
         return item;
       });
 
-    set((state) => ({ objects: updateRecursive(state.objects) }));
+    set({ objects: updateRecursive(get().objects) });
   },
 }));

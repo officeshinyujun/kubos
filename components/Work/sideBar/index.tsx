@@ -16,7 +16,7 @@ type TabType = "구조" | "코드" | "쉐이더";
 
 export default function WorkSideBar() {
     const testData = useSceneStore((state) => state.objects);
-    const {removeObject} = useSceneStore();
+    const {removeObject, updateObject} = useSceneStore();
 
     const [tab, setTab] = useState<TabType>("구조");
     const [active, setActive] = useState("");
@@ -65,11 +65,12 @@ export default function WorkSideBar() {
                                 {isExpanded && item.children.map(child => (
                                     <div key={child.name} className={s.child}>
                                         <ModelButton
+                                            key={child.name}
                                             name={child.name}
-                                            //@ts-ignore
                                             isChildren={false}
                                             isactive={active === child.name}
-                                            edit={() => console.log("edit")}
+                                            //@ts-ignore
+                                            edit={(newName) => updateObject(child.name, {name: newName})}
                                             onDelete={() => handleDelete(child.name)}
                                             onClick={() => setActive(child.name)}
                                         />
@@ -85,7 +86,7 @@ export default function WorkSideBar() {
                                 isChildren={false}
                                 isactive={active === item.name}
                                 edit={() => console.log("edit")}
-                                onDelete={() => console.log("delete")}
+                                onDelete={() => handleDelete(item.name)}
                                 onClick={() => setActive(item.name)}
                             />
                         );
@@ -97,7 +98,7 @@ export default function WorkSideBar() {
                                 isChildren={false}
                                 isactive={active === item.name}
                                 edit={() => console.log("edit")}
-                                onDelete={() => console.log("delete")}
+                                onDelete={() => handleDelete(item.name)}
                                 onClick={() => setActive(item.name)}
                             />
                         );
@@ -108,7 +109,8 @@ export default function WorkSideBar() {
                                 name={item.name}
                                 isChildren={false}
                                 isactive={active === item.name}
-                                edit={() => console.log("edit")}
+                                //@ts-ignore
+                                edit={(newName) => updateObject(item.name, {name: newName})}
                                 onDelete={() => handleDelete(item.name)}
                                 onClick={() => setActive(item.name)}
                             />

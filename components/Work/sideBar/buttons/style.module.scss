@@ -5,6 +5,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    gap: $s12;
     background-color: $background-primary;
     border-radius: $s12;
 }
@@ -23,6 +24,13 @@
         font-size: $s16;
         font-weight: normal;
         line-height: 150%; /* 24px */
+    }
+    input{
+        width: 90%;
+        border: none;
+        outline : none;
+        background: none;
+        color : $text-primary;
     }
 }
 

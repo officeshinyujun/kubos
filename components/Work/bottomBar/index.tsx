@@ -15,7 +15,7 @@ export default function BottomBar() {
         setActiveButton(type);
     };
     
-    const { addObject } = useSceneStore();
+    const { addObject, addLight, addCamera } = useSceneStore();
 
     const addMesh = (mesh: ModelType) => {
         addObject(null, mesh);
@@ -70,14 +70,57 @@ export default function BottomBar() {
                 {activeButton === "라이트" && 
                     <Section text="라이트">
                         {lightList.map(name => (
-                            <SectionButton key={name} type="라이트" text={name} />
+                            <SectionButton key={name} type="라이트" text={name} onClick={() => addLight(
+                                null,
+                                // @ts-ignore
+                                {name: `${name}`,
+                                    type: "light",
+                                    locate: {
+                                        x: 1,
+                                        y: 0,
+                                        z: 1,
+                                    },
+                                    rotate: {
+                                        x: 1,
+                                        y: 3,
+                                        z: 4,
+                                    },
+                                    scale: {
+                                        x: 1,
+                                        y: 1,
+                                        z: 1,
+                                    },
+                                    light : "ambient" 
+                                }
+                            )} />
                         ))}
                     </Section>
                 }
                 {activeButton === "카메라" && 
                     <Section text="카메라">
                         {cameraList.map(name => (
-                            <SectionButton key={name} type="카메라" text={name} />
+                            <SectionButton key={name} type="카메라" text={name} onClick={() => addCamera(null,
+                                // @ts-ignore
+                                {name: `${name}`,
+                                    type: "camera",
+                                    locate: {
+                                        x: 1,
+                                        y: 1,
+                                        z: 1,
+                                    },
+                                    rotate: {
+                                        x: 1,
+                                        y: 1,
+                                        z: 1,
+                                    },
+                                    scale: {
+                                        x: 1,
+                                        y: 1,
+                                        z: 1,
+                                    },
+                                    camera : "perspective" 
+                                }
+                            )} />
                         ))}
                     </Section>
                 }
