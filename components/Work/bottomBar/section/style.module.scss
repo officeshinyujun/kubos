@@ -1,4 +1,5 @@
 .container{
+    min-height: 250px;;
     display: flex;
     flex-direction: column;
     gap : $s12;
@@ -15,7 +16,7 @@
 
 .contents{
     display: grid;
-    height: 239px;
+    min-height: 100%;
     row-gap: 10px;
     column-gap: 10px;
     align-self: stretch;
@@ -23,7 +24,7 @@
 }
 
 .mesh{
-    grid-template-rows: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
