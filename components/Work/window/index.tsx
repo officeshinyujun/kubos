@@ -17,7 +17,6 @@ export default function WorkWindow() {
 
                 <gridHelper args={[10, 10]} />
                 <axesHelper args={[5]} />
-
                 <OrbitControls />
             </Canvas>
         </div>
