@@ -15,6 +15,7 @@ interface ModelProps {
   materialType?: MaterialType;
   materialProps?: Partial<React.ComponentProps<typeof MaterialFactory>>;
   position?: [number, number, number];
+  orbitControlSetter?: (enabled: boolean) => void; // OrbitControls 상태 조절
 }
 
 export default function Model({
@@ -23,6 +24,7 @@ export default function Model({
   materialType = "standard",
   materialProps = {},
   position = [0, 0, 0],
+  orbitControlSetter,
 }: ModelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const meshRef = useRef<THREE.Mesh>(null);
@@ -49,6 +51,7 @@ export default function Model({
 
   return (
     <group ref={groupRef} position={position}>
+      {/* 실제 모델 */}
       <mesh
         ref={meshRef}
         onClick={(e) => {
@@ -60,12 +63,14 @@ export default function Model({
         <MaterialFactory type={materialType} {...materialProps} />
       </mesh>
 
+      {/* 선택된 경우 EdgeBox 표시 */}
       {boxSize && isSelected && (
         <EdgeBox
           size={boxSize}
           position={[0, 0, 0]} // 그룹 기준
           color="#ffffff"
           pointSize={0.05}
+          orbitControlSetter={orbitControlSetter} // OrbitControls 활성/비활성 제어
         />
       )}
     </group>
