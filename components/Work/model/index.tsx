@@ -18,6 +18,8 @@ interface ModelProps {
   scale?: [number, number, number]; // 📍 scale prop 추가
   orbitControlSetter?: (enabled: boolean) => void;
   onHeightChange?: (deltaY: number) => void;
+  onWidthChange?: (deltaX: number) => void;
+  onDepthChange?: (deltaX: number) => void;
 }
 
 export default function Model({
@@ -29,6 +31,8 @@ export default function Model({
   scale = [1, 1, 1], // 📍 scale 기본값 설정
   orbitControlSetter,
   onHeightChange,
+  onWidthChange,
+  onDepthChange,
 }: ModelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const meshRef = useRef<THREE.Mesh>(null);
@@ -80,6 +84,8 @@ export default function Model({
           pointSize={0.05}
           orbitControlSetter={orbitControlSetter}
           onHeightChange={onHeightChange}
+          onWidthChange={onWidthChange}
+          onDepthChange={onDepthChange}
         />
       )}
     </group>

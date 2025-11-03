@@ -11,6 +11,8 @@ interface EdgeBoxProps {
   coneSize?: number;
   orbitControlSetter?: (enabled: boolean) => void;
   onHeightChange?: (deltaY: number) => void; // 높이 변경 콜백
+  onWidthChange?: (deltaX: number) => void; // 폭 변경 콜백 (X)
+  onDepthChange?: (deltaX: number) => void; // 깊이 변경 콜백 (Z)
 }
 
 export default function EdgeBox({
@@ -21,11 +23,16 @@ export default function EdgeBox({
   coneSize = 0.2,
   orbitControlSetter,
   onHeightChange, // 새로 추가된 prop
+  onWidthChange,
+  onDepthChange,
 }: EdgeBoxProps) {
   const [moveMode, setMoveMode] = useState(false);
   const [isResizingHeight, setIsResizingHeight] = useState(false); // 높이 조절 모드
+  const [isResizingWidth, setIsResizingWidth] = useState<null | 'left' | 'right'>(null); // 폭 조절 모드
+  const [isResizingDepth, setIsResizingDepth] = useState<null | 'front' | 'back'>(null); // 깊이 조절 모드
   const [parentGroup, setParentGroup] = useState<THREE.Group | null>(null);
   const lastMouseY = useRef(0); // 마우스 Y 위치 추적
+  const lastMouseX = useRef(0); // 마우스 X 위치 추적
 
   const [width, height, depth] = size;
 
@@ -52,6 +59,15 @@ export default function EdgeBox({
     0,
   ];
 
+  // 좌/우 엣지 핸들 (X축 폭 변경) – 상자 중앙 높이(y=0)에서 배치
+  const edgeHandleSize = 0.12;
+  const leftHandlePosition: [number, number, number] = [-(width / 2 + edgeHandleSize / 2), 0, 0];
+  const rightHandlePosition: [number, number, number] = [(width / 2 + edgeHandleSize / 2), 0, 0];
+
+  // 앞/뒤 엣지 핸들 (Z축 깊이 변경)
+  const frontHandlePosition: [number, number, number] = [0, 0, -(depth / 2 + edgeHandleSize / 2)];
+  const backHandlePosition: [number, number, number] = [0, 0, (depth / 2 + edgeHandleSize / 2)];
+
   // 휠 이동, 마우스 드래그, 외부 클릭 이벤트 핸들러
   useEffect(() => {
     // 휠 이동
@@ -68,21 +84,35 @@ export default function EdgeBox({
       }
     };
 
-    // 높이 조절 마우스 이동
+    // 높이/폭/깊이 조절 마우스 이동
     const onMouseMove = (e: MouseEvent) => {
-      if (!isResizingHeight) return;
-      
-      // 마우스 이동량(delta) 계산 (위로 가면 +)
-      const deltaY = (lastMouseY.current - e.clientY) * 0.02; // 감도 조절
-      onHeightChange?.(deltaY);
-      lastMouseY.current = e.clientY;
+      // Height
+      if (isResizingHeight) {
+        const deltaY = (lastMouseY.current - e.clientY) * 0.02; // 감도 조절
+        onHeightChange?.(deltaY);
+        lastMouseY.current = e.clientY;
+      }
+      // Width (X) – 좌/우에 따라 방향 부호 보정
+      if (isResizingWidth) {
+        const rawDeltaX = (e.clientX - lastMouseX.current) * 0.02; // 감도 조절
+        const signedDeltaX = isResizingWidth === 'left' ? -rawDeltaX : rawDeltaX;
+        onWidthChange?.(signedDeltaX);
+        lastMouseX.current = e.clientX;
+      }
+      // Depth (Z) – 전/후에 따라 방향 부호 보정 (마우스 X에 매핑)
+      if (isResizingDepth) {
+        const rawDeltaX = (e.clientX - lastMouseX.current) * 0.02; // 감도 조절
+        const signedDeltaZ = isResizingDepth === 'front' ? -rawDeltaX : rawDeltaX;
+        onDepthChange?.(signedDeltaZ);
+        lastMouseX.current = e.clientX;
+      }
     };
 
-    // 높이 조절 종료
+    // 리사이즈 종료
     const onMouseUp = () => {
-      if (isResizingHeight) {
-        setIsResizingHeight(false);
-      }
+      if (isResizingHeight) setIsResizingHeight(false);
+      if (isResizingWidth) setIsResizingWidth(null);
+      if (isResizingDepth) setIsResizingDepth(null);
     };
 
     window.addEventListener("wheel", onWheel, { passive: false });
@@ -96,12 +126,12 @@ export default function EdgeBox({
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseup", onMouseUp);
     };
-  }, [moveMode, parentGroup, isResizingHeight, onHeightChange]);
+  }, [moveMode, parentGroup, isResizingHeight, isResizingWidth, isResizingDepth, onHeightChange, onWidthChange, onDepthChange]);
 
   // OrbitControls 제어 (이동 모드 또는 리사이즈 모드일 때 비활성화)
   useEffect(() => {
-    orbitControlSetter?.(!moveMode && !isResizingHeight);
-  }, [moveMode, isResizingHeight, orbitControlSetter]);
+    orbitControlSetter?.(!moveMode && !isResizingHeight && !isResizingWidth && !isResizingDepth);
+  }, [moveMode, isResizingHeight, isResizingWidth, isResizingDepth, orbitControlSetter]);
   
 
   return (
@@ -146,6 +176,58 @@ export default function EdgeBox({
       >
         <boxGeometry args={[heightHandleSize, heightHandleSize, heightHandleSize]} />
         <meshBasicMaterial color={isResizingHeight ? "blue" : color} />
+      </mesh>
+
+      {/* 좌측 엣지 핸들 (Width -) */}
+      <mesh
+        position={leftHandlePosition}
+        onPointerDown={(e) => {
+          e.stopPropagation();
+          setIsResizingWidth('left');
+          lastMouseX.current = e.clientX;
+        }}
+      >
+        <boxGeometry args={[edgeHandleSize, edgeHandleSize, edgeHandleSize]} />
+        <meshBasicMaterial color={isResizingWidth === 'left' ? "#4fc3f7" : color} />
+      </mesh>
+
+      {/* 우측 엣지 핸들 (Width +) */}
+      <mesh
+        position={rightHandlePosition}
+        onPointerDown={(e) => {
+          e.stopPropagation();
+          setIsResizingWidth('right');
+          lastMouseX.current = e.clientX;
+        }}
+      >
+        <boxGeometry args={[edgeHandleSize, edgeHandleSize, edgeHandleSize]} />
+        <meshBasicMaterial color={isResizingWidth === 'right' ? "#4fc3f7" : color} />
+      </mesh>
+
+      {/* 전면 엣지 핸들 (Depth -) */}
+      <mesh
+        position={frontHandlePosition}
+        onPointerDown={(e) => {
+          e.stopPropagation();
+          setIsResizingDepth('front');
+          lastMouseX.current = e.clientX;
+        }}
+      >
+        <boxGeometry args={[edgeHandleSize, edgeHandleSize, edgeHandleSize]} />
+        <meshBasicMaterial color={isResizingDepth === 'front' ? "#81c784" : color} />
+      </mesh>
+
+      {/* 후면 엣지 핸들 (Depth +) */}
+      <mesh
+        position={backHandlePosition}
+        onPointerDown={(e) => {
+          e.stopPropagation();
+          setIsResizingDepth('back');
+          lastMouseX.current = e.clientX;
+        }}
+      >
+        <boxGeometry args={[edgeHandleSize, edgeHandleSize, edgeHandleSize]} />
+        <meshBasicMaterial color={isResizingDepth === 'back' ? "#81c784" : color} />
       </mesh>
     </group>
   );

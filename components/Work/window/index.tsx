@@ -12,6 +12,7 @@ import { MaterialType } from "@/types/model/MaterialType"; // 📍 MaterialType�
 import { ModelData, GeometryType } from "@/types/model/modelDefinitions";
 // 📍 새로 만든 유틸리티 파일을 임포트합니다.
 import { updateModelHeight } from "@/utils/geometryHeightUpdater";
+import { updateModelWidth, updateModelDepth } from "@/utils/geometryAxisUpdater";
 
 // 📍 ModelData 인터페이스 정의 제거 (파일로 분리됨)
 
@@ -131,6 +132,26 @@ export default function WorkWindow() {
     );
   };
 
+  const handleWidthChange = (modelId: string, deltaX: number) => {
+    setModels((currentModels) =>
+      currentModels.map((model) => {
+        if (model.id !== modelId) return model;
+        const updatedProps = updateModelWidth(model, deltaX);
+        return { ...model, ...updatedProps };
+      })
+    );
+  };
+
+  const handleDepthChange = (modelId: string, deltaX: number) => {
+    setModels((currentModels) =>
+      currentModels.map((model) => {
+        if (model.id !== modelId) return model;
+        const updatedProps = updateModelDepth(model, deltaX);
+        return { ...model, ...updatedProps };
+      })
+    );
+  };
+
   return (
     <div className={s.container}>
       <Canvas className={s.canvas}>
@@ -150,6 +171,8 @@ export default function WorkWindow() {
             scale={model.scale}
             orbitControlSetter={setOrbitEnabled}
             onHeightChange={(deltaY) => handleHeightChange(model.id, deltaY)}
+            onWidthChange={(deltaX) => handleWidthChange(model.id, deltaX)}
+            onDepthChange={(deltaX) => handleDepthChange(model.id, deltaX)}
           />
         ))}
 
