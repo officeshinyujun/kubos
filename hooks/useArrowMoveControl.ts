@@ -3,16 +3,26 @@
 import { useEffect } from "react";
 import { useThree } from "@react-three/fiber";
 import { useEditorStore } from "@/stores/useEditStore";
+import { useStackStore } from "@/stores/useStackStore";
 import * as THREE from "three";
 
 export default function ArrowMoveControl() {
   const selectedObjectId = useEditorStore((s) => s.selectedObjectId);
   const scene = useThree((state) => state.scene);
-  const camera = useThree((state) => state.camera);
+  const push = useStackStore((s) => s.push);
+  const undo = useStackStore((s) => s.undo);
+  const redo = useStackStore((s) => s.redo);
 
   useEffect(() => {
     const MOVE = 0.1;
-    const cameraDir = new THREE.Vector3();
+
+    const saveState = (group: THREE.Object3D) => {
+      push({
+        uuid: group.uuid,
+        position: [group.position.x, group.position.y, group.position.z],
+        rotation: [group.rotation.x, group.rotation.y, group.rotation.z],
+      });
+    };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!selectedObjectId) return;
@@ -23,51 +33,48 @@ export default function ArrowMoveControl() {
       const group = obj.parent;
       if (!group) return;
 
-      // ✅ 카메라 방향 가져오기
-      camera.getWorldDirection(cameraDir);
-
-      // ✅ 정면(-Z)을 0°로 기준 맞춤
-      let angle = Math.atan2(cameraDir.x, -cameraDir.z) * (180 / Math.PI);
-
-      let moveX = 0;
-      let moveZ = 0;
-
-      // -45° ~ 45° : 정면
-      if (angle >= -45 && angle < 45) {
-        if (e.key === "ArrowLeft") moveX -= MOVE;
-        if (e.key === "ArrowRight") moveX += MOVE;
-        if (e.key === "ArrowUp") moveZ -= MOVE;
-        if (e.key === "ArrowDown") moveZ += MOVE;
-      }
-      // 45° ~ 135° : 오른쪽
-      else if (angle >= 45 && angle < 135) {
-        if (e.key === "ArrowLeft") moveZ -= MOVE;
-        if (e.key === "ArrowRight") moveZ += MOVE;
-        if (e.key === "ArrowUp") moveX += MOVE;
-        if (e.key === "ArrowDown") moveX -= MOVE;
-      }
-      // 135° ~ -135° : 뒤
-      else if (angle >= 135 || angle < -135) {
-        if (e.key === "ArrowLeft") moveX += MOVE;
-        if (e.key === "ArrowRight") moveX -= MOVE;
-        if (e.key === "ArrowUp") moveZ += MOVE;
-        if (e.key === "ArrowDown") moveZ -= MOVE;
-      }
-      // -135° ~ -45° : 왼쪽
-      else if (angle >= -135 && angle < -45) {
-        if (e.key === "ArrowLeft") moveZ += MOVE;
-        if (e.key === "ArrowRight") moveZ -= MOVE;
-        if (e.key === "ArrowUp") moveX -= MOVE;
-        if (e.key === "ArrowDown") moveX += MOVE;
+      // CMD + Z 또는 CTRL + Z → Undo
+      if ((e.metaKey || e.ctrlKey) && e.key === "z") {
+        const prev = undo();
+        if (prev && prev.uuid === group.uuid) {
+          group.position.set(...prev.position);
+          group.rotation.set(...prev.rotation);
+        }
+        return;
       }
 
-      group.position.x += moveX;
-      group.position.z += moveZ;
+      // CMD + SHIFT + Z 또는 CTRL + SHIFT + Z → Redo
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === "Z") {
+        const next = redo();
+        if (next && next.uuid === group.uuid) {
+          group.position.set(...next.position);
+          group.rotation.set(...next.rotation);
+        }
+        return;
+      }
+
+      // 이동 전 상태 저장
+      saveState(group);
+
+      switch (e.key) {
+        case "ArrowLeft":
+          group.position.x -= MOVE;
+          break;
+        case "ArrowRight":
+          group.position.x += MOVE;
+          break;
+        case "ArrowUp":
+          group.position.z -= MOVE;
+          break;
+        case "ArrowDown":
+          group.position.z += MOVE;
+          break;
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedObjectId, scene, camera]);
+  }, [selectedObjectId, scene, push, undo, redo]);
 
   return null;
 }
