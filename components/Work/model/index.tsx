@@ -1,4 +1,3 @@
-// Model.tsx
 'use client'
 
 import GeometryFactory from "./GeometryFactory";
@@ -8,7 +7,7 @@ import { GeometryType } from "@/types/model/GeometryType";
 import { MaterialType } from "@/types/model/MaterialType";
 import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
-import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
+import { useEditorStore } from "@/stores/useEditStore";
 
 interface ModelProps {
   geometryType: GeometryType;
@@ -25,42 +24,50 @@ export default function Model({
   materialProps = {},
   position = [0, 0, 0],
 }: ModelProps) {
-  const [active, setActive] = useState(false);
-  const [boxSize, setBoxSize] = useState<[number, number, number] | null>(null);
+  const groupRef = useRef<THREE.Group>(null);
   const meshRef = useRef<THREE.Mesh>(null);
+  const [boxSize, setBoxSize] = useState<[number, number, number] | null>(null);
 
-  // GeometryFactory의 실제 크기를 계산
+  const selectedObjectId = useEditorStore((s) => s.selectedObjectId);
+  const selectObject = useEditorStore((s) => s.selectObject);
+
+  const isSelected = selectedObjectId === meshRef.current?.uuid;
+
+  // Geometry 크기 계산
   useEffect(() => {
     if (meshRef.current) {
       const geometry = meshRef.current.geometry as THREE.BufferGeometry;
       geometry.computeBoundingBox();
       const bbox = geometry.boundingBox!;
-      const size: [number, number, number] = [
+      setBoxSize([
         bbox.max.x - bbox.min.x,
         bbox.max.y - bbox.min.y,
         bbox.max.z - bbox.min.z,
-      ];
-      setBoxSize(size);
+      ]);
     }
   }, [geometryType, geometryArgs]);
 
   return (
-    <>
-      {/* 원본 모델 */}
-      <mesh ref={meshRef} position={position} onClick={() => setActive(!active)}>
+    <group ref={groupRef} position={position}>
+      <mesh
+        ref={meshRef}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (meshRef.current) selectObject(meshRef.current.uuid);
+        }}
+      >
         <GeometryFactory type={geometryType} args={geometryArgs} />
         <MaterialFactory type={materialType} {...materialProps} />
       </mesh>
 
-      {/* 클릭 가능한 EdgeBox 표시 */}
-      {boxSize && active &&    (
+      {boxSize && isSelected && (
         <EdgeBox
           size={boxSize}
-          position={position}
-          color="#ffffff" // 클릭 시 색 변경 예시
+          position={[0, 0, 0]} // 그룹 기준
+          color="#ffffff"
           pointSize={0.05}
         />
       )}
-    </>
+    </group>
   );
 }
