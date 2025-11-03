@@ -67,6 +67,7 @@ export default function EdgeBox({
   useEffect(() => {
     orbitControlSetter?.(!moveMode);
   }, [moveMode]);
+  
 
   return (
     <group
