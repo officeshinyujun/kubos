@@ -50,6 +50,18 @@ export default function BottomBar() {
         "큐브"
     ]
 
+    const lightTypeMapping: { [key: string]: "ambient" | "directional" | "point" | "spot" } = {
+        "앰비언트": "ambient",
+        "디렉셔널": "directional",
+        "스팟": "spot",
+        "포인트": "point"
+    };
+
+    const cameraTypeMapping: { [key: string]: "perspective" | "orthographic" } = {
+        "원근": "perspective",
+        "직교": "orthographic"
+    };
+
     return (
         <div className={s.container}>
             <div className={s.top}>
@@ -62,14 +74,14 @@ export default function BottomBar() {
                     <Section text="메시">
                         {meshList.map(name => (
                             <SectionButton key={name} type="메시" text={name} onClick={() => addMesh({
-                                name: `${name}`, type: "mesh", locate: { x: 0, y: 0, z: 0 }, rotate: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1, z: 1 }, shader: "standard", mesh: "box"
+                                name: `${name}`, type: "mesh", locate: { x: 0, y: 0, z: 0 }, rotate: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1, z: 1 }, shader: "standard", mesh: name
                             })} />
                         ))}
                     </Section>
                 }
                 {activeButton === "라이트" && 
                     <Section text="라이트">
-                        {lightList.map(name => (
+                        {lightList.filter(name => lightTypeMapping[name]).map(name => (
                             <SectionButton key={name} type="라이트" text={name} onClick={() => addLight(
                                 null,
                                 // @ts-ignore
@@ -90,7 +102,7 @@ export default function BottomBar() {
                                         y: 1,
                                         z: 1,
                                     },
-                                    light : "ambient" 
+                                    light : lightTypeMapping[name]
                                 }
                             )} />
                         ))}
@@ -98,7 +110,7 @@ export default function BottomBar() {
                 }
                 {activeButton === "카메라" && 
                     <Section text="카메라">
-                        {cameraList.map(name => (
+                        {cameraList.filter(name => cameraTypeMapping[name]).map(name => (
                             <SectionButton key={name} type="카메라" text={name} onClick={() => addCamera(null,
                                 // @ts-ignore
                                 {name: `${name}`,
@@ -118,7 +130,7 @@ export default function BottomBar() {
                                         y: 1,
                                         z: 1,
                                     },
-                                    camera : "perspective" 
+                                    camera : cameraTypeMapping[name]
                                 }
                             )} />
                         ))}
