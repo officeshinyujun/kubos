@@ -26,6 +26,22 @@
   transition: background-color 0.3s ease;
 }
 
+.copyButton {
+  margin-left: auto; /* Pushes the button to the right */
+  padding: 10px 15px;
+  cursor: pointer;
+  border: none;
+  background-color: #61afef; /* A distinct color for the copy button */
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #528cbf;
+  }
+}
+
 .tabButton.active {
   background-color: #282c34;
   color: #61afef; /* Highlight active tab */
@@ -53,8 +69,36 @@
 }
 
 .iframeContent iframe {
+  word-break: break-all; /* Break words to prevent overflow */
+}
+
+.iframeWrapper {
   width: 100%;
   height: 500px; /* Adjust as needed for the demo */
   border: 1px solid #3a3f4b;
   border-radius: 4px;
+  overflow: hidden; /* Ensures content inside iframe does not overflow */
 }
+
+.vanillaIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.openInNewWindowButton {
+  margin-left: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  background-color: #28a745; /* Green color for open button */
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #218838;
+  }
+}
+

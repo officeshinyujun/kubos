@@ -1,8 +1,6 @@
 // stores/useSceneStore.ts
 import { create } from 'zustand';
-import { ModelType, GroupType, LightType, CameraType } from "@/types/model/modelType";
-
-type SceneObject = ModelType | GroupType | LightType | CameraType;
+import { ModelType, GroupType, LightType, CameraType, SceneObject } from "@/types/model/modelType";
 
 interface SceneState {
   objects: SceneObject[];
@@ -124,10 +122,9 @@ export const useSceneStore = create<SceneState>((set, get) => {
         name: groupName,
         type: "group",
         children: [],
-        //@ts-ignore
-        position: { x: 0, y: 0, z: 0 },
-        rotation: { x: 0, y: 0, z: 0 },
-        scale: { x: 1, y: 1, z: 1 }
+        locate: { x: 0, y: 0, z: 0 }, // Initialize locate
+        rotate: { x: 0, y: 0, z: 0 }, // Initialize rotate
+        scale: { x: 1, y: 1, z: 1 }  // Initialize scale
       };
 
       const addToGroup = (items: SceneObject[]): SceneObject[] =>

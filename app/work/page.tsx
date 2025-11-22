@@ -104,6 +104,7 @@ export default function WorkList() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [clearSelection]);
 
+  //@ts-ignore
   type SceneObject = ModelType | LightType | CameraType | GroupType ;
 
   const geometryMapR3F: Record<GeometryType, string> = {
@@ -252,78 +253,109 @@ export default function App() {
   };
 
   const generateVanillaThreeJSCode = (objects: SceneObject[]): string => {
-    let threeJSObjectsCode = '';
+    const threeJSComponents = new Set<string>();
+    threeJSComponents.add('Scene');
+    threeJSComponents.add('PerspectiveCamera');
+    threeJSComponents.add('OrthographicCamera');
+    threeJSComponents.add('WebGLRenderer');
+    threeJSComponents.add('AmbientLight');
+    threeJSComponents.add('DirectionalLight');
+    threeJSComponents.add('PointLight');
+    threeJSComponents.add('SpotLight');
+    threeJSComponents.add('Mesh');
+    threeJSComponents.add('Group'); // Add Group for handling groups
+
+    Object.values(geometryMapThreeJS).forEach(cls => { if (cls) threeJSComponents.add(cls); });
+    Object.values(materialMapThreeJS).forEach(cls => { if (cls) threeJSComponents.add(cls); });
+
     let sceneSetupCode = `
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const scene = new Scene();
+const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement); // This assumes a browser environment, might need adjustment for Next.js
+document.body.appendChild(renderer.domElement);
 
 camera.position.set(5, 5, 5); // Default camera position
-`;
-    let animateLoopObjects = '';
-    let orbitControlsCode = '';
-    
-    let hasOrbitControls = false;
 
-    objects.forEach(obj => {
-      if (obj.type === 'mesh') {
-        const geometryClass = geometryMapThreeJS[obj.mesh as GeometryType];
-        const materialClass = materialMapThreeJS[obj.shader || 'Standard'];
+const ambientLight = new AmbientLight(0xffffff, 0.5); // Add a soft white ambient light
+scene.add(ambientLight);
 
-        threeJSObjectsCode += `
-const ${obj.name}Geometry = new THREE.${geometryClass}();
-const ${obj.name}Material = new THREE.${materialClass}({ color: '${(obj as ModelType & {color?: string}).color || '#ffffff'}' });
-const ${obj.name}Mesh = new THREE.Mesh(${obj.name}Geometry, ${obj.name}Material);
-${obj.name}Mesh.position.set(${obj.locate.x}, ${obj.locate.y}, ${obj.locate.z});
-${obj.name}Mesh.scale.set(${obj.scale.x}, ${obj.scale.y}, ${obj.scale.z});
-${obj.name}Mesh.rotation.set(${obj.rotate.x}, ${obj.rotate.y}, ${obj.rotate.z});
-scene.add(${obj.name}Mesh);
+const directionalLight = new DirectionalLight(0xffffff, 0.8); // Add a directional light
+directionalLight.position.set(3, 10, 5);
+scene.add(directionalLight);
 `;
-      } else if (obj.type === 'light') {
-        let lightClass = '';
-        if (obj.light === 'ambient') lightClass = 'AmbientLight';
-        else if (obj.light === 'point') lightClass = 'PointLight';
-        else if (obj.light === 'directional') lightClass = 'DirectionalLight';
-        else if (obj.light === 'spot') lightClass = 'SpotLight';
+    let generatedObjectCode = ''; // Accumulate all object-related code here
 
-        if (lightClass) {
-          threeJSObjectsCode += `
-const ${obj.name}Light = new THREE.${lightClass}('${obj.color}', ${obj.intensity});
-${obj.name}Light.position.set(${obj.locate.x}, ${obj.locate.y}, ${obj.locate.z});
-scene.add(${obj.name}Light);
+    const generateObjectCodeRecursive = (
+      items: SceneObject[],
+      parentVarName: string,
+      indent: string = ''
+    ): string => {
+      let code = '';
+      items.forEach((obj) => {
+        const sanitizedName = obj.name.replace(/[^a-zA-Z0-9_]/g, '_'); // Sanitize name for JS variable
+
+        if (obj.type === 'mesh') {
+          const geometryClass = geometryMapThreeJS[obj.mesh as GeometryType];
+          const materialClass = materialMapThreeJS[obj.shader || 'Standard'];
+          
+          if (!geometryClass || !materialClass) {
+              console.warn(`Skipping mesh ${obj.name} due to undefined geometry (${obj.mesh}) or material (${obj.shader})`);
+              return;
+          }
+
+          code += `
+${indent}const ${sanitizedName}Geometry = new ${geometryClass}();
+${indent}const ${sanitizedName}Material = new ${materialClass}({ color: '${obj.color || '#ffffff'}' });
+${indent}const ${sanitizedName}Mesh = new Mesh(${sanitizedName}Geometry, ${sanitizedName}Material);
+${indent}${sanitizedName}Mesh.position.set(${obj.locate.x}, ${obj.locate.y}, ${obj.locate.z});
+${indent}${sanitizedName}Mesh.scale.set(${obj.scale.x}, ${obj.scale.y}, ${obj.scale.z});
+${indent}${sanitizedName}Mesh.rotation.set(${obj.rotate.x}, ${obj.rotate.y}, ${obj.rotate.z});
+${indent}${parentVarName}.add(${sanitizedName}Mesh);
 `;
+        } else if (obj.type === 'light') {
+          let lightClass = '';
+          if (obj.light === 'ambient') lightClass = 'AmbientLight';
+          else if (obj.light === 'point') lightClass = 'PointLight';
+          else if (obj.light === 'directional') lightClass = 'DirectionalLight';
+          else if (obj.light === 'spot') lightClass = 'SpotLight';
+
+          if (lightClass) {
+            code += `
+${indent}const ${sanitizedName}Light = new ${lightClass}('${obj.color}', ${obj.intensity});
+${indent}${sanitizedName}Light.position.set(${obj.locate.x}, ${obj.locate.y}, ${obj.locate.z});
+${indent}${parentVarName}.add(${sanitizedName}Light);
+`;
+          }
+        } else if (obj.type === 'camera') {
+            // For now, cameras are not added to groups or the scene in a traditional sense for rendering purposes
+            // If needed, they could be added as helpers or for specific viewports
+        } else if (obj.type === 'group') {
+          code += `
+${indent}const ${sanitizedName}Group = new Group();
+${indent}${sanitizedName}Group.position.set(${obj.locate.x}, ${obj.locate.y}, ${obj.locate.z});
+${indent}${sanitizedName}Group.scale.set(${obj.scale.x}, ${obj.scale.y}, ${obj.scale.z});
+${indent}${sanitizedName}Group.rotation.set(${obj.rotate.x}, ${obj.rotate.y}, ${obj.rotate.z});
+${indent}${parentVarName}.add(${sanitizedName}Group);
+`;
+          code += generateObjectCodeRecursive(obj.children, `${sanitizedName}Group`, indent + '  ');
         }
-      } else if (obj.type === 'camera') {
-          // In vanilla Three.js, we usually define one main camera for rendering
-          // We can set its properties here based on the first camera object found
-          // For simplicity, we'll assume the primary camera is already set up in sceneSetupCode
-      }
-      // GroupType handling is omitted for initial implementation complexity
-    });
+      });
+      return code;
+    };
 
-    // Add OrbitControls to Vanilla Three.js example
-    if (objects.length > 0) { // If there are objects, likely want controls
-      orbitControlsCode = `
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true; // an animation loop is required when damping is enabled
-controls.dampingFactor = 0.25;
-controls.screenSpacePanning = false;
-controls.maxPolarAngle = Math.PI / 2;
-`;
-      animateLoopObjects += `controls.update();\n`;
-    }
+    generatedObjectCode = generateObjectCodeRecursive(objects, 'scene');
 
-    return `import * as THREE from 'three';
-${orbitControlsCode}
+    const threeJsImports = Array.from(threeJSComponents).join(', ');
+
+    return `import { ${threeJsImports} } from 'https://unpkg.com/three@0.158.0/build/three.module.js';
 
 ${sceneSetupCode}
 
+${generatedObjectCode}
+
 function animate() {
     requestAnimationFrame(animate);
-    ${animateLoopObjects}
     renderer.render(scene, camera);
 }
 animate();

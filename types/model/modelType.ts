@@ -71,7 +71,24 @@ export type CameraType = {
 export type GroupType = {
     name: string;
     type: "group";
-    children: ModelType[];
+    locate: { // Add locate for group position
+        x: number;
+        y: number;
+        z: number;
+    };
+    rotate: { // Add rotate for group rotation
+        x: number;
+        y: number;
+        z: number;
+    };
+    scale: { // Add scale for group scale
+        x: number;
+        y: number;
+        z: number;
+    };
+    children: SceneObject[]; // Allow children to be any SceneObject
 }
 
 export type TypeType = "mesh" | "group" | "light" | "camera";
+
+type SceneObject = ModelType | GroupType | LightType | CameraType; // Define SceneObject here for GroupType children
