@@ -1,0 +1,68 @@
+.container {
+    padding: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+}
+
+.noObject {
+    color: #888;
+    font-style: italic;
+}
+
+.vectorInput {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+    label {
+        width: 20px;
+        font-weight: bold;
+        color: #aaa;
+    }
+
+    input {
+        width: 60px;
+        background-color: #333;
+        border: 1px solid #555;
+        color: white;
+        padding: 5px;
+        border-radius: 3px;
+        text-align: center;
+    }
+}
+
+.colorInput {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    input[type="color"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 30px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        &::-webkit-color-swatch {
+            border-radius: 5px;
+            border: 1px solid #555;
+        }
+        &::-moz-color-swatch {
+            border-radius: 5px;
+            border: 1px solid #555;
+        }
+    }
+}

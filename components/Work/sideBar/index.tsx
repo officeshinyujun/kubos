@@ -9,17 +9,19 @@ import GroupButton from "./buttons/groupButton";
 import LightButton from "./buttons/lightButton";
 import CameraButton from "./buttons/cameraButton";
 import { useSceneStore } from "@/stores/useSceneStore";
+import { useEditorStore } from "@/stores/useEditStore";
+import EditPanel from "../EditPanel";
 
-type TabType = "구조" | "코드" | "쉐이더";
+type TabType = "구조" | "속성" | "코드" | "쉐이더";
 
 
 
 export default function WorkSideBar() {
     const testData = useSceneStore((state) => state.objects);
     const {removeObject, updateObject} = useSceneStore();
+    const { selectedObjectId, selectObject } = useEditorStore();
 
     const [tab, setTab] = useState<TabType>("구조");
-    const [active, setActive] = useState("");
     const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
 
     const toggleGroup = (groupName: string) => {
@@ -39,11 +41,12 @@ export default function WorkSideBar() {
         <div className={s.container}>
             <div className={s.buttons}>
                 <TabButton label="구조" onClick={() => setTab("구조")} isActive={tab === "구조"} />
+                <TabButton label="속성" onClick={() => setTab("속성")} isActive={tab === "속성"} />
                 <TabButton label="코드" onClick={() => setTab("코드")} isActive={tab === "코드"} />
                 <TabButton label="쉐이더" onClick={() => setTab("쉐이더")} isActive={tab === "쉐이더"} />
             </div>
             <div className={s.contents}>
-                {testData.map((item) => {
+                {tab === "구조" && testData.map((item) => {
                     if (item.type === "group") {
                         const isExpanded = !!expandedGroups[item.name];
                         return (
@@ -52,12 +55,12 @@ export default function WorkSideBar() {
                                     name={item.name}
                                     //@ts-ignore
                                     isChildren={false}
-                                    isactive={active === item.name}
+                                    isactive={selectedObjectId === item.name}
                                     isExpanded={isExpanded}
                                     edit={() => console.log("edit")}
                                     onDelete={() => console.log("delete")}
                                     onClick={() => {
-                                        setActive(item.name);
+                                        selectObject(item.name);
                                         toggleGroup(item.name);
                                     }}
                                 />
@@ -68,11 +71,11 @@ export default function WorkSideBar() {
                                             key={child.name}
                                             name={child.name}
                                             isChildren={false}
-                                            isactive={active === child.name}
+                                            isactive={selectedObjectId === child.name}
                                             //@ts-ignore
                                             edit={(newName) => updateObject(child.name, {name: newName})}
                                             onDelete={() => handleDelete(child.name)}
-                                            onClick={() => setActive(child.name)}
+                                            onClick={() => selectObject(child.name)}
                                         />
                                     </div>
                                 ))}
@@ -84,10 +87,10 @@ export default function WorkSideBar() {
                                 key={item.name}
                                 name={item.name}
                                 isChildren={false}
-                                isactive={active === item.name}
+                                isactive={selectedObjectId === item.name}
                                 edit={() => console.log("edit")}
                                 onDelete={() => handleDelete(item.name)}
-                                onClick={() => setActive(item.name)}
+                                onClick={() => selectObject(item.name)}
                             />
                         );
                     } else if (item.type === "camera") {
@@ -96,27 +99,29 @@ export default function WorkSideBar() {
                                 key={item.name}
                                 name={item.name}
                                 isChildren={false}
-                                isactive={active === item.name}
+                                isactive={selectedObjectId === item.name}
                                 edit={() => console.log("edit")}
                                 onDelete={() => handleDelete(item.name)}
-                                onClick={() => setActive(item.name)}
+                                onClick={() => selectObject(item.name)}
                             />
                         );
-                    } else {
+                    }
+                    else {
                         return (
                             <ModelButton
                                 key={item.name}
                                 name={item.name}
                                 isChildren={false}
-                                isactive={active === item.name}
+                                isactive={selectedObjectId === item.name}
                                 //@ts-ignore
                                 edit={(newName) => updateObject(item.name, {name: newName})}
                                 onDelete={() => handleDelete(item.name)}
-                                onClick={() => setActive(item.name)}
+                                onClick={() => selectObject(item.name)}
                             />
                         );
                     }
                 })}
+                {tab === "속성" && <EditPanel />}
             </div>
         </div>
     );

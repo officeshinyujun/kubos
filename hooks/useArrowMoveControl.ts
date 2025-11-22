@@ -27,10 +27,7 @@ export default function ArrowMoveControl() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!selectedObjectId) return;
 
-      const obj = scene.getObjectByProperty("uuid", selectedObjectId);
-      if (!obj) return;
-
-      const group = obj.parent;
+      const group = scene.getObjectByName(selectedObjectId);
       if (!group) return;
 
       if ((e.metaKey || e.ctrlKey) && e.key === "z") {

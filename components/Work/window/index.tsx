@@ -47,10 +47,13 @@ export default function WorkWindow() {
             return (
               <Model
                 key={obj.name}
+                name={obj.name}
                 geometryType={obj.mesh as GeometryType}
                 position={[obj.locate.x, obj.locate.y, obj.locate.z]}
                 scale={[obj.scale.x, obj.scale.y, obj.scale.z]}
                 materialType={obj.shader as MaterialType}
+                // @ts-ignore
+                materialProps={{ color: obj.color }}
                 orbitControlSetter={setOrbitEnabled}
                 onHeightChange={(deltaY) => handleHeightChange(obj.name, deltaY)}
                 onWidthChange={(deltaX) => handleWidthChange(obj.name, deltaX)}

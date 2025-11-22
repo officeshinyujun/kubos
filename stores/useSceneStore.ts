@@ -67,7 +67,9 @@ export const useSceneStore = create<SceneState>((set, get) => {
   };
 
   // Expose undo/redo to window
-  (window as any).__SCENE_STORE__ = { undo, redo };
+  if (typeof window !== 'undefined') {
+    (window as any).__SCENE_STORE__ = { undo, redo };
+  }
 
   return {
     objects: [],

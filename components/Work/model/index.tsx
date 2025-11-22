@@ -10,6 +10,7 @@ import * as THREE from "three";
 import { useEditorStore } from "@/stores/useEditStore";
 
 interface ModelProps {
+  name: string;
   geometryType: GeometryType;
   geometryArgs?: any[];
   materialType?: MaterialType;
@@ -23,6 +24,7 @@ interface ModelProps {
 }
 
 export default function Model({
+  name,
   geometryType,
   geometryArgs,
   materialType = "standard",
@@ -41,7 +43,7 @@ export default function Model({
   const selectedObjectId = useEditorStore((s) => s.selectedObjectId);
   const selectObject = useEditorStore((s) => s.selectObject);
 
-  const isSelected = selectedObjectId === meshRef.current?.uuid;
+  const isSelected = selectedObjectId === name;
 
   // Geometry 크기 계산 (스케일 적용)
   useEffect(() => {
@@ -61,14 +63,14 @@ export default function Model({
   }, [geometryType, geometryArgs, scale]);
 
   return (
-    <group ref={groupRef} position={position}>
+    <group ref={groupRef} name={name} position={position}>
       {/* 실제 모델 (scale 적용) */}
       <mesh
         ref={meshRef}
         scale={scale} // 📍 메쉬에 scale 적용
         onClick={(e) => {
           e.stopPropagation();
-          if (meshRef.current) selectObject(meshRef.current.uuid);
+          selectObject(name);
         }}
       >
         <GeometryFactory type={geometryType} args={geometryArgs} />
