@@ -102,7 +102,7 @@ export default function EdgeBox({
       // Depth (Z) – 전/후에 따라 방향 부호 보정 (마우스 X에 매핑)
       if (isResizingDepth) {
         const rawDeltaX = (e.clientX - lastMouseX.current) * 0.02; // 감도 조절
-        const signedDeltaZ = isResizingDepth === 'front' ? -rawDeltaX : rawDeltaX;
+        const signedDeltaZ = rawDeltaX;
         onDepthChange?.(signedDeltaZ);
         lastMouseX.current = e.clientX;
       }
