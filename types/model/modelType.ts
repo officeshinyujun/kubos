@@ -64,6 +64,7 @@ export type CameraType = {
         z: number;
     };
     camera : "perspective" | "orthographic";
+    fov?: number;
 }
 
 export type GroupType = {

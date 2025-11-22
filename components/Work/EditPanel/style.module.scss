@@ -66,3 +66,48 @@
         }
     }
 }
+
+.sliderInput {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    input[type="range"] {
+        flex-grow: 1;
+    }
+
+    span {
+        width: 50px;
+        text-align: right;
+    }
+}
+
+.button {
+    background-color: #444;
+    border: 1px solid #666;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: #555;
+    }
+}
+
+.activeButton {
+    background-color: #007acc;
+    border-color: #007acc;
+
+    &:hover {
+        background-color: #005f99;
+    }
+}
+
+.modeSwitcher {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

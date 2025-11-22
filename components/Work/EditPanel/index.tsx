@@ -2,8 +2,8 @@
 
 import s from './style.module.scss';
 import { useEditorStore } from '../../../stores/useEditStore';
-import { useSceneStore } from '@/stores/useSceneStore';
-import { ModelType, LightType } from '@/types/model/modelType';
+import { useSceneStore } from '../../../stores/useSceneStore';
+import { ModelType, LightType, CameraType } from '../../../types/model/modelType';
 import React from 'react';
 
 // Helper function to find an object recursively
@@ -63,6 +63,8 @@ const SliderInput = ({ label, value, onChange, min = 0, max = 2, step = 0.1 }: {
                   onChange={(e) => onChange(parseFloat(e.target.value))}
                   onMouseDown={() => setOrbitEnabled(false)}
                   onMouseUp={() => setOrbitEnabled(true)}
+                  onTouchStart={() => setOrbitEnabled(false)}
+                  onTouchEnd={() => setOrbitEnabled(true)}
                 />
                 <span>{value.toFixed(2)}</span>
             </div>
@@ -70,9 +72,33 @@ const SliderInput = ({ label, value, onChange, min = 0, max = 2, step = 0.1 }: {
     )
 }
 
+// Mode Switcher component
+const ModeSwitcher = () => {
+    const { transformMode, setTransformMode } = useEditorStore();
+    return (
+        <div>
+            <p className={s.title}>Transform Mode</p>
+            <div className={s.modeSwitcher}>
+                <button 
+                    className={`${s.button} ${transformMode === 'translate' ? s.activeButton : ''}`}
+                    onClick={() => setTransformMode('translate')}
+                >
+                    Translate
+                </button>
+                <button 
+                    className={`${s.button} ${transformMode === 'rotate' ? s.activeButton : ''}`}
+                    onClick={() => setTransformMode('rotate')}
+                >
+                    Rotate
+                </button>
+            </div>
+        </div>
+    )
+}
+
 
 export default function EditPanel() {
-  const { selectedObjectId } = useEditorStore();
+  const { selectedObjectId, setActiveRenderCamera, activeRenderCameraId } = useEditorStore();
   const { objects, updateObject } = useSceneStore();
 
   const selectedObject = selectedObjectId ? findObject(objects, selectedObjectId) : null;
@@ -132,6 +158,7 @@ export default function EditPanel() {
     const light = selectedObject as LightType;
     return (
       <div className={s.container}>
+        <ModeSwitcher />
         <VectorInput
             label="Position"
             value={light.locate}
@@ -161,6 +188,41 @@ export default function EditPanel() {
                 onChange={(value) => handleValueChange('angle', value)}
             />
         )}
+      </div>
+    );
+  }
+
+    // Camera-specific panel
+  if (selectedObject.type === 'camera') {
+    const camera = selectedObject as CameraType;
+    const isRenderCamera = activeRenderCameraId === camera.name;
+    return (
+      <div className={s.container}>
+        <ModeSwitcher />
+        <VectorInput
+            label="Position"
+            value={camera.locate}
+            onChange={(axis, value) => handleVectorChange('locate', axis, value)}
+        />
+        <VectorInput
+            label="Rotation"
+            value={camera.rotate}
+            onChange={(axis, value) => handleVectorChange('rotate', axis, value)}
+        />
+        <SliderInput
+            label="FOV"
+            min={10}
+            max={120}
+            step={1}
+            value={camera.fov || 50}
+            onChange={(value) => handleValueChange('fov', value)}
+        />
+        <button 
+            className={`${s.button} ${isRenderCamera ? s.activeButton : ''}`} 
+            onClick={() => setActiveRenderCamera(isRenderCamera ? null : camera.name)}
+        >
+          {isRenderCamera ? 'Unset as Render Camera' : 'Set as Render Camera'}
+        </button>
       </div>
     );
   }

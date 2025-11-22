@@ -181,7 +181,12 @@ export const useSceneStore = create<SceneState>((set, get) => {
     addCamera: (parentName, camera) => {
       const { objects } = get();
       const count = objects.filter((o) => o.type === "camera").length;
-      const camObj: CameraType = { ...camera, name: `${camera.name}-${count}`, type: "camera" };
+      const camObj: CameraType = { 
+        ...camera, 
+        name: `${camera.name}-${count}`, 
+        type: "camera",
+        fov: 50,
+      };
 
       const addToGroup = (items: SceneObject[]): SceneObject[] =>
         items.map((item) => {
