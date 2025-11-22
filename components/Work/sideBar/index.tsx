@@ -11,12 +11,16 @@ import CameraButton from "./buttons/cameraButton";
 import { useSceneStore } from "@/stores/useSceneStore";
 import { useEditorStore } from "@/stores/useEditStore";
 import EditPanel from "../EditPanel";
+import CodePanel from "../CodePanel";
 
 type TabType = "구조" | "속성" | "코드" | "쉐이더";
 
+interface WorkSideBarProps {
+    reactCode: string;
+    vanillaCode: string;
+}
 
-
-export default function WorkSideBar() {
+export default function WorkSideBar({ reactCode, vanillaCode }: WorkSideBarProps) {
     const testData = useSceneStore((state) => state.objects);
     const {removeObject, updateObject} = useSceneStore();
     const { selectedObjectId, selectObject } = useEditorStore();
@@ -34,8 +38,6 @@ export default function WorkSideBar() {
     const handleDelete = (name : string) => {
         removeObject(name);
     }
-
-    // name: "cube1", type: "mesh", locate: { x: 0, y: 0, z: 0 }, rotate: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1, z: 1 }, shader: "standard", mesh: "box"
 
     return (
         <div className={s.container}>
@@ -122,6 +124,7 @@ export default function WorkSideBar() {
                     }
                 })}
                 {tab === "속성" && <EditPanel />}
+                {tab === "코드" && <CodePanel reactCode={reactCode} vanillaCode={vanillaCode} />}
             </div>
         </div>
     );

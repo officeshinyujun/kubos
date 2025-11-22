@@ -1,0 +1,60 @@
+.codeViewerContainer {
+  font-family: monospace;
+  background-color: #282c34; /* Dark background for code */
+  color: #abb2bf; /* Light text color */
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tabs {
+  display: flex;
+  background-color: #21252b;
+  border-bottom: 1px solid #3a3f4b;
+}
+
+.tabButton {
+  padding: 10px 15px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: #abb2bf;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.tabButton.active {
+  background-color: #282c34;
+  color: #61afef; /* Highlight active tab */
+  border-bottom: 2px solid #61afef;
+}
+
+.tabButton:hover:not(.active) {
+  background-color: #3a3f4b;
+}
+
+.codeContent, .iframeContent {
+  padding: 20px;
+  overflow-x: auto;
+  min-height: 300px; /* Ensure content area is visible */
+}
+
+.codeContent pre {
+  margin: 0;
+}
+
+.codeContent code {
+  display: block;
+  white-space: pre-wrap; /* Preserve whitespace and wrap lines */
+  word-break: break-all; /* Break words to prevent overflow */
+}
+
+.iframeContent iframe {
+  width: 100%;
+  height: 500px; /* Adjust as needed for the demo */
+  border: 1px solid #3a3f4b;
+  border-radius: 4px;
+}

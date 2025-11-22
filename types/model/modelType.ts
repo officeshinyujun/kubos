@@ -16,6 +16,7 @@ export type ModelType = {
         y: number;
         z: number;
     };
+    color?: string; // Add color property here
 } & (
     | { type: 'mesh'; shader: string; mesh: string }
     | { type: Exclude<TypeType, 'mesh'>; shader?: string; mesh?: never }

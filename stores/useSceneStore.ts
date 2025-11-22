@@ -98,6 +98,7 @@ export const useSceneStore = create<SceneState>((set, get) => {
         locate: obj.locate || { x: 0, y: 0, z: 0 },
         rotate: obj.rotate || { x: 0, y: 0, z: 0 },
         scale: obj.scale || { x: 1, y: 1, z: 1 },
+        color: obj.color || '#ffffff', // Set a default color
       } as ModelType;
 
       const addToGroup = (items: SceneObject[]): SceneObject[] =>
