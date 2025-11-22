@@ -24,6 +24,8 @@ export type ModelType = {
 export type LightType = {
     name: string;
     type: "light";
+    color: string;
+    intensity: number;
     locate: {
         x: number;
         y: number;
@@ -40,6 +42,7 @@ export type LightType = {
         z: number;
     };
     light : "ambient" | "directional" | "point" | "spot";
+    angle?: number; // For spot lights
 }
 
 export type CameraType = {

@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import * as THREE from "three";
+import { useEditorStore } from "../../../../stores/useEditStore";
 
 interface EdgeBoxProps {
   size: [number, number, number];
@@ -9,7 +10,6 @@ interface EdgeBoxProps {
   color?: string; // EdgeBox 기본 색상
   pointSize?: number;
   coneSize?: number;
-  orbitControlSetter?: (enabled: boolean) => void;
   onHeightChange?: (deltaY: number) => void; // 높이 변경 콜백
   onWidthChange?: (deltaX: number) => void; // 폭 변경 콜백 (X)
   onDepthChange?: (deltaX: number) => void; // 깊이 변경 콜백 (Z)
@@ -21,7 +21,6 @@ export default function EdgeBox({
   color = "white",
   pointSize = 0.05,
   coneSize = 0.2,
-  orbitControlSetter,
   onHeightChange, // 새로 추가된 prop
   onWidthChange,
   onDepthChange,
@@ -33,6 +32,7 @@ export default function EdgeBox({
   const [parentGroup, setParentGroup] = useState<THREE.Group | null>(null);
   const lastMouseY = useRef(0); // 마우스 Y 위치 추적
   const lastMouseX = useRef(0); // 마우스 X 위치 추적
+  const setOrbitEnabled = useEditorStore((s) => s.setOrbitEnabled);
 
   const [width, height, depth] = size;
 
@@ -102,7 +102,7 @@ export default function EdgeBox({
       // Depth (Z) – 전/후에 따라 방향 부호 보정 (마우스 X에 매핑)
       if (isResizingDepth) {
         const rawDeltaX = (e.clientX - lastMouseX.current) * 0.02; // 감도 조절
-        const signedDeltaZ = rawDeltaX;
+        const signedDeltaZ = isResizingDepth === 'front' ? -rawDeltaX : rawDeltaX;
         onDepthChange?.(signedDeltaZ);
         lastMouseX.current = e.clientX;
       }
@@ -130,8 +130,8 @@ export default function EdgeBox({
 
   // OrbitControls 제어 (이동 모드 또는 리사이즈 모드일 때 비활성화)
   useEffect(() => {
-    orbitControlSetter?.(!moveMode && !isResizingHeight && !isResizingWidth && !isResizingDepth);
-  }, [moveMode, isResizingHeight, isResizingWidth, isResizingDepth, orbitControlSetter]);
+    setOrbitEnabled(!moveMode && !isResizingHeight && !isResizingWidth && !isResizingDepth);
+  }, [moveMode, isResizingHeight, isResizingWidth, isResizingDepth, setOrbitEnabled]);
   
 
   return (

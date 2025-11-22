@@ -17,7 +17,6 @@ interface ModelProps {
   materialProps?: Partial<React.ComponentProps<typeof MaterialFactory>>;
   position?: [number, number, number];
   scale?: [number, number, number]; // 📍 scale prop 추가
-  orbitControlSetter?: (enabled: boolean) => void;
   onHeightChange?: (deltaY: number) => void;
   onWidthChange?: (deltaX: number) => void;
   onDepthChange?: (deltaX: number) => void;
@@ -31,7 +30,6 @@ export default function Model({
   materialProps = {},
   position = [0, 0, 0],
   scale = [1, 1, 1], // 📍 scale 기본값 설정
-  orbitControlSetter,
   onHeightChange,
   onWidthChange,
   onDepthChange,
@@ -84,7 +82,6 @@ export default function Model({
           position={[0, 0, 0]}
           color="#ffffff"
           pointSize={0.05}
-          orbitControlSetter={orbitControlSetter}
           onHeightChange={onHeightChange}
           onWidthChange={onWidthChange}
           onDepthChange={onDepthChange}

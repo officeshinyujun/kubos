@@ -149,7 +149,17 @@ export const useSceneStore = create<SceneState>((set, get) => {
     addLight: (parentName, light) => {
       const { objects } = get();
       const count = objects.filter((o) => o.type === "light").length;
-      const lightObj: LightType = { ...light, name: `${light.name}-${count}`, type: "light" };
+      const lightObj: LightType = { 
+        ...light, 
+        name: `${light.name}-${count}`, 
+        type: "light",
+        color: '#ffffff',
+        intensity: 1,
+        locate: light.locate || { x: 0, y: 2, z: 0 },
+        rotate: light.rotate || { x: 0, y: 0, z: 0 },
+        scale: light.scale || { x: 1, y: 1, z: 1 },
+        angle: light.angle || (light.light === 'spot' ? Math.PI / 6 : undefined),
+      };
 
       const addToGroup = (items: SceneObject[]): SceneObject[] =>
         items.map((item) => {

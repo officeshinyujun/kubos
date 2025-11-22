@@ -7,13 +7,21 @@ import WorkWindow from '@/components/Work/window';
 import WorkBottomBar from '@/components/Work/bottomBar';
 import { useEffect } from 'react';
 import { useSceneStore } from '@/stores/useSceneStore';
+import { useEditorStore } from '@/stores/useEditStore';
 import toast from 'react-hot-toast';
 
 export default function WorkList() {
   const { undo, redo } = useSceneStore();
+  const { clearSelection } = useEditorStore();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      // ESC to clear selection
+      if (event.key === 'Escape') {
+        clearSelection();
+        return;
+      }
+
       const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
       const isCmdOrCtrl = event.metaKey || event.ctrlKey;
       
@@ -39,7 +47,7 @@ export default function WorkList() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [undo, redo]);
+  }, [undo, redo, clearSelection]);
 
   return (
     <div className={s.container}>
