@@ -16,7 +16,7 @@ export default function WorkHeader() {
             <p data-tutorial-id="export-button">내보내기</p>
             <p>저장하기</p>
             <p>삭제하기</p>
-            <p onClick={startTutorial}>튜토리얼</p>
+            <p onClick={() => startTutorial('FIRST_STEP_START')}>튜토리얼</p>
         </header>
     );
 }

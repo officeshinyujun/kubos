@@ -106,7 +106,9 @@ export default function BottomBar() {
                                     },
                                     light : lightTypeMapping[name]
                                 }
-                            )} />
+                            )}
+                            dataTutorialId={`light-button-${name}`}
+                             />
                         ))}
                     </Section>
                 }

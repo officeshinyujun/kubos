@@ -1,33 +1,109 @@
 import { create } from 'zustand';
-import { tutorialSteps, TutorialStep } from '@/app/tutorial/steps';
+import { tutorialFsmConfig, TutorialState, TutorialStepConfig } from '@/app/tutorial/fsm';
+import { useSceneStore } from './useSceneStore';
 
-interface TutorialState {
+interface TutorialStore {
+  currentState: TutorialState;
+  currentStepConfig: TutorialStepConfig;
   isTutorialActive: boolean;
-  currentStepIndex: number;
-  steps: TutorialStep[];
-  startTutorial: () => void;
-  nextStep: () => void;
-  prevStep: () => void;
+  startTutorial: (startState: TutorialState) => void;
   endTutorial: () => void;
-  setStep: (index: number) => void;
+  dispatchEvent: (event: { type: string; [key: string]: any }) => void;
+  nextStep: () => void;
 }
 
-export const useTutorialStore = create<TutorialState>((set) => ({
-  isTutorialActive: false,
-  currentStepIndex: 0,
-  steps: tutorialSteps,
-  startTutorial: () => set({ isTutorialActive: true, currentStepIndex: 0 }),
-  nextStep: () =>
-    set((state) => ({
-      currentStepIndex: Math.min(state.currentStepIndex + 1, state.steps.length - 1),
-    })),
-  prevStep: () =>
-    set((state) => ({
-      currentStepIndex: Math.max(state.currentStepIndex - 1, 0),
-    })),
-  endTutorial: () => set({ isTutorialActive: false }),
-    setStep: (index) =>
-    set((state) => ({
-        currentStepIndex: Math.max(0, Math.min(index, state.steps.length - 1)),
-    })),
-}));
+const useTutorialStore = create<TutorialStore>((set, get) => {
+  const store: TutorialStore = {
+    currentState: 'IDLE',
+    currentStepConfig: tutorialFsmConfig['IDLE'],
+    isTutorialActive: false,
+    
+    startTutorial: (startState) => {
+      set({
+        currentState: startState,
+        currentStepConfig: tutorialFsmConfig[startState],
+        isTutorialActive: true,
+      });
+    },
+
+    endTutorial: () => {
+      set({
+        currentState: 'IDLE',
+        currentStepConfig: tutorialFsmConfig['IDLE'],
+        isTutorialActive: false,
+      });
+    },
+
+    dispatchEvent: (event) => {
+      const { currentState, currentStepConfig } = get();
+      if (!currentStepConfig.autoAdvance || !currentStepConfig.requirements) return;
+
+      if (currentStepConfig.requirements(event)) {
+        const nextState = currentStepConfig.nextState;
+        set({
+          currentState: nextState,
+          currentStepConfig: tutorialFsmConfig[nextState],
+        });
+      }
+    },
+
+    nextStep: () => {
+        const { currentState, currentStepConfig } = get();
+        if (currentStepConfig.autoAdvance) return;
+
+        const nextState = currentStepConfig.nextState;
+        set({
+            currentState: nextState,
+            currentStepConfig: tutorialFsmConfig[nextState],
+        });
+    }
+  };
+
+  return store;
+});
+
+// Subscribe to scene store changes to dispatch events to the tutorial FSM
+useSceneStore.subscribe(
+  (state, prevState) => {
+    const { dispatchEvent, isTutorialActive } = useTutorialStore.getState();
+    if (!isTutorialActive) return;
+
+    // Check for added objects
+    if (state.objects.length > prevState.objects.length) {
+        const lastObject = state.objects[state.objects.length - 1];
+        if (lastObject.type === 'mesh') {
+            dispatchEvent({ type: 'addObject', object: lastObject });
+        } else if (lastObject.type === 'light') {
+            dispatchEvent({ type: 'addLight', light: lastObject });
+        }
+    }
+
+    // Check for removed objects
+    if (state.objects.length < prevState.objects.length) {
+        const removedObject = prevState.objects.find(obj => !state.objects.some(o => o.name === obj.name));
+        if (removedObject) {
+            dispatchEvent({ type: 'removeObject', object: removedObject });
+        }
+    }
+    
+    // Check for updated objects
+    for (const object of state.objects) {
+        const prevObject = prevState.objects.find(o => o.name === object.name);
+        if (prevObject && JSON.stringify(object) !== JSON.stringify(prevObject)) {
+            const updatedProps = Object.keys(object).reduce((acc, key) => {
+                // @ts-ignore
+                if (JSON.stringify(object[key]) !== JSON.stringify(prevObject[key])) {
+                    // @ts-ignore
+                    acc[key] = object[key];
+                }
+                return acc;
+            }, {} as Partial<typeof object>);
+
+            dispatchEvent({ type: 'updateObject', object, updated: updatedProps });
+        }
+    }
+  }
+);
+
+
+export { useTutorialStore };

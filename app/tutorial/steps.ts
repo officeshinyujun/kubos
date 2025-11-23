@@ -45,6 +45,6 @@ export const tutorialSteps: TutorialStep[] = [
     },
     {
         title: '튜토리얼 완료',
-        description: '축하합니다! 모든 기본 조작법을 배웠습니다. 이제 다음으로, .',
+        description: '축하합니다! 모든 기본 조작법을 배웠습니다. 이제 다음으로,  빛을 배워봅시다.',
     },
 ];

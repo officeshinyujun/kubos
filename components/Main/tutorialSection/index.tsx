@@ -12,7 +12,11 @@ export default function TutorialSection() {
             <div className={s.contents}>
                 <TutorialCard 
                     title="기본 튜토리얼 (FSM)" 
-                    onClick={() => router.push("/work?startTutorial=true")}
+                    onClick={() => router.push("/work?tutorial=first_step")}
+                />
+                <TutorialCard
+                    title="빛 튜토리얼 (FSM)"
+                    onClick={() => router.push("/work?tutorial=light")}
                 />
             </div>
         </section>

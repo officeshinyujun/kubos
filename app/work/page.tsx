@@ -53,8 +53,13 @@ export default function WorkList() {
   }, [clearSelection]);
 
   useEffect(() => {
-    if (searchParams.get('startTutorial') === 'true' && !isTutorialActive) {
-      startTutorial();
+    const tutorial = searchParams.get('tutorial');
+    if (tutorial && !isTutorialActive) {
+      if (tutorial === 'first_step') {
+        startTutorial('FIRST_STEP_START');
+      } else if (tutorial === 'light') {
+        startTutorial('LIGHT_TUTORIAL_START');
+      }
     }
   }, [searchParams, isTutorialActive, startTutorial]);
 

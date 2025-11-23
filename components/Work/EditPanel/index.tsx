@@ -36,9 +36,9 @@ const VectorInput = ({ label, value, onChange, dataTutorialId }: { label: string
 };
 
 // Color input component
-const ColorInput = ({ value, onChange }: { value: string, onChange: (value: string) => void }) => {
+const ColorInput = ({ value, onChange, dataTutorialId }: { value: string, onChange: (value: string) => void, dataTutorialId?: string }) => {
     return (
-        <div>
+        <div data-tutorial-id={dataTutorialId}>
             <p className={s.title}>Color</p>
             <div className={s.colorInput}>
                 <input type="color" value={value} onChange={(e) => onChange(e.target.value)} />
@@ -52,7 +52,7 @@ const SliderInput = ({ label, value, onChange, min = 0, max = 2, step = 0.1 }: {
     const { setOrbitEnabled } = useEditorStore();
     return (
         <div>
-            <p className={s.title}>{label}</p>
+            <p className={s.title}>Color</p>
             <div className={s.sliderInput}>
                 <input 
                   type="range" 
@@ -173,6 +173,7 @@ export default function EditPanel() {
         <ColorInput
           value={light.color || '#ffffff'}
           onChange={(value) => handleValueChange('color', value)}
+          dataTutorialId="light-color-control"
         />
         <SliderInput
             label="Intensity"
