@@ -21,7 +21,14 @@ export default function BottomBar() {
         addObject(null, mesh);
     }
 
-
+    const testJson = 
+    {
+        name: '정육면체-0',
+        type: 'mesh',
+        material: { type: 'MeshStandardMaterial', map: '/textures/wood.jpg' }
+        // ... 기타 속성
+    }
+    
     const meshList = [
         "정육면체",
         "구",
@@ -73,7 +80,11 @@ export default function BottomBar() {
                 {activeButton === "메시" && 
                     <Section text="메시">
                         {meshList.map(name => (
-                            <SectionButton key={name} type="메시" text={name} onClick={() => addMesh({
+                            <SectionButton 
+                            key={name} 
+                            type="메시" 
+                            text={name} 
+                            onClick={() => addMesh({
                                 name: `${name}`, type: "mesh", locate: { x: 0, y: 0, z: 0 }, rotate: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1, z: 1 }, shader: "standard", mesh: name
                             })} 
                             dataTutorialId={name === '정육면체' ? 'cube-card' : name === '구' ? 'sphere-card' : undefined}

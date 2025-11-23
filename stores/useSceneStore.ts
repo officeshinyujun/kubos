@@ -110,7 +110,8 @@ export const useSceneStore = create<SceneState>((set, get) => {
         rotate: obj.rotate || { x: 0, y: 0, z: 0 },
         scale: obj.scale || { x: 1, y: 1, z: 1 },
         color: obj.color || '#ffffff', // Set a default color
-      } as ModelType;
+      } as ModelType; //고유 이름 및 타입 부여...
+      useEditorStore.getState().selectObject(newObj.name); // 생성된 객체 자동 선택
 
       const addToGroup = (items: SceneObject[]): SceneObject[] =>
         items.map((item) => {
@@ -127,7 +128,6 @@ export const useSceneStore = create<SceneState>((set, get) => {
       const newState = { objects: newObjects };
       saveState(newState as any);
       set(newState);
-      useEditorStore.getState().selectObject(newObj.name);
     },
 
     addGroup: (parentName, groupName) => {
