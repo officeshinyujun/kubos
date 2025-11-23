@@ -1,5 +1,6 @@
 // stores/useSceneStore.ts
 import { create } from 'zustand';
+//@ts-ignore
 import { ModelType, GroupType, LightType, CameraType, SceneObject } from "@/types/model/modelType";
 
 interface SceneState {
@@ -112,7 +113,7 @@ export const useSceneStore = create<SceneState>((set, get) => {
 
       const newObjects = parentName ? addToGroup(objects) : [...objects, newObj];
       const newState = { objects: newObjects };
-      saveState(newState);
+      saveState(newState as any);
       set(newState);
     },
 
@@ -140,7 +141,7 @@ export const useSceneStore = create<SceneState>((set, get) => {
 
       const newObjects = parentName ? addToGroup(objects) : [...objects, newGroup];
       const newState = { objects: newObjects };
-      saveState(newState);
+      saveState(newState as any);
       set(newState);
     },
 
@@ -172,7 +173,7 @@ export const useSceneStore = create<SceneState>((set, get) => {
 
       const newObjects = parentName ? addToGroup(objects) : [...objects, lightObj];
       const newState = { objects: newObjects };
-      saveState(newState);
+      saveState(newState as any);
       set(newState);
     },
 
@@ -199,7 +200,7 @@ export const useSceneStore = create<SceneState>((set, get) => {
 
       const newObjects = parentName ? addToGroup(objects) : [...objects, camObj];
       const newState = { objects: newObjects };
-      saveState(newState);
+      saveState(newState as any);
       set(newState);
     },
 
@@ -242,7 +243,7 @@ export const useSceneStore = create<SceneState>((set, get) => {
 
       const newObjects = updateInGroup(objects);
       const newState = { objects: newObjects };
-      saveState(newState);
+      saveState(newState as any);
       set(newState);
     },
 

@@ -66,6 +66,12 @@ export type CameraType = {
     };
     camera : "perspective" | "orthographic";
     fov?: number;
+    target?: { // Optional target property for camera lookAt
+        x: number;
+        y: number;
+        z: number;
+    };
+    zoom?: number; // Optional zoom property for camera
 }
 
 export type GroupType = {
