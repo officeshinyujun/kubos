@@ -15,10 +15,10 @@ const ColorNode: React.FC<ColorNodeProps> = ({ data }) => {
   };
 
   return (
-    <div style={{ padding: 10, border: '1px solid #ccc', borderRadius: 5, background: '#fff' }}>
+    <div style={{ padding: 10, border: '1px solid #696969', borderRadius: 5, background: '#111' }}>
       <Handle type="target" position={Position.Top} />
       <div>{data.label || 'Color Node'}</div>
-      <input type="color" value={data.color || '#ffffff'} onChange={handleChange} />
+      <input type="color" value={data.color || '#ffffff'} onChange={handleChange} style={{ outline: 'none', border: 'none' }} />
       <Handle type="source" position={Position.Bottom} />
     </div>
   );

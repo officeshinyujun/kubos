@@ -1,12 +1,18 @@
 'use client';
 
 import { Suspense } from 'react';
+import { useGLTF } from '@react-three/drei';
 import { useSceneStore } from '@/stores/useSceneStore';
 import Model from '@/components/Work/model';
 import LightRenderer from '@/components/Work/LightRenderer';
 import CameraRenderer from '@/components/Work/CameraRenderer';
-import { ModelType, LightType, CameraType } from '@/types/model/modelType';
+import { ModelType, LightType, CameraType, GLTFType } from '@/types/model/modelType';
 import { GeometryType } from '@/types/model/modelDefinitions';
+
+function GltfModel({ url, position, scale, rotation }: { url: string, position: [number, number, number], scale: [number, number, number], rotation: [number, number, number] }) {
+  const { scene } = useGLTF(url);
+  return <primitive object={scene} position={position} scale={scale} rotation={rotation} />;
+}
 
 // This component renders the shared scene objects for both viewports.
 export const SharedScene = () => {
@@ -60,6 +66,16 @@ export const SharedScene = () => {
         }
         if (obj.type === 'camera') {
           return <CameraRenderer key={obj.name} camera={obj as CameraType} />
+        }
+        if (obj.type === 'gltf') {
+          const gltfObj = obj as GLTFType;
+          return <GltfModel 
+            key={gltfObj.name} 
+            url={gltfObj.url}
+            position={[gltfObj.locate.x, gltfObj.locate.y, gltfObj.locate.z]}
+            scale={[gltfObj.scale.x, gltfObj.scale.y, gltfObj.scale.z]}
+            rotation={[gltfObj.rotate.x, gltfObj.rotate.y, gltfObj.rotate.z]}
+          />
         }
         return null;
       })}

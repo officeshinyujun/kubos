@@ -2,7 +2,7 @@
 import { create } from 'zustand';
 import * as THREE from 'three'; // Import THREE
 //@ts-ignore
-import { ModelType, GroupType, LightType, CameraType, SceneObject } from "@/types/model/modelType";
+import { ModelType, GroupType, LightType, CameraType, SceneObject, GLTFType } from "@/types/model/modelType";
 import { useEditorStore } from './useEditStore';
 
 interface SceneState {
@@ -15,6 +15,7 @@ interface SceneState {
   addGroup: (parentName: string | null, groupName: string) => void;
   addLight: (parentName: string | null, light: Omit<LightType, "name"> & { name: string }) => void;
   addCamera: (parentName: string | null, camera: Omit<CameraType, "name"> & { name: string }) => void;
+  addGltf: (parentName: string | null, url: string) => void;
   removeObject: (name: string) => void;
   updateObject: (name: string, updated: Partial<SceneObject>) => void;
   undo: () => void;
@@ -271,6 +272,36 @@ export const useSceneStore = create<SceneState>((set, get) => {
         });
 
       const newObjects = updateInGroup(objects);
+      const newState = { objects: newObjects };
+      saveState(newState as any);
+      set(newState);
+    },
+
+    addGltf: (parentName, url) => {
+      const { objects } = get();
+      const count = objects.filter((o) => o.type === "gltf").length;
+      const newObj: GLTFType = {
+        name: `gltf-${count}`,
+        type: 'gltf',
+        url,
+        locate: { x: 0, y: 0, z: 0 },
+        rotate: { x: 0, y: 0, z: 0 },
+        scale: { x: 1, y: 1, z: 1 },
+      };
+      useEditorStore.getState().selectObject(newObj.name);
+
+      const addToGroup = (items: SceneObject[]): SceneObject[] =>
+        items.map((item) => {
+          if (item.type === "group" && item.name === parentName) {
+            return { ...item, children: [...item.children, newObj] } as GroupType;
+          }
+          if (item.type === "group") {
+            return { ...item, children: addToGroup(item.children) } as GroupType;
+          }
+          return item;
+        });
+
+      const newObjects = parentName ? addToGroup(objects) : [...objects, newObj];
       const newState = { objects: newObjects };
       saveState(newState as any);
       set(newState);

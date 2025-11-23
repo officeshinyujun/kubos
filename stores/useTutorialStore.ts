@@ -6,10 +6,12 @@ interface TutorialStore {
   currentState: TutorialState;
   currentStepConfig: TutorialStepConfig;
   isTutorialActive: boolean;
+  completedTutorials: Record<string, boolean>;
   startTutorial: (startState: TutorialState) => void;
-  endTutorial: () => void;
+  endTutorial: (tutorialName?: string) => void;
   dispatchEvent: (event: { type: string; [key: string]: any }) => void;
   nextStep: () => void;
+  markTutorialComplete: (tutorialName: string) => void;
 }
 
 const useTutorialStore = create<TutorialStore>((set, get) => {
@@ -17,6 +19,7 @@ const useTutorialStore = create<TutorialStore>((set, get) => {
     currentState: 'IDLE',
     currentStepConfig: tutorialFsmConfig['IDLE'],
     isTutorialActive: false,
+    completedTutorials: {},
     
     startTutorial: (startState) => {
       useSceneStore.getState().clearScene();
@@ -27,7 +30,10 @@ const useTutorialStore = create<TutorialStore>((set, get) => {
       });
     },
 
-    endTutorial: () => {
+    endTutorial: (tutorialName) => {
+      if (tutorialName) {
+        get().markTutorialComplete(tutorialName);
+      }
       set({
         currentState: 'IDLE',
         currentStepConfig: tutorialFsmConfig['IDLE'],
@@ -41,10 +47,21 @@ const useTutorialStore = create<TutorialStore>((set, get) => {
 
       if (currentStepConfig.requirements(event)) {
         const nextState = currentStepConfig.nextState;
-        set({
-          currentState: nextState,
-          currentStepConfig: tutorialFsmConfig[nextState],
-        });
+        if (nextState === 'IDLE') {
+          // Determine which tutorial ended
+          if (currentState === 'FIRST_STEP_END') {
+            get().endTutorial('firstStepTutorial');
+          } else if (currentState === 'LIGHT_TUTORIAL_END') {
+            get().endTutorial('lightTutorial');
+          } else {
+            get().endTutorial();
+          }
+        } else {
+          set({
+            currentState: nextState,
+            currentStepConfig: tutorialFsmConfig[nextState],
+          });
+        }
       }
     },
 
@@ -53,11 +70,31 @@ const useTutorialStore = create<TutorialStore>((set, get) => {
         if (currentStepConfig.autoAdvance) return;
 
         const nextState = currentStepConfig.nextState;
-        set({
-            currentState: nextState,
-            currentStepConfig: tutorialFsmConfig[nextState],
-        });
-    }
+        if (nextState === 'IDLE') {
+          // Determine which tutorial ended
+          if (currentState === 'FIRST_STEP_END') {
+            get().endTutorial('firstStepTutorial');
+          } else if (currentState === 'LIGHT_TUTORIAL_END') {
+            get().endTutorial('lightTutorial');
+          } else {
+            get().endTutorial();
+          }
+        } else {
+          set({
+              currentState: nextState,
+              currentStepConfig: tutorialFsmConfig[nextState],
+          });
+        }
+    },
+
+    markTutorialComplete: (tutorialName: string) => {
+      set((state) => ({
+        completedTutorials: {
+          ...state.completedTutorials,
+          [tutorialName]: true,
+        },
+      }));
+    },
   };
 
   return store;

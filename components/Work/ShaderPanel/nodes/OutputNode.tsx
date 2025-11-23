@@ -9,9 +9,9 @@ interface OutputNodeProps {
 
 const OutputNode: React.FC<OutputNodeProps> = ({ data }) => {
   return (
-    <div style={{ padding: 10, border: '1px solid #ccc', borderRadius: 5, background: '#fff' }}>
+    <div style={{ padding: 10, border: '1px solid #696969', borderRadius: 5, background: '#111' }}>
       <Handle type="target" position={Position.Top} />
-      <div>{data.label || 'Output Node'}</div>
+      <div style={{ color: '#fff' }}>{data.label || 'Output Node'}</div>
     </div>
   );
 };

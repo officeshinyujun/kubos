@@ -8,8 +8,7 @@ import { MaterialType } from "@/types/model/MaterialType";
 import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import { useEditorStore } from "@/stores/useEditStore";
-import { useLoader } from '@react-three/fiber';
-import { TextureLoader } from 'three';
+import { useTexture } from '@react-three/drei';
 
 interface ModelProps {
   name: string;
@@ -24,6 +23,17 @@ interface ModelProps {
   onWidthChange?: (deltaX: number) => void;
   onDepthChange?: (deltaX: number) => void;
 }
+
+// Helper component to ensure useTexture is not called conditionally
+const MaterialWithTexture = ({ materialType, materialProps, texturePath }: {
+  materialType: MaterialType;
+  materialProps?: Partial<React.ComponentProps<typeof MaterialFactory>>;
+  texturePath: string;
+}) => {
+  const textureMap = useTexture(texturePath);
+  return <MaterialFactory type={materialType} {...materialProps} map={textureMap} />;
+};
+
 
 export default function Model({
   name,
@@ -46,18 +56,6 @@ export default function Model({
   const selectObject = useEditorStore((s) => s.selectObject);
 
   const isSelected = selectedObjectId === name;
-
-  // Load texture if texturePath is provided
-  let textureMap = undefined;
-  console.log(`Model Component: received texturePath for ${name}:`, texturePath);
-  if (texturePath) {
-    try {
-      textureMap = useLoader(TextureLoader, texturePath);
-      console.log(`Model Component: texture loaded for ${name}:`, textureMap);
-    } catch (error) {
-      console.error(`Model Component: Error loading texture for ${name} from ${texturePath}:`, error);
-    }
-  }
 
   // Geometry 크기 계산 (스케일 적용)
   useEffect(() => {
@@ -88,7 +86,15 @@ export default function Model({
         }}
       >
         <GeometryFactory type={geometryType} args={geometryArgs} />
-        <MaterialFactory type={materialType} {...materialProps} map={textureMap} />
+        {texturePath ? (
+          <MaterialWithTexture 
+            materialType={materialType} 
+            materialProps={materialProps} 
+            texturePath={texturePath} 
+          />
+        ) : (
+          <MaterialFactory type={materialType} {...materialProps} />
+        )}
       </mesh>
 
       {/* 선택된 경우 EdgeBox 표시 (계산된 boxSize 사용) */}

@@ -96,6 +96,27 @@ export type GroupType = {
     children: SceneObject[]; // Allow children to be any SceneObject
 }
 
-export type TypeType = "mesh" | "group" | "light" | "camera";
+export type GLTFType = {
+    name: string;
+    type: "gltf";
+    locate: {
+        x: number;
+        y: number;
+        z: number;
+    };
+    rotate: {
+        x: number;
+        y: number;
+        z: number;
+    };
+    scale: {
+        x: number;
+        y: number;
+        z: number;
+    };
+    url: string;
+}
 
-type SceneObject = ModelType | GroupType | LightType | CameraType; // Define SceneObject here for GroupType children
+export type TypeType = "mesh" | "group" | "light" | "camera" | "gltf";
+
+export type SceneObject = ModelType | GroupType | LightType | CameraType | GLTFType; // Define SceneObject here for GroupType children

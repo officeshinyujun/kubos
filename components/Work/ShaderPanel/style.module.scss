@@ -11,14 +11,14 @@
 }
 
 .materialCard {
-  background-color: var(--BACKGROUND_COLOR_PRIMARY);
-  border: 1px solid var(--LINES);
+  background-color: $background-secondary;
+  border: 1px solid $border-primary;
   padding: 10px;
   margin-top: 10px;
   border-radius: 5px;
   h4 {
     margin-top: 0;
-    color: var(--TEXT_COLOR_PRIMARY);
+    color: $background-primary
   }
   p {
     margin-bottom: 5px;
@@ -77,5 +77,23 @@
     white-space: pre-wrap; // Wrap long lines
     word-break: break-all; // Break words if necessary
     margin: 0;
+  }
+}
+
+.toolbar{
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: $s12;
+  button{
+    border: 1px solid $border-primary;
+    color: $text-primary;
+    background-color: $background-secondary;
+    padding: $s12 $s24;
+    cursor: pointer;
+    &:hover{
+      background-color: $background-secondary;
+    }
   }
 }

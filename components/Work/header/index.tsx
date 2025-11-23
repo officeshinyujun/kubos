@@ -7,24 +7,49 @@ import { useTutorialStore } from "@/stores/useTutorialStore";
 import { useSceneStore } from "@/stores/useSceneStore";
 import { exportToGLTF } from "@/utils/export";
 import { useRouter } from "next/navigation";
+import { useRef, useCallback } from "react";
 
 export default function WorkHeader() {
     const { startTutorial } = useTutorialStore();
-    const { objects } = useSceneStore();
+    const { objects, addGltf } = useSceneStore();
     const router = useRouter();
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleExport = () => {
         exportToGLTF(objects);
     }
 
+    const handleImportClick = () => {
+        fileInputRef.current?.click();
+    };
+
+    const handleFileChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                if (e.target?.result) {
+                    addGltf(null, e.target.result as string);
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    }, [addGltf]);
+
     return (
         <header className={s.container}>
             <Image src={logo} alt="Logo" width={40} height={40} onClick={() => router.push('/')} />
-            <p data-tutorial-id="import-button">불러오기</p>
+            <p data-tutorial-id="import-button" onClick={handleImportClick}>불러오기</p>
+            <input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+                accept=".gltf,.glb"
+                onChange={handleFileChange}
+            />
             <p data-tutorial-id="export-button" onClick={handleExport}>내보내기</p>
             <p>저장하기</p>
             <p>삭제하기</p>
-            <p onClick={() => startTutorial('FIRST_STEP_START')}>튜토리얼</p>
         </header>
     );
 }

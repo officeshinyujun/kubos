@@ -24,9 +24,9 @@ const TextureNode: React.FC<TextureNodeProps> = ({ data }) => {
   };
 
   return (
-    <div style={{ padding: 10, border: '1px solid #ccc', borderRadius: 5, background: '#fff' }}>
+    <div style={{ padding: 10, border: '1px solid #696969', borderRadius: 5, background: '#111' }}>
       <Handle type="target" position={Position.Top} />
-      <div>{data.label || 'Texture Node'}</div>
+      <div style={{ color: '#fff' }}>{data.label || 'Texture Node'}</div>
       {data.texturePath && (
         <div>
           <img src={data.texturePath} alt="texture preview" style={{ maxWidth: '100px', maxHeight: '100px' }} />

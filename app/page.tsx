@@ -6,7 +6,7 @@ import TutorialSection from "@/components/Main/tutorialSection";
 
 export default function Home() {
 
-  const user = "고윤"
+  const user = "유준"
 
   return (
     <div className={s.container}>

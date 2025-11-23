@@ -59,6 +59,13 @@ export default function CodeViewer({ reactCode, vanillaCode }: CodeViewerProps) 
         body { margin: 0; }
         canvas { display: block; }
     </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three/build/three.module.js"
+        }
+    }
+    </script>
 </head>
 <body>
     <script type="module">
@@ -78,6 +85,18 @@ export default function CodeViewer({ reactCode, vanillaCode }: CodeViewerProps) 
     } catch (err) {
       console.error('Failed to copy code: ', err);
       toast.error('Failed to copy code.');
+    }
+  };
+
+  const handleCopyAsIframe = async () => {
+    const htmlContent = generateVanillaHtml(vanillaCode);
+    const iframeTag = `<iframe width="600" height="400" srcdoc="${htmlContent.replace(/"/g, '&quot;')}"></iframe>`;
+    try {
+      await navigator.clipboard.writeText(iframeTag);
+      toast.success('<iframe> snippet copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy iframe tag: ', err);
+      toast.error('Failed to copy <iframe> tag.');
     }
   };
 
@@ -155,6 +174,11 @@ export default function CodeViewer({ reactCode, vanillaCode }: CodeViewerProps) 
         <button onClick={handleCopy} className={styles.copyButton}>
           {copied ? 'Copied!' : 'Copy Code'}
         </button>
+        {activeTab === 'vanilla' && (
+            <button onClick={handleCopyAsIframe} className={styles.copyButton}>
+                Copy as &lt;iframe&gt;
+            </button>
+        )}
       </div>
     </div>
   );
