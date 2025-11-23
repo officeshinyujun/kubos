@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useThree } from "@react-three/fiber";
 import { useEditorStore } from "@/stores/useEditStore";
 import { useStackStore } from "@/stores/useStackStore";
+import { useSceneStore } from "@/stores/useSceneStore";
+import { ModelType } from "@/types/model/modelType";
 import * as THREE from "three";
 
 export default function ArrowMoveControl() {
@@ -12,6 +14,7 @@ export default function ArrowMoveControl() {
   const push = useStackStore((s) => s.push);
   const undo = useStackStore((s) => s.undo);
   const redo = useStackStore((s) => s.redo);
+  const { updateObject } = useSceneStore();
 
   useEffect(() => {
     const MOVE = 0.1;
@@ -35,6 +38,18 @@ export default function ArrowMoveControl() {
         if (prev && prev.uuid === group.uuid) {
           group.position.set(...prev.position);
           group.rotation.set(...prev.rotation);
+          updateObject(selectedObjectId, {
+            locate: {
+              x: prev.position[0],
+              y: prev.position[1],
+              z: prev.position[2],
+            },
+            rotate: {
+              x: prev.rotation[0],
+              y: prev.rotation[1],
+              z: prev.rotation[2],
+            },
+          });
         }
         return;
       }
@@ -44,6 +59,18 @@ export default function ArrowMoveControl() {
         if (next && next.uuid === group.uuid) {
           group.position.set(...next.position);
           group.rotation.set(...next.rotation);
+          updateObject(selectedObjectId, {
+            locate: {
+              x: next.position[0],
+              y: next.position[1],
+              z: next.position[2],
+            },
+            rotate: {
+              x: next.rotation[0],
+              y: next.rotation[1],
+              z: next.rotation[2],
+            },
+          });
         }
         return;
       }
@@ -112,11 +139,19 @@ export default function ArrowMoveControl() {
       
       const moveVector = moveAxis.multiplyScalar(moveDirection * MOVE);
       group.position.add(moveVector);
+
+      updateObject(selectedObjectId, {
+        locate: {
+          x: group.position.x,
+          y: group.position.y,
+          z: group.position.z,
+        },
+      });
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedObjectId, scene, camera, push, undo, redo]);
+  }, [selectedObjectId, scene, camera, push, undo, redo, updateObject]);
 
   return null;
 }
