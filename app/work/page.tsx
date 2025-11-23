@@ -21,7 +21,7 @@ export default function WorkList() {
   const mainViewRef = useRef<HTMLDivElement>(null!);
   const renderViewRef = useRef<HTMLDivElement>(null!);
   
-  const { selectedObjectId, activeRenderCameraId } = useEditorStore();
+  const { selectedObjectId, activeRenderCameraId, isOrbitEnabled } = useEditorStore();
   const { objects } = useSceneStore();
 
   const selectedObject = selectedObjectId
@@ -75,7 +75,7 @@ export default function WorkList() {
               <SharedScene />
               <gridHelper args={[10, 10]} />
               <axesHelper args={[5]} />
-              <OrbitControls makeDefault enabled={!isLightSelected} />
+              <OrbitControls makeDefault enabled={!isLightSelected && isOrbitEnabled} />
             </View>
             
             {/* Second Render View */}

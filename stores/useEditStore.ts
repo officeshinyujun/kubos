@@ -28,7 +28,8 @@ export const useEditorStore = create<EditorState>((set) => ({
 
   clearSelection: () =>
     set(() => ({
-      selectedObjectId: null
+      selectedObjectId: null,
+      isOrbitEnabled: true, // Re-enable OrbitControls when nothing is selected
     })),
   
   setOrbitEnabled: (enabled) =>

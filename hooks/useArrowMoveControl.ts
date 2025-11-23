@@ -15,9 +15,11 @@ export default function ArrowMoveControl() {
   const undo = useStackStore((s) => s.undo);
   const redo = useStackStore((s) => s.redo);
   const { updateObject } = useSceneStore();
+  const { isOrbitEnabled, setOrbitEnabled } = useEditorStore();
 
   useEffect(() => {
-    const MOVE = 0.1;
+    const GRID_SNAP_SIZE = 0.1; // Define grid snap size
+    const MOVE = GRID_SNAP_SIZE;
 
     const saveState = (group: THREE.Object3D) => {
       push({
@@ -76,6 +78,9 @@ export default function ArrowMoveControl() {
       }
 
       const isArrowKey = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key);
+      if (isArrowKey && isOrbitEnabled) {
+        setOrbitEnabled(false);
+      }
       if (!isArrowKey) {
         return;
       }
@@ -92,53 +97,39 @@ export default function ArrowMoveControl() {
       ).normalize();
       const right = new THREE.Vector3(-forward.z, 0, forward.x);
 
-      let moveAxis = new THREE.Vector3();
-      let moveDirection = 0;
+      let finalMoveVector = new THREE.Vector3(); // Declare once
 
-      if (Math.abs(forward.x) >= Math.abs(forward.z)) {
-        // Dominant axis is X for forward/backward, Z for left/right
-        switch (e.key) {
-            case "ArrowUp":
-                moveAxis.set(1, 0, 0);
-                moveDirection = Math.sign(forward.x) || 1;
-                break;
-            case "ArrowDown":
-                moveAxis.set(1, 0, 0);
-                moveDirection = -Math.sign(forward.x) || -1;
-                break;
-            case "ArrowLeft":
-                moveAxis.set(0, 0, 1);
-                moveDirection = -Math.sign(right.z) || -1;
-                break;
-            case "ArrowRight":
-                moveAxis.set(0, 0, 1);
-                moveDirection = Math.sign(right.z) || 1;
-                break;
+      if (e.shiftKey) { // Handle vertical movement with Shift
+        if (e.key === "ArrowUp") {
+          finalMoveVector.set(0, MOVE, 0);
+        } else if (e.key === "ArrowDown") {
+          finalMoveVector.set(0, -MOVE, 0);
         }
-      } else {
-        // Dominant axis is Z for forward/backward, X for left/right
+      } else { // Handle horizontal (forward/backward/left/right) movement
         switch (e.key) {
-            case "ArrowUp":
-                moveAxis.set(0, 0, 1);
-                moveDirection = Math.sign(forward.z) || -1;
-                break;
-            case "ArrowDown":
-                moveAxis.set(0, 0, 1);
-                moveDirection = -Math.sign(forward.z) || 1;
-                break;
-            case "ArrowLeft":
-                moveAxis.set(1, 0, 0);
-                moveDirection = -Math.sign(right.x) || -1;
-                break;
-            case "ArrowRight":
-                moveAxis.set(1, 0, 0);
-                moveDirection = Math.sign(right.x) || 1;
-                break;
+          case "ArrowUp": // Forward
+            finalMoveVector.copy(forward).multiplyScalar(MOVE);
+            break;
+          case "ArrowDown": // Backward
+            finalMoveVector.copy(forward).multiplyScalar(-MOVE);
+            break;
+          case "ArrowLeft": // Left
+            finalMoveVector.copy(right).multiplyScalar(-MOVE);
+            break;
+          case "ArrowRight": // Right
+            finalMoveVector.copy(right).multiplyScalar(MOVE);
+            break;
         }
       }
       
-      const moveVector = moveAxis.multiplyScalar(moveDirection * MOVE);
-      group.position.add(moveVector);
+      group.position.add(finalMoveVector);
+
+      // Apply grid snapping
+      group.position.set(
+        Math.round(group.position.x / GRID_SNAP_SIZE) * GRID_SNAP_SIZE,
+        Math.round(group.position.y / GRID_SNAP_SIZE) * GRID_SNAP_SIZE,
+        Math.round(group.position.z / GRID_SNAP_SIZE) * GRID_SNAP_SIZE
+      );
 
       updateObject(selectedObjectId, {
         locate: {
@@ -149,9 +140,20 @@ export default function ArrowMoveControl() {
       });
     };
 
+    const handleKeyUp = (e: KeyboardEvent) => {
+      const isArrowKey = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key);
+      if (isArrowKey && !isOrbitEnabled) {
+        setOrbitEnabled(true);
+      }
+    };
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedObjectId, scene, camera, push, undo, redo, updateObject]);
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [selectedObjectId, scene, camera, push, undo, redo, updateObject, isOrbitEnabled, setOrbitEnabled]);
 
   return null;
 }
