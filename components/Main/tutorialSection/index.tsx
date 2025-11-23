@@ -1,20 +1,19 @@
+'use client'
+
 import s from "./style.module.scss"
 import TutorialCard from "./tutorialCard"
+import { useRouter } from "next/navigation";
 
 export default function TutorialSection() {
+    const router = useRouter();
     return (
         <section className={s.container}>
             <h1>튜토리얼</h1>
             <div className={s.contents}>
-                <TutorialCard title="튜토리얼 1" isComplete={true} />
-                <TutorialCard title="튜토리얼 2" />
-                <TutorialCard title="튜토리얼 3" />
-                <TutorialCard title="튜토리얼 4" />
-                <TutorialCard title="튜토리얼 5" />
-                <TutorialCard title="튜토리얼 6" />
-                <TutorialCard title="튜토리얼 7" />
-                <TutorialCard title="튜토리얼 8" />
-                <TutorialCard title="튜토리얼 9" />
+                <TutorialCard 
+                    title="기본 튜토리얼 (FSM)" 
+                    onClick={() => router.push("/work?startTutorial=true")}
+                />
             </div>
         </section>
     )

@@ -1,4 +1,3 @@
-
 export interface TutorialStep {
   title: string;
   description: string;
@@ -8,8 +7,8 @@ export interface TutorialStep {
 
 export const tutorialSteps: TutorialStep[] = [
     {
-        title: '1. 첫걸음 ',
-        description: '안녕하세요! Kubos의 첫단계 튜토리얼에 오신 것을 환영합니다. 이 첫단계 튜토리얼에서는 기본적인 조작법을 배우게 됩니다.',
+        title: '1. 첫걸음',
+        description: '안녕하세요! Kubos의 튜토리얼에 오신 것을 환영합니다. 이 튜토리얼에서는 기본적인 조작법을 배우게 됩니다.',
     },
     {
         title: '메인 뷰',
@@ -46,6 +45,6 @@ export const tutorialSteps: TutorialStep[] = [
     },
     {
         title: '튜토리얼 완료',
-        description: '축하합니다! 모든 기본 조작법을 배웠습니다. 이제 다음 단계로 넘어가보세요!',
+        description: '축하합니다! 모든 기본 조작법을 배웠습니다. 이제 다음으로, .',
     },
 ];

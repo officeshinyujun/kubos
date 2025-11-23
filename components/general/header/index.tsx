@@ -12,6 +12,7 @@ export default function Header() {
                 alt="Kubos Logo"
                 width={45}
                 height={45}
+                
             />
             <Image 
                 src={kubosLogoText}

@@ -5,12 +5,13 @@ import { CircleCheck } from "lucide-react"
 interface Props {
     title: string;
     isComplete?: boolean;
+    onClick?: () => void;
 }
 
-export default function TutorialCard({title, isComplete}: Props) {
+export default function TutorialCard({title, isComplete, onClick}: Props) {
     if (isComplete) {
         return (
-            <div className={s.container} style={{backgroundImage: `url(${testImage.src})`}}>
+            <div className={s.container} style={{backgroundImage: `url(${testImage.src})`}} onClick={onClick}>
                 <div className={s.content + " " + s.complete}>
                     <CircleCheck size={36} color={"#33FF33"} />
                     <h1>{title}</h1>
@@ -20,7 +21,7 @@ export default function TutorialCard({title, isComplete}: Props) {
     }
     else {
         return (
-            <div className={s.container} style={{backgroundImage: `url(${testImage.src})`}}>
+            <div className={s.container} style={{backgroundImage: `url(${testImage.src})`}} onClick={onClick}>
                 <div className={s.content + " " + s.incomplete}>
                     <h1>{title}</h1>
                 </div>

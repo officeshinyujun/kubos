@@ -16,6 +16,8 @@ import { generateR3FCode, generateVanillaThreeJSCode } from '@/utils/codeGenerat
 
 import { SharedScene } from '@/components/Work/SharedScene';
 import TutorialGuide from '@/app/tutorial/TutorialGuide';
+import { useSearchParams } from 'next/navigation';
+import { useTutorialStore } from '@/stores/useTutorialStore';
 
 export default function WorkList() {
   const { undo, redo } = useSceneStore();
@@ -25,6 +27,9 @@ export default function WorkList() {
   
   const { selectedObjectId, activeRenderCameraId, isOrbitEnabled } = useEditorStore();
   const { objects } = useSceneStore();
+
+  const searchParams = useSearchParams();
+  const { startTutorial, isTutorialActive } = useTutorialStore();
 
   const selectedObject = selectedObjectId
     ? objects.find((obj) => obj.name === selectedObjectId)
@@ -46,6 +51,12 @@ export default function WorkList() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [clearSelection]);
+
+  useEffect(() => {
+    if (searchParams.get('startTutorial') === 'true' && !isTutorialActive) {
+      startTutorial();
+    }
+  }, [searchParams, isTutorialActive, startTutorial]);
 
   const reactCode = generateR3FCode(objects);
   const vanillaCode = generateVanillaThreeJSCode(objects);
