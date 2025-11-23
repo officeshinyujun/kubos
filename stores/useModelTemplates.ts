@@ -140,7 +140,7 @@ export const useModelTemplates = create<ModelTemplatesState>((set, get) => ({
       userData: {},
     };
 
-    sceneStore.addObject(null, modelData);
+    sceneStore.addObject(null, modelData as any);
   },
 
   getTemplatesByCategory: () => {

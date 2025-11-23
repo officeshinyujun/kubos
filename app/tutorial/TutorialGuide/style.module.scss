@@ -1,12 +1,41 @@
 .guideBox {
   position: absolute;
-  background-color: white;
+  background-color:$background-primary;
+  border: 1px solid $border-primary;
   padding: 20px;
   border-radius: 8px;
   z-index: 1001;
   width: 300px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  color: black;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: $s16;
+  flex-direction: column;
+  color: $text-primary;
+  h4{
+    font-size: 16px;
+  }
+  .buttonGroup{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: $s8;
+    width: 100%;
+    button {
+      background-color: $background-secondary;
+      padding: 4px $s8;
+      border-radius: 4px;
+      color: $text-primary;
+      border: none;
+      outline: 1px solid $border-primary;
+      cursor: pointer;
+      &:hover {
+        background-color: $brand-primary;
+        color: #111;
+      }
+    }
+  }
 }
 
 .highlightOverlay {
@@ -20,3 +49,4 @@
   border-radius: 4px;
   pointer-events: none;
 }
+

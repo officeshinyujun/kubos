@@ -60,9 +60,11 @@ const TutorialGuide = () => {
       >
         <h4>{currentStep.title}</h4>
         <p>{currentStep.description}</p>
-        <button onClick={prevStep} disabled={currentStepIndex === 0}>이전</button>
-        {!currentStep.autoAdvance && <button onClick={nextStep}>다음</button>}
-        <button onClick={endTutorial}>튜토리얼 종료</button>
+        <div className={styles.buttonGroup}>
+          <button onClick={prevStep} disabled={currentStepIndex === 0}>이전</button>
+          {!currentStep.autoAdvance && <button onClick={nextStep}>다음</button>}
+          <button onClick={endTutorial}>튜토리얼 종료</button>
+        </div>
       </div>
     </div>
   );
