@@ -76,7 +76,7 @@ export default function BottomBar() {
                             <SectionButton key={name} type="메시" text={name} onClick={() => addMesh({
                                 name: `${name}`, type: "mesh", locate: { x: 0, y: 0, z: 0 }, rotate: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1, z: 1 }, shader: "standard", mesh: name
                             })} 
-                            dataTutorialId={name === '정육면체' ? 'cube-card' : undefined}
+                            dataTutorialId={name === '정육면체' ? 'cube-card' : name === '구' ? 'sphere-card' : undefined}
                             />
                         ))}
                     </Section>

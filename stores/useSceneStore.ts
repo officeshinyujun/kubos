@@ -3,12 +3,14 @@ import { create } from 'zustand';
 import * as THREE from 'three'; // Import THREE
 //@ts-ignore
 import { ModelType, GroupType, LightType, CameraType, SceneObject } from "@/types/model/modelType";
+import { useEditorStore } from './useEditStore';
 
 interface SceneState {
   objects: SceneObject[];
   selectedObject: string | null;
   loadScene: (data: SceneObject[]) => void;
   setSelectedObject: (id: string | null) => void;
+  clearScene: () => void;
   addObject: (parentName: string | null, obj: Omit<ModelType, "name"> & { name: string }) => void;
   addGroup: (parentName: string | null, groupName: string) => void;
   addLight: (parentName: string | null, light: Omit<LightType, "name"> & { name: string }) => void;
@@ -84,6 +86,15 @@ export const useSceneStore = create<SceneState>((set, get) => {
       set(newState);
     },
 
+    clearScene: () => {
+      const newState = {
+        objects: [],
+        selectedObject: null,
+      };
+      saveState(newState);
+      set(newState);
+    },
+
     setSelectedObject: (id: string | null) => {
       set({ selectedObject: id });
     },
@@ -116,6 +127,7 @@ export const useSceneStore = create<SceneState>((set, get) => {
       const newState = { objects: newObjects };
       saveState(newState as any);
       set(newState);
+      useEditorStore.getState().selectObject(newObj.name);
     },
 
     addGroup: (parentName, groupName) => {
@@ -148,7 +160,7 @@ export const useSceneStore = create<SceneState>((set, get) => {
 
     addLight: (parentName, light) => {
       const { objects } = get();
-      const count = objects.filter((o) => o.type === "light").length;
+      const count = objects.filter((o) => o.type === "light" && o.name.startsWith(light.name)).length;
       const lightObj: LightType = { 
         ...light, 
         name: `${light.name}-${count}`, 
@@ -176,6 +188,7 @@ export const useSceneStore = create<SceneState>((set, get) => {
       const newState = { objects: newObjects };
       saveState(newState as any);
       set(newState);
+      useEditorStore.getState().selectObject(lightObj.name);
     },
 
     addCamera: (parentName, camera) => {

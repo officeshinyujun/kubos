@@ -1,4 +1,3 @@
-
 export type TutorialState = 
   | 'IDLE'
   | 'FIRST_STEP_START'
@@ -10,6 +9,7 @@ export type TutorialState =
   | 'FIRST_STEP_DELETE_OBJECT'
   | 'FIRST_STEP_END'
   | 'LIGHT_TUTORIAL_START'
+  | 'LIGHT_TUTORIAL_ADD_MESH'
   | 'LIGHT_TUTORIAL_ADD_LIGHT'
   | 'LIGHT_TUTORIAL_MODIFY_LIGHT'
   | 'LIGHT_TUTORIAL_END';
@@ -74,11 +74,18 @@ export const tutorialFsmConfig: Record<TutorialState, TutorialStepConfig> = {
         nextState: 'IDLE',
     },
     LIGHT_TUTORIAL_START: {
-        description: '빛 튜토리얼에 오신 것을 환영합니다. 이 튜토리얼에서는 빛을 추가하고 조작하는 방법을 배웁니다.',
+        description: '빛 튜토리얼에 오신 것을 환영합니다. 먼저 빛의 효과를 확인할 물체를 추가합니다.',
+        nextState: 'LIGHT_TUTORIAL_ADD_MESH',
+    },
+    LIGHT_TUTORIAL_ADD_MESH: {
+        description: "'구'를 추가해 주세요.",
+        highlightedComponentId: 'sphere-card',
+        autoAdvance: true,
+        requirements: (payload) => payload.type === 'addObject' && payload.object.name.startsWith('구'),
         nextState: 'LIGHT_TUTORIAL_ADD_LIGHT',
     },
     LIGHT_TUTORIAL_ADD_LIGHT: {
-        description: '하단의 "라이트" 탭에서 "포인트" 라이트를 클릭하여 씬에 추가하세요.',
+        description: '이제 빛을 추가해 봅시다. 하단의 "라이트" 탭에서 "포인트" 라이트를 클릭하여 씬에 추가하세요.',
         highlightedComponentId: 'light-button-포인트',
         autoAdvance: true,
         requirements: (payload) => payload.type === 'addLight' && payload.light.name.startsWith('포인트'),

@@ -19,6 +19,7 @@ const useTutorialStore = create<TutorialStore>((set, get) => {
     isTutorialActive: false,
     
     startTutorial: (startState) => {
+      useSceneStore.getState().clearScene();
       set({
         currentState: startState,
         currentStepConfig: tutorialFsmConfig[startState],
