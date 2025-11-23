@@ -25,6 +25,7 @@ export default function MaterialFactory({
   opacity = 1,
   map, // Destructure map prop
 }: MaterialProps) {
+  console.log(`MaterialFactory: Creating material of type '${type}' with color '${color}' and map:`, map);
   switch (type) {
     case "basic":
       return <meshBasicMaterial color={color} transparent={transparent} opacity={opacity} map={map} />;

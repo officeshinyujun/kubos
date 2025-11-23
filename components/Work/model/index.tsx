@@ -48,7 +48,16 @@ export default function Model({
   const isSelected = selectedObjectId === name;
 
   // Load texture if texturePath is provided
-  const textureMap = texturePath ? useLoader(TextureLoader, texturePath) : undefined;
+  let textureMap = undefined;
+  console.log(`Model Component: received texturePath for ${name}:`, texturePath);
+  if (texturePath) {
+    try {
+      textureMap = useLoader(TextureLoader, texturePath);
+      console.log(`Model Component: texture loaded for ${name}:`, textureMap);
+    } catch (error) {
+      console.error(`Model Component: Error loading texture for ${name} from ${texturePath}:`, error);
+    }
+  }
 
   // Geometry 크기 계산 (스케일 적용)
   useEffect(() => {
