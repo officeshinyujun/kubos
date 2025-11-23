@@ -8,6 +8,8 @@ import { MaterialType } from "@/types/model/MaterialType";
 import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import { useEditorStore } from "@/stores/useEditStore";
+import { useLoader } from '@react-three/fiber';
+import { TextureLoader } from 'three';
 
 interface ModelProps {
   name: string;
@@ -17,6 +19,7 @@ interface ModelProps {
   materialProps?: Partial<React.ComponentProps<typeof MaterialFactory>>;
   position?: [number, number, number];
   scale?: [number, number, number]; // 📍 scale prop 추가
+  texturePath?: string; // Add texturePath prop
   onHeightChange?: (deltaY: number) => void;
   onWidthChange?: (deltaX: number) => void;
   onDepthChange?: (deltaX: number) => void;
@@ -30,6 +33,7 @@ export default function Model({
   materialProps = {},
   position = [0, 0, 0],
   scale = [1, 1, 1], // 📍 scale 기본값 설정
+  texturePath, // Destructure texturePath
   onHeightChange,
   onWidthChange,
   onDepthChange,
@@ -42,6 +46,9 @@ export default function Model({
   const selectObject = useEditorStore((s) => s.selectObject);
 
   const isSelected = selectedObjectId === name;
+
+  // Load texture if texturePath is provided
+  const textureMap = texturePath ? useLoader(TextureLoader, texturePath) : undefined;
 
   // Geometry 크기 계산 (스케일 적용)
   useEffect(() => {
@@ -72,7 +79,7 @@ export default function Model({
         }}
       >
         <GeometryFactory type={geometryType} args={geometryArgs} />
-        <MaterialFactory type={materialType} {...materialProps} />
+        <MaterialFactory type={materialType} {...materialProps} map={textureMap} />
       </mesh>
 
       {/* 선택된 경우 EdgeBox 표시 (계산된 boxSize 사용) */}

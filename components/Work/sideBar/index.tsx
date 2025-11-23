@@ -12,6 +12,7 @@ import { useSceneStore } from "@/stores/useSceneStore";
 import { useEditorStore } from "@/stores/useEditStore";
 import EditPanel from "../EditPanel";
 import CodePanel from "../CodePanel";
+import ShaderPanel from "../ShaderPanel";
 
 type TabType = "구조" | "속성" | "코드" | "쉐이더";
 
@@ -125,6 +126,7 @@ export default function WorkSideBar({ reactCode, vanillaCode }: WorkSideBarProps
                 })}
                 {tab === "속성" && <EditPanel />}
                 {tab === "코드" && <CodePanel reactCode={reactCode} vanillaCode={vanillaCode} />}
+                {tab === "쉐이더" && <ShaderPanel />}
             </div>
         </div>
     );

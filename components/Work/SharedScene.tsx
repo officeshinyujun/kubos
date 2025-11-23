@@ -45,8 +45,10 @@ export const SharedScene = () => {
               position={[obj.locate.x, obj.locate.y, obj.locate.z]}
               scale={[obj.scale.x, obj.scale.y, obj.scale.z]}
               materialType={obj.shader as any}
-              // @ts-ignore
-              materialProps={{ color: obj.color }}
+              texturePath={obj.texturePath}
+              materialProps={{ 
+                color: obj.color,
+              }}
               onHeightChange={(deltaY) => handleHeightChange(obj.name, deltaY)}
               onWidthChange={(deltaX) => handleWidthChange(obj.name, deltaX)}
               onDepthChange={(deltaX) => handleDepthChange(obj.name, deltaX)}

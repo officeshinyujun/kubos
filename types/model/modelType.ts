@@ -17,6 +17,7 @@ export type ModelType = {
         z: number;
     };
     color?: string; // Add color property here
+    texturePath?: string; // Add texture path property for image texturing
 } & (
     | { type: 'mesh'; shader: string; mesh: string }
     | { type: Exclude<TypeType, 'mesh'>; shader?: string; mesh?: never }

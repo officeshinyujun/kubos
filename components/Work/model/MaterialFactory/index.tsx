@@ -11,6 +11,7 @@ interface MaterialProps {
   matcap?: Texture;   // matcap
   transparent?: boolean;
   opacity?: number;
+  map?: Texture; // Add map prop for diffuse texture
 }
 
 export default function MaterialFactory({
@@ -22,20 +23,21 @@ export default function MaterialFactory({
   matcap,
   transparent = false,
   opacity = 1,
+  map, // Destructure map prop
 }: MaterialProps) {
   switch (type) {
     case "basic":
-      return <meshBasicMaterial color={color} transparent={transparent} opacity={opacity} />;
+      return <meshBasicMaterial color={color} transparent={transparent} opacity={opacity} map={map} />;
     case "standard":
-      return <meshStandardMaterial color={color} metalness={metalness} roughness={roughness} transparent={transparent} opacity={opacity} />;
+      return <meshStandardMaterial color={color} metalness={metalness} roughness={roughness} transparent={transparent} opacity={opacity} map={map} />;
     case "physical":
-      return <meshPhysicalMaterial color={color} metalness={metalness} roughness={roughness} transparent={transparent} opacity={opacity} />;
+      return <meshPhysicalMaterial color={color} metalness={metalness} roughness={roughness} transparent={transparent} opacity={opacity} map={map} />;
     case "lambert":
-      return <meshLambertMaterial color={color} transparent={transparent} opacity={opacity} />;
+      return <meshLambertMaterial color={color} transparent={transparent} opacity={opacity} map={map} />;
     case "phong":
-      return <meshPhongMaterial color={color} shininess={shininess} transparent={transparent} opacity={opacity} />;
+      return <meshPhongMaterial color={color} shininess={shininess} transparent={transparent} opacity={opacity} map={map} />;
     case "toon":
-      return <meshToonMaterial color={color} transparent={transparent} opacity={opacity} />;
+      return <meshToonMaterial color={color} transparent={transparent} opacity={opacity} map={map} />;
     case "normal":
       return <meshNormalMaterial transparent={transparent} opacity={opacity} />;
     case "depth":
@@ -43,6 +45,6 @@ export default function MaterialFactory({
     case "matcap":
       return <meshMatcapMaterial matcap={matcap} transparent={transparent} opacity={opacity} />;
     default:
-      return <meshStandardMaterial color={color} />;
+      return <meshStandardMaterial color={color} map={map} />;
   }
 }
