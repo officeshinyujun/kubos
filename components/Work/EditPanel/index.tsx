@@ -19,9 +19,9 @@ const findObject = (objects: any[], id: string): any | null => {
 };
 
 // Vector input component
-const VectorInput = ({ label, value, onChange }: { label: string, value: { x: number, y: number, z: number }, onChange: (axis: 'x' | 'y' | 'z', value: number) => void }) => {
+const VectorInput = ({ label, value, onChange, dataTutorialId }: { label: string, value: { x: number, y: number, z: number }, onChange: (axis: 'x' | 'y' | 'z', value: number) => void, dataTutorialId?: string }) => {
   return (
-    <div>
+    <div data-tutorial-id={dataTutorialId}>
       <p className={s.title}>{label}</p>
       <div className={s.vectorInput}>
         <label>X</label>
@@ -133,6 +133,7 @@ export default function EditPanel() {
           label="Position"
           value={model.locate}
           onChange={(axis, value) => handleVectorChange('locate', axis, value)}
+          dataTutorialId="position-control"
         />
         <VectorInput
           label="Rotation"

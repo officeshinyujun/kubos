@@ -118,7 +118,8 @@ export default function ModelButton({ name, isChildren, edit, onDelete, isactive
             size={20} 
             strokeWidth={1.25} 
             color="hsla(0, 100%, 56%, 1)" 
-            onClick={onDelete} 
+            onClick={onDelete}
+            data-tutorial-id={`delete-button-${name}`}
           />
         </div>
       </div>

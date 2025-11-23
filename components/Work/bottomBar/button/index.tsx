@@ -4,18 +4,23 @@ import {Box, Sun, Camera} from "lucide-react";
 interface Props {
     isActive : boolean;
     type : '메시' | '라이트' | '카메라';
-    onClick? : () => void
+    onClick? : () => void;
+    dataTutorialId?: string;
 }
-export default function BottomButton({isActive, type, onClick} : Props) {
+export default function BottomButton({isActive, type, onClick, dataTutorialId} : Props) {
+    const props = {
+        "data-tutorial-id": dataTutorialId
+    }
+
     if (isActive) {
-        return <div className={[s.container, s.active].join(" ")} onClick={onClick}>
+        return <div className={[s.container, s.active].join(" ")} onClick={onClick} {...props}>
             {(type === '메시' && <Box size={20} strokeWidth={2} color={"#111"}/>)}
             {(type === '라이트' && <Sun size={20} strokeWidth={2} color={"#111"}/>)}
             {(type === '카메라' && <Camera size={20} strokeWidth={2} color={"#111"}/>)}
             <p>{type}</p>
             </div>;
     } else {
-        return <div className={[s.container, s.unactive].join(" ")} onClick={onClick}>
+        return <div className={[s.container, s.unactive].join(" ")} onClick={onClick} {...props}>
             {(type === '메시' && <Box size={20} strokeWidth={2} color={"#fafafa"}/>)}
             {(type === '라이트' && <Sun size={20} strokeWidth={2} color={"#fafafa"}/>)}
             {(type === '카메라' && <Camera size={20} strokeWidth={2} color={"#fafafa"}/>)}

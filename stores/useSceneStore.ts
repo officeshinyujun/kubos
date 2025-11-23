@@ -3,6 +3,8 @@ import { create } from 'zustand';
 import * as THREE from 'three'; // Import THREE
 //@ts-ignore
 import { ModelType, GroupType, LightType, CameraType, SceneObject } from "@/types/model/modelType";
+import { useTutorialStore } from './useTutorialStore';
+import { useEditorStore } from './useEditStore';
 
 interface SceneState {
   objects: SceneObject[];
@@ -90,7 +92,7 @@ export const useSceneStore = create<SceneState>((set, get) => {
 
     addObject: (parentName, obj) => {
       const { objects } = get();
-      const count = objects.filter((o) => o.type === "mesh").length;
+      const count = objects.filter((o) => o.type === "mesh" && o.name.startsWith(obj.name)).length;
       const newObj = {
         ...obj,
         name: `${obj.name}-${count}`,
@@ -116,6 +118,13 @@ export const useSceneStore = create<SceneState>((set, get) => {
       const newState = { objects: newObjects };
       saveState(newState as any);
       set(newState);
+      
+      useEditorStore.getState().selectObject(newObj.name);
+
+      const { isTutorialActive, currentStepIndex, steps, nextStep } = useTutorialStore.getState();
+      if (isTutorialActive && steps[currentStepIndex].highlightedComponentId === 'cube-card') {
+        nextStep();
+      }
     },
 
     addGroup: (parentName, groupName) => {
@@ -241,6 +250,11 @@ export const useSceneStore = create<SceneState>((set, get) => {
       };
       saveState(newState);
       set(newState);
+
+      const { isTutorialActive, currentStepIndex, steps, nextStep } = useTutorialStore.getState();
+      if (isTutorialActive && steps[currentStepIndex].highlightedComponentId?.startsWith('delete-button-')) {
+        nextStep();
+      }
     },
 
     updateObject: (name, updated) => {
@@ -261,6 +275,11 @@ export const useSceneStore = create<SceneState>((set, get) => {
       const newState = { objects: newObjects };
       saveState(newState as any);
       set(newState);
+
+      const { isTutorialActive, currentStepIndex, steps, nextStep } = useTutorialStore.getState();
+      if (isTutorialActive && steps[currentStepIndex].highlightedComponentId === 'position-control' && updated.locate) {
+        nextStep();
+      }
     },
 
     undo,

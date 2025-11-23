@@ -65,8 +65,8 @@ export default function BottomBar() {
     return (
         <div className={s.container}>
             <div className={s.top}>
-                <BottomButton isActive={activeButton === "메시"} type="메시" onClick={() => handleClick("메시")}/>
-                <BottomButton isActive={activeButton === "라이트"} type="라이트" onClick={() => handleClick("라이트")}/>
+                <BottomButton isActive={activeButton === "메시"} type="메시" onClick={() => handleClick("메시")} dataTutorialId="model-button"/>
+                <BottomButton isActive={activeButton === "라이트"} type="라이트" onClick={() => handleClick("라이트")} dataTutorialId="light-button"/>
                 <BottomButton isActive={activeButton === "카메라"} type="카메라" onClick={() => handleClick("카메라")}/>
             </div>
             <div className={s.bottom}>
@@ -75,7 +75,9 @@ export default function BottomBar() {
                         {meshList.map(name => (
                             <SectionButton key={name} type="메시" text={name} onClick={() => addMesh({
                                 name: `${name}`, type: "mesh", locate: { x: 0, y: 0, z: 0 }, rotate: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1, z: 1 }, shader: "standard", mesh: name
-                            })} />
+                            })} 
+                            dataTutorialId={name === '정육면체' ? 'cube-card' : undefined}
+                            />
                         ))}
                     </Section>
                 }

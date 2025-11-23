@@ -15,6 +15,8 @@ import { CameraType } from '@/types/model/modelType'; // Needed for renderCamera
 import { generateR3FCode, generateVanillaThreeJSCode } from '@/utils/codeGeneration';
 
 import { SharedScene } from '@/components/Work/SharedScene';
+import TutorialGuide from '@/app/tutorial/TutorialGuide';
+
 export default function WorkList() {
   const { undo, redo } = useSceneStore();
   const { clearSelection } = useEditorStore();
@@ -51,12 +53,13 @@ export default function WorkList() {
 
   return (
     <div className={s.container}>
+      <TutorialGuide />
       <WorkHeader/>
       <div className={s.contents}>
         <div className={s.three}>
           <div className={s.viewports}>
             {/* The two divs that will contain our views */}
-            <div ref={mainViewRef} className={s.window} />
+            <div ref={mainViewRef} className={s.window} data-tutorial-id="main-window" />
             <div ref={renderViewRef} className={s.renderWindow} />
           </div>
           <div className={s.add}>

@@ -43,8 +43,8 @@ export default function WorkSideBar({ reactCode, vanillaCode }: WorkSideBarProps
     return (
         <div className={s.container}>
             <div className={s.buttons}>
-                <TabButton label="구조" onClick={() => setTab("구조")} isActive={tab === "구조"} />
-                <TabButton label="속성" onClick={() => setTab("속성")} isActive={tab === "속성"} />
+                <TabButton label="구조" onClick={() => setTab("구조")} isActive={tab === "구조"} dataTutorialId="structure-tab" />
+                <TabButton label="속성" onClick={() => setTab("속성")} isActive={tab === "속성"} dataTutorialId="properties-tab"/>
                 <TabButton label="코드" onClick={() => setTab("코드")} isActive={tab === "코드"} />
                 <TabButton label="쉐이더" onClick={() => setTab("쉐이더")} isActive={tab === "쉐이더"} />
             </div>
