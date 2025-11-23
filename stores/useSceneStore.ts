@@ -1,5 +1,6 @@
 // stores/useSceneStore.ts
 import { create } from 'zustand';
+import * as THREE from 'three'; // Import THREE
 //@ts-ignore
 import { ModelType, GroupType, LightType, CameraType, SceneObject } from "@/types/model/modelType";
 
@@ -180,11 +181,26 @@ export const useSceneStore = create<SceneState>((set, get) => {
     addCamera: (parentName, camera) => {
       const { objects } = get();
       const count = objects.filter((o) => o.type === "camera").length;
+
+      // Set initial position for the camera
+      const initialCameraPosition = { x: 0, y: 0, z: 5 }; // Example initial position
+
+      // Calculate rotation to look at (0,0,0)
+      const tempObject = new THREE.Object3D();
+      tempObject.position.set(initialCameraPosition.x, initialCameraPosition.y, initialCameraPosition.z);
+      tempObject.lookAt(0, 0, 0);
+
       const camObj: CameraType = { 
         ...camera, 
         name: `${camera.name}-${count}`, 
         type: "camera",
         fov: 50,
+        locate: initialCameraPosition,
+        rotate: {
+          x: tempObject.rotation.x,
+          y: tempObject.rotation.y,
+          z: tempObject.rotation.z,
+        },
       };
 
       const addToGroup = (items: SceneObject[]): SceneObject[] =>
