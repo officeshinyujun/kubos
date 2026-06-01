@@ -21,6 +21,8 @@ interface SceneState {
   removeObject: (name: string) => void;
   updateObject: (name: string, updated: Partial<SceneObject>) => void;
   convertToEditable: (name: string) => void;
+  updateMeshSelection: (name: string, updates: { vertexIds?: string[]; edgeIds?: string[]; faceIds?: string[] }, additive?: boolean) => void;
+  clearMeshSelection: (name: string) => void;
 }
 
 export const useSceneStore = create<SceneState>()(
@@ -258,6 +260,63 @@ export const useSceneStore = create<SceneState>()(
           } else {
             state.objects.push(newObj);
           }
+        });
+      },
+
+      updateMeshSelection: (name, updates, additive = false) => {
+        set((state) => {
+          const findAndUpdate = (items: SceneObject[]): void => {
+            for (const item of items) {
+              if (item.name === name && item.type === 'editableMesh') {
+                const mesh = (item as EditableMeshType).meshData;
+                if (!additive) {
+                  mesh.vertices.forEach((v) => v.selected = false);
+                  mesh.edges.forEach((e) => e.selected = false);
+                  mesh.faces.forEach((f) => f.selected = false);
+                }
+                if (updates.vertexIds) {
+                  mesh.vertices.forEach((v) => {
+                    if (updates.vertexIds!.includes(v.id)) v.selected = !v.selected || !additive;
+                  });
+                }
+                if (updates.edgeIds) {
+                  mesh.edges.forEach((e) => {
+                    if (updates.edgeIds!.includes(e.id)) e.selected = !e.selected || !additive;
+                  });
+                }
+                if (updates.faceIds) {
+                  mesh.faces.forEach((f) => {
+                    if (updates.faceIds!.includes(f.id)) f.selected = !f.selected || !additive;
+                  });
+                }
+                return;
+              }
+              if (item.type === 'group') {
+                findAndUpdate((item as GroupType).children);
+              }
+            }
+          };
+          findAndUpdate(state.objects);
+        });
+      },
+
+      clearMeshSelection: (name) => {
+        set((state) => {
+          const findAndClear = (items: SceneObject[]): void => {
+            for (const item of items) {
+              if (item.name === name && item.type === 'editableMesh') {
+                const mesh = (item as EditableMeshType).meshData;
+                mesh.vertices.forEach((v) => v.selected = false);
+                mesh.edges.forEach((e) => e.selected = false);
+                mesh.faces.forEach((f) => f.selected = false);
+                return;
+              }
+              if (item.type === 'group') {
+                findAndClear((item as GroupType).children);
+              }
+            }
+          };
+          findAndClear(state.objects);
         });
       },
 

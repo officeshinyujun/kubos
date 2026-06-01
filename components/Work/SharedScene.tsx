@@ -6,8 +6,9 @@ import { useSceneStore } from '@/stores/useSceneStore';
 import Model from '@/components/Work/model';
 import LightRenderer from '@/components/Work/LightRenderer';
 import CameraRenderer from '@/components/Work/CameraRenderer';
-import { ModelType, LightType, CameraType, GLTFType } from '@/types/model/modelType';
+import { ModelType, LightType, CameraType, GLTFType, EditableMeshType } from '@/types/model/modelType';
 import { GeometryType } from '@/types/model/modelDefinitions';
+import EditableMeshRenderer from '@/components/Work/model/EditableMeshRenderer';
 
 function GltfModel({ url, position, scale, rotation }: { url: string, position: [number, number, number], scale: [number, number, number], rotation: [number, number, number] }) {
   const { scene } = useGLTF(url);
@@ -76,6 +77,19 @@ export const SharedScene = () => {
             scale={[gltfObj.scale.x, gltfObj.scale.y, gltfObj.scale.z]}
             rotation={[gltfObj.rotate.x, gltfObj.rotate.y, gltfObj.rotate.z]}
           />
+        }
+        if (obj.type === 'editableMesh') {
+          const emObj = obj as EditableMeshType;
+          return (
+            <EditableMeshRenderer
+              key={emObj.name}
+              name={emObj.name}
+              meshData={emObj.meshData}
+              position={[emObj.locate.x, emObj.locate.y, emObj.locate.z]}
+              rotation={[emObj.rotate.x, emObj.rotate.y, emObj.rotate.z]}
+              scale={[emObj.scale.x, emObj.scale.y, emObj.scale.z]}
+            />
+          );
         }
         return null;
       })}
