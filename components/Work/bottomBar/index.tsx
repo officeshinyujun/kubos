@@ -6,6 +6,7 @@ import SectionButton from "./section/button";
 import s from "./style.module.scss"
 import { useState } from "react";
 import { useSceneStore } from "@/stores/useSceneStore";
+import { useEditorStore } from "@/stores/useEditStore";
 import { ModelType } from "@/types/model/modelType";
 
 export default function BottomBar() {
@@ -16,19 +17,12 @@ export default function BottomBar() {
     };
     
     const { addObject, addLight, addCamera } = useSceneStore();
+    const { editorMode, activeTool, setActiveTool } = useEditorStore();
 
     const addMesh = (mesh: ModelType) => {
         addObject(null, mesh);
     }
 
-    const testJson = 
-    {
-        name: '정육면체-0',
-        type: 'mesh',
-        material: { type: 'MeshStandardMaterial', map: '/textures/wood.jpg' }
-        // ... 기타 속성
-    }
-    
     const meshList = [
         "정육면체",
         "구",
@@ -69,89 +63,125 @@ export default function BottomBar() {
         "직교": "orthographic"
     };
 
+    const editTools = [
+        { key: 'select' as const, label: '선택' },
+        { key: 'move' as const, label: '이동' },
+        { key: 'rotate' as const, label: '회전' },
+        { key: 'scale' as const, label: '스케일' },
+        { key: 'extrude' as const, label: '돌출' },
+        { key: 'inset' as const, label: '인셋' },
+        { key: 'bevel' as const, label: '베벨' },
+        { key: 'loopCut' as const, label: '루프컷' },
+    ];
+
     return (
         <div className={s.container}>
-            <div className={s.top}>
-                <BottomButton isActive={activeButton === "메시"} type="메시" onClick={() => handleClick("메시")} dataTutorialId="model-button"/>
-                <BottomButton isActive={activeButton === "라이트"} type="라이트" onClick={() => handleClick("라이트")} dataTutorialId="light-button"/>
-                <BottomButton isActive={activeButton === "카메라"} type="카메라" onClick={() => handleClick("카메라")}/>
-            </div>
-            <div className={s.bottom}>
-                {activeButton === "메시" && 
-                    <Section text="메시">
-                        {meshList.map(name => (
-                            <SectionButton 
-                            key={name} 
-                            type="메시" 
-                            text={name} 
-                            onClick={() => addMesh({
-                                name: `${name}`, type: "mesh", locate: { x: 0, y: 0, z: 0 }, rotate: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1, z: 1 }, shader: "standard", mesh: name
-                            })} 
-                            dataTutorialId={name === '정육면체' ? 'cube-card' : name === '구' ? 'sphere-card' : undefined}
-                            />
-                        ))}
-                    </Section>
-                }
-                {activeButton === "라이트" && 
-                    <Section text="라이트">
-                        {lightList.filter(name => lightTypeMapping[name]).map(name => (
-                            <SectionButton key={name} type="라이트" text={name} onClick={() => addLight(
-                                null,
-                                // @ts-ignore
-                                {name: `${name}`,
-                                    type: "light",
-                                    locate: {
-                                        x: 1,
-                                        y: 0,
-                                        z: 1,
-                                    },
-                                    rotate: {
-                                        x: 1,
-                                        y: 3,
-                                        z: 4,
-                                    },
-                                    scale: {
-                                        x: 1,
-                                        y: 1,
-                                        z: 1,
-                                    },
-                                    light : lightTypeMapping[name]
-                                }
-                            )}
-                            dataTutorialId={`light-button-${name}`}
-                             />
-                        ))}
-                    </Section>
-                }
-                {activeButton === "카메라" && 
-                    <Section text="카메라">
-                        {cameraList.filter(name => cameraTypeMapping[name]).map(name => (
-                            <SectionButton key={name} type="카메라" text={name} onClick={() => addCamera(null,
-                                // @ts-ignore
-                                {name: `${name}`,
-                                    type: "camera",
-                                    locate: {
-                                        x: 1,
-                                        y: 1,
-                                        z: 1,
-                                    },
-                                    rotate: {
-                                        x: 1,
-                                        y: 1,
-                                        z: 1,
-                                    },
-                                    scale: {
-                                        x: 1,
-                                        y: 1,
-                                        z: 1,
-                                    },
-                                    camera : cameraTypeMapping[name]
-                                }
-                            )} />
-                        ))}
-                    </Section>
-                }
-            </div>
+            {editorMode === 'edit' ? (
+                <div className={s.bottom} style={{ display: 'flex', gap: '4px', padding: '8px', flexWrap: 'wrap' }}>
+                    {editTools.map(({ key, label }) => (
+                        <button
+                            key={key}
+                            onClick={() => setActiveTool(key)}
+                            style={{
+                                padding: '6px 12px',
+                                borderRadius: '4px',
+                                border: 'none',
+                                cursor: 'pointer',
+                                fontSize: '12px',
+                                fontWeight: activeTool === key ? 600 : 400,
+                                backgroundColor: activeTool === key ? '#ff6b4a' : '#2a2a2a',
+                                color: activeTool === key ? '#fff' : '#ccc',
+                            }}
+                        >
+                            {label}
+                        </button>
+                    ))}
+                </div>
+            ) : (
+                <>
+                    <div className={s.top}>
+                        <BottomButton isActive={activeButton === "메시"} type="메시" onClick={() => handleClick("메시")} dataTutorialId="model-button"/>
+                        <BottomButton isActive={activeButton === "라이트"} type="라이트" onClick={() => handleClick("라이트")} dataTutorialId="light-button"/>
+                        <BottomButton isActive={activeButton === "카메라"} type="카메라" onClick={() => handleClick("카메라")}/>
+                    </div>
+                    <div className={s.bottom}>
+                        {activeButton === "메시" && 
+                            <Section text="메시">
+                                {meshList.map(name => (
+                                    <SectionButton 
+                                    key={name} 
+                                    type="메시" 
+                                    text={name} 
+                                    onClick={() => addMesh({
+                                        name: `${name}`, type: "mesh", locate: { x: 0, y: 0, z: 0 }, rotate: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1, z: 1 }, shader: "standard", mesh: name
+                                    })} 
+                                    dataTutorialId={name === '정육면체' ? 'cube-card' : name === '구' ? 'sphere-card' : undefined}
+                                    />
+                                ))}
+                            </Section>
+                        }
+                        {activeButton === "라이트" && 
+                            <Section text="라이트">
+                                {lightList.filter(name => lightTypeMapping[name]).map(name => (
+                                    <SectionButton key={name} type="라이트" text={name} onClick={() => addLight(
+                                        null,
+                                        // @ts-expect-error light object shape is handled by the scene store
+                                        {name: `${name}`,
+                                            type: "light",
+                                            locate: {
+                                                x: 1,
+                                                y: 0,
+                                                z: 1,
+                                            },
+                                            rotate: {
+                                                x: 1,
+                                                y: 3,
+                                                z: 4,
+                                            },
+                                            scale: {
+                                                x: 1,
+                                                y: 1,
+                                                z: 1,
+                                            },
+                                            light : lightTypeMapping[name]
+                                        }
+                                    )}
+                                    dataTutorialId={`light-button-${name}`}
+                                     />
+                                ))}
+                            </Section>
+                        }
+                        {activeButton === "카메라" && 
+                            <Section text="카메라">
+                                {cameraList.filter(name => cameraTypeMapping[name]).map(name => (
+                                    <SectionButton key={name} type="카메라" text={name} onClick={() => addCamera(null,
+                                        // @ts-ignore camera object shape is handled by the scene store
+                                        {name: `${name}`,
+                                            type: "camera",
+                                            locate: {
+                                                x: 1,
+                                                y: 1,
+                                                z: 1,
+                                            },
+                                            rotate: {
+                                                x: 1,
+                                                y: 1,
+                                                z: 1,
+                                            },
+                                            scale: {
+                                                x: 1,
+                                                y: 1,
+                                                z: 1,
+                                            },
+                                            camera : cameraTypeMapping[name]
+                                        }
+                                    )} />
+                                ))}
+                            </Section>
+                        }
+                    </div>
+                </>
+            )}
         </div>
     );
 }

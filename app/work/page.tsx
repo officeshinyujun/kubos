@@ -4,10 +4,9 @@ import s from './style.module.scss';
 import WorkHeader from '@/components/Work/header';
 import WorkSideBar from '@/components/Work/sideBar';
 import WorkBottomBar from '@/components/Work/bottomBar';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSceneStore } from '@/stores/useSceneStore';
 import { useEditorStore } from '@/stores/useEditStore';
-import toast from 'react-hot-toast'; // Still used in CodeViewer, so keep this import
 import { Canvas } from '@react-three/fiber';
 import { View, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import ArrowMoveControl from '@/hooks/useArrowMoveControl';
@@ -18,11 +17,13 @@ import { SharedScene } from '@/components/Work/SharedScene';
 import TutorialGuide from '@/app/tutorial/TutorialGuide';
 import { useSearchParams } from 'next/navigation';
 import { useTutorialStore } from '@/stores/useTutorialStore';
+import FocusToggle from '@/components/Work/FocusToggle';
 
 export default function WorkList() {
   const { clearSelection } = useEditorStore();
   const mainViewRef = useRef<HTMLDivElement>(null!);
   const renderViewRef = useRef<HTMLDivElement>(null!);
+  const [isFocused, setIsFocused] = useState(false);
   
   const { selectedObjectId, activeRenderCameraId, isOrbitEnabled } = useEditorStore();
   const { objects } = useSceneStore();
@@ -72,6 +73,7 @@ export default function WorkList() {
       <WorkHeader/>
       <div className={s.contents}>
         <div className={s.three}>
+          <FocusToggle isFocused={isFocused} onToggle={setIsFocused} />
           <div className={s.viewports}>
             {/* The two divs that will contain our views */}
             <div ref={mainViewRef} className={s.window} data-tutorial-id="main-window" />
@@ -112,7 +114,7 @@ export default function WorkList() {
             </View>
           </Canvas>
         </div>
-        <WorkSideBar reactCode={reactCode} vanillaCode={vanillaCode} /> {/* Pass code props */}
+        {!isFocused && <WorkSideBar reactCode={reactCode} vanillaCode={vanillaCode} />} {/* Pass code props */}
       </div>
     </div>
   );
