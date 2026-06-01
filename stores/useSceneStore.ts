@@ -3,8 +3,9 @@ import { temporal } from 'zundo';
 import { immer } from 'zustand/middleware/immer';
 import * as THREE from 'three';
 //@ts-ignore
-import { ModelType, GroupType, LightType, CameraType, SceneObject, GLTFType } from "@/types/model/modelType";
+import { ModelType, GroupType, LightType, CameraType, SceneObject, GLTFType, EditableMeshType } from "@/types/model/modelType";
 import { useEditorStore } from './useEditStore';
+import { primitiveToEditableMesh } from '@/utils/meshConversion';
 
 interface SceneState {
   objects: SceneObject[];
@@ -19,6 +20,7 @@ interface SceneState {
   addGltf: (parentName: string | null, url: string) => void;
   removeObject: (name: string) => void;
   updateObject: (name: string, updated: Partial<SceneObject>) => void;
+  convertToEditable: (name: string) => void;
 }
 
 export const useSceneStore = create<SceneState>()(
@@ -256,6 +258,53 @@ export const useSceneStore = create<SceneState>()(
           } else {
             state.objects.push(newObj);
           }
+        });
+      },
+
+      convertToEditable: (name) => {
+        const { objects } = get();
+
+        const findObj = (items: SceneObject[]): SceneObject | null => {
+          for (const item of items) {
+            if (item.name === name) return item;
+            if (item.type === 'group') {
+              const found = findObj((item as GroupType).children);
+              if (found) return found;
+            }
+          }
+          return null;
+        };
+
+        const obj = findObj(objects);
+        if (!obj || obj.type !== 'mesh') return;
+
+        const meshObj = obj as ModelType;
+        const meshData = primitiveToEditableMesh(
+          meshObj.mesh,
+          [meshObj.scale.x, meshObj.scale.y, meshObj.scale.z]
+        );
+
+        set((state) => {
+          const replaceInList = (items: SceneObject[]): void => {
+            for (let i = 0; i < items.length; i++) {
+              if (items[i].name === name) {
+                const editable: EditableMeshType = {
+                  name: meshObj.name,
+                  type: 'editableMesh',
+                  locate: { ...meshObj.locate },
+                  rotate: { ...meshObj.rotate },
+                  scale: { x: 1, y: 1, z: 1 },
+                  meshData,
+                };
+                items[i] = editable;
+                return;
+              }
+              if (items[i].type === 'group') {
+                replaceInList((items[i] as GroupType).children);
+              }
+            }
+          };
+          replaceInList(state.objects);
         });
       },
     })),

@@ -9,6 +9,7 @@ import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import { useEditorStore } from "@/stores/useEditStore";
 import { useSceneStore } from "@/stores/useSceneStore";
+import { snapVector3 } from "@/hooks/useSnapping";
 import { useTexture, TransformControls } from '@react-three/drei';
 
 interface ModelProps {
@@ -57,12 +58,16 @@ export default function Model({
   const selectObject = useEditorStore((s) => s.selectObject);
   const activeTool = useEditorStore((s) => s.activeTool);
   const editorMode = useEditorStore((s) => s.editorMode);
+  const orientationMode = useEditorStore((s) => s.orientationMode);
+  const snapEnabled = useEditorStore((s) => s.snapEnabled);
+  const snapIncrement = useEditorStore((s) => s.snapIncrement);
   const setOrbitEnabled = useEditorStore((s) => s.setOrbitEnabled);
   const { updateObject } = useSceneStore();
 
   const isSelected = selectedObjectId === name;
   const showGizmo = isSelected && editorMode === 'object' && ['move', 'rotate', 'scale'].includes(activeTool);
   const gizmoMode = activeTool === 'rotate' ? 'rotate' : activeTool === 'scale' ? 'scale' : 'translate';
+  const gizmoSpace = orientationMode === 'local' ? 'local' : 'world';
 
   const [isDragging, setIsDragging] = useState(false);
 
@@ -75,8 +80,16 @@ export default function Model({
       const pos = groupRef.current.position;
       const rot = groupRef.current.rotation;
       const scl = groupRef.current.scale;
+      const locate = snapEnabled
+        ? snapVector3(pos.x, pos.y, pos.z, snapIncrement)
+        : { x: pos.x, y: pos.y, z: pos.z };
+
+      if (snapEnabled) {
+        groupRef.current.position.set(locate.x, locate.y, locate.z);
+      }
+
       updateObject(name, {
-        locate: { x: pos.x, y: pos.y, z: pos.z },
+        locate,
         rotate: { x: rot.x, y: rot.y, z: rot.z },
         scale: { x: scl.x, y: scl.y, z: scl.z },
       });
@@ -139,6 +152,7 @@ export default function Model({
         <TransformControls
           object={groupRef.current}
           mode={gizmoMode}
+          space={gizmoSpace}
           onMouseUp={handleTransform}
           // @ts-ignore
           onDraggingChange={setIsDragging}
