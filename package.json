@@ -11,7 +11,9 @@
   "dependencies": {
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.4.0",
+    "classnames": "^2.5.1",
     "highlight.js": "^11.11.1",
+    "immer": "^11.1.8",
     "lucide-react": "^0.548.0",
     "next": "16.0.0",
     "react": "19.2.0",
@@ -21,13 +23,16 @@
     "reactflow": "^11.11.4",
     "sass": "^1.93.2",
     "three": "^0.181.2",
+    "three-mesh-bvh": "^0.9.10",
     "uuid": "^13.0.0",
+    "zundo": "^2.3.0",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "baseline-browser-mapping": "^2.10.33",
     "eslint": "^9",
     "eslint-config-next": "16.0.0",
     "typescript": "^5"

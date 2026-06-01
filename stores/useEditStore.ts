@@ -1,25 +1,47 @@
 import { create } from 'zustand';
 
-type TransformMode = 'translate' | 'rotate';
+type EditorMode = 'object' | 'edit';
+type SelectionMode = 'object' | 'vertex' | 'edge' | 'face';
+type ActiveTool = 'select' | 'move' | 'rotate' | 'scale' | 'extrude' | 'inset' | 'loopCut' | 'bevel';
+type PivotMode = 'median' | 'individualOrigins';
+type OrientationMode = 'global' | 'local';
 
 interface EditorState {
-  selectedObjectId: string | null;   // 현재 선택된 오브젝트 ID
-  isOrbitEnabled: boolean; // OrbitControls 활성화 여부
-  activeRenderCameraId: string | null; // 렌더 뷰에 사용될 카메라 ID
-  transformMode: TransformMode; // TransformControls 모드
+  selectedObjectId: string | null;
+  isOrbitEnabled: boolean;
+  activeRenderCameraId: string | null;
+  editorMode: EditorMode;
+  selectionMode: SelectionMode;
+  activeTool: ActiveTool;
+  snapEnabled: boolean;
+  snapIncrement: number;
+  pivotMode: PivotMode;
+  orientationMode: OrientationMode;
 
-  selectObject: (id: string | null) => void; 
+  selectObject: (id: string | null) => void;
   clearSelection: () => void;
   setOrbitEnabled: (enabled: boolean) => void;
   setActiveRenderCamera: (id: string | null) => void;
-  setTransformMode: (mode: TransformMode) => void;
+  setEditorMode: (mode: EditorMode) => void;
+  setSelectionMode: (mode: SelectionMode) => void;
+  setActiveTool: (tool: ActiveTool) => void;
+  setSnapEnabled: (enabled: boolean) => void;
+  setSnapIncrement: (increment: number) => void;
+  setPivotMode: (mode: PivotMode) => void;
+  setOrientationMode: (mode: OrientationMode) => void;
 }
 
 export const useEditorStore = create<EditorState>((set) => ({
   selectedObjectId: null,
   isOrbitEnabled: true,
   activeRenderCameraId: null,
-  transformMode: 'translate',
+  editorMode: 'object',
+  selectionMode: 'object',
+  activeTool: 'select',
+  snapEnabled: false,
+  snapIncrement: 0.1,
+  pivotMode: 'median',
+  orientationMode: 'global',
 
   selectObject: (id) =>
     set(() => ({
@@ -42,8 +64,47 @@ export const useEditorStore = create<EditorState>((set) => ({
       activeRenderCameraId: id
     })),
   
-  setTransformMode: (mode) =>
+  setEditorMode: (mode) =>
+    set(() =>
+      mode === 'edit'
+        ? {
+            editorMode: mode,
+            selectionMode: 'face',
+          }
+        : {
+            editorMode: mode,
+            selectionMode: 'object',
+            activeTool: 'select',
+          }
+    ),
+
+  setSelectionMode: (mode) =>
     set(() => ({
-      transformMode: mode
+      selectionMode: mode
+    })),
+
+  setActiveTool: (tool) =>
+    set(() => ({
+      activeTool: tool
+    })),
+
+  setSnapEnabled: (enabled) =>
+    set(() => ({
+      snapEnabled: enabled
+    })),
+
+  setSnapIncrement: (increment) =>
+    set(() => ({
+      snapIncrement: increment
+    })),
+
+  setPivotMode: (mode) =>
+    set(() => ({
+      pivotMode: mode
+    })),
+
+  setOrientationMode: (mode) =>
+    set(() => ({
+      orientationMode: mode
     })),
 }));

@@ -1,6 +1,7 @@
-// stores/useSceneStore.ts
 import { create } from 'zustand';
-import * as THREE from 'three'; // Import THREE
+import { temporal } from 'zundo';
+import { immer } from 'zustand/middleware/immer';
+import * as THREE from 'three';
 //@ts-ignore
 import { ModelType, GroupType, LightType, CameraType, SceneObject, GLTFType } from "@/types/model/modelType";
 import { useEditorStore } from './useEditStore';
@@ -18,309 +19,249 @@ interface SceneState {
   addGltf: (parentName: string | null, url: string) => void;
   removeObject: (name: string) => void;
   updateObject: (name: string, updated: Partial<SceneObject>) => void;
-  undo: () => void;
-  redo: () => void;
 }
 
-export const useSceneStore = create<SceneState>((set, get) => {
-  // History tracking
-  const history: { objects: SceneObject[]; selectedObject: string | null }[] = [];
-  let historyIndex = -1;
+export const useSceneStore = create<SceneState>()(
+  temporal(
+    immer((set, get) => ({
+      objects: [],
+      selectedObject: null,
 
-  const saveState = (state: { objects: SceneObject[]; selectedObject: string | null }) => {
-    const currentState = { 
-      objects: JSON.parse(JSON.stringify(state.objects)),
-      selectedObject: state.selectedObject 
-    };
-    
-    if (historyIndex >= 0 && JSON.stringify(history[historyIndex]) === JSON.stringify(currentState)) {
-      return;
-    }
-
-    // Remove redo history if we're not at the end
-    if (historyIndex < history.length - 1) {
-      history.length = historyIndex + 1;
-    }
-
-    history.push(currentState);
-    historyIndex = history.length - 1;
-  };
-
-  const applyState = (state: { objects: SceneObject[]; selectedObject: string | null }) => {
-    return {
-      objects: JSON.parse(JSON.stringify(state.objects)),
-      selectedObject: state.selectedObject,
-    };
-  };
-
-  const undo = () => {
-    if (historyIndex > 0) {
-      historyIndex--;
-      const previousState = history[historyIndex];
-      set(applyState(previousState));
-    }
-  };
-
-  const redo = () => {
-    if (historyIndex < history.length - 1) {
-      historyIndex++;
-      const nextState = history[historyIndex];
-      set(applyState(nextState));
-    }
-  };
-
-  // Expose undo/redo to window
-  if (typeof window !== 'undefined') {
-    (window as any).__SCENE_STORE__ = { undo, redo };
-  }
-
-  return {
-    objects: [],
-    selectedObject: null,
-
-    loadScene: (data: SceneObject[]) => {
-      const newState = {
-        objects: JSON.parse(JSON.stringify(data)),
-        selectedObject: null,
-      };
-      saveState(newState);
-      set(newState);
-    },
-
-    clearScene: () => {
-      const newState = {
-        objects: [],
-        selectedObject: null,
-      };
-      saveState(newState);
-      set(newState);
-    },
-
-    setSelectedObject: (id: string | null) => {
-      set({ selectedObject: id });
-    },
-
-    addObject: (parentName, obj) => {
-      const { objects } = get();
-      const count = objects.filter((o) => o.type === "mesh" && o.name.startsWith(obj.name)).length;
-      const newObj = {
-        ...obj,
-        name: `${obj.name}-${count}`,
-        type: 'mesh' as const,
-        locate: obj.locate || { x: 0, y: 0, z: 0 },
-        rotate: obj.rotate || { x: 0, y: 0, z: 0 },
-        scale: obj.scale || { x: 1, y: 1, z: 1 },
-        color: obj.color || '#ffffff', // Set a default color
-      } as ModelType; //고유 이름 및 타입 부여...
-      useEditorStore.getState().selectObject(newObj.name); // 생성된 객체 자동 선택
-
-      const addToGroup = (items: SceneObject[]): SceneObject[] =>
-        items.map((item) => {
-          if (item.type === "group" && item.name === parentName) {
-            return { ...item, children: [...item.children, newObj] } as GroupType;
-          }
-          if (item.type === "group") {
-            return { ...item, children: addToGroup(item.children) } as GroupType;
-          }
-          return item;
+      loadScene: (data: SceneObject[]) => {
+        set((state) => {
+          state.objects = JSON.parse(JSON.stringify(data));
+          state.selectedObject = null;
         });
+      },
 
-      const newObjects = parentName ? addToGroup(objects) : [...objects, newObj];
-      const newState = { objects: newObjects };
-      saveState(newState as any);
-      set(newState);
-    },
-
-    addGroup: (parentName, groupName) => {
-      const { objects } = get();
-      const newGroup: GroupType = {
-        name: groupName,
-        type: "group",
-        children: [],
-        locate: { x: 0, y: 0, z: 0 }, // Initialize locate
-        rotate: { x: 0, y: 0, z: 0 }, // Initialize rotate
-        scale: { x: 1, y: 1, z: 1 }  // Initialize scale
-      };
-
-      const addToGroup = (items: SceneObject[]): SceneObject[] =>
-        items.map((item) => {
-          if (item.type === "group" && item.name === parentName) {
-            return { ...item, children: [...item.children, newGroup] } as GroupType;
-          }
-          if (item.type === "group") {
-            return { ...item, children: addToGroup(item.children) } as GroupType;
-          }
-          return item;
+      clearScene: () => {
+        set((state) => {
+          state.objects = [];
+          state.selectedObject = null;
         });
+      },
 
-      const newObjects = parentName ? addToGroup(objects) : [...objects, newGroup];
-      const newState = { objects: newObjects };
-      saveState(newState as any);
-      set(newState);
-    },
-
-    addLight: (parentName, light) => {
-      const { objects } = get();
-      const count = objects.filter((o) => o.type === "light" && o.name.startsWith(light.name)).length;
-      const lightObj: LightType = { 
-        ...light, 
-        name: `${light.name}-${count}`, 
-        type: "light",
-        color: '#ffffff',
-        intensity: 1,
-        locate: light.locate || { x: 0, y: 2, z: 0 },
-        rotate: light.rotate || { x: 0, y: 0, z: 0 },
-        scale: light.scale || { x: 1, y: 1, z: 1 },
-        angle: light.angle || (light.light === 'spot' ? Math.PI / 6 : undefined),
-      };
-
-      const addToGroup = (items: SceneObject[]): SceneObject[] =>
-        items.map((item) => {
-          if (item.type === "group" && item.name === parentName) {
-            return { ...item, children: [...item.children, lightObj] } as GroupType;
-          }
-          if (item.type === "group") {
-            return { ...item, children: addToGroup(item.children) } as GroupType;
-          }
-          return item;
+      setSelectedObject: (id: string | null) => {
+        set((state) => {
+          state.selectedObject = id;
         });
+      },
 
-      const newObjects = parentName ? addToGroup(objects) : [...objects, lightObj];
-      const newState = { objects: newObjects };
-      saveState(newState as any);
-      set(newState);
-      useEditorStore.getState().selectObject(lightObj.name);
-    },
+      addObject: (parentName, obj) => {
+        const { objects } = get();
+        const count = objects.filter((o) => o.type === "mesh" && o.name.startsWith(obj.name)).length;
+        const newObj = {
+          ...obj,
+          name: `${obj.name}-${count}`,
+          type: 'mesh' as const,
+          locate: obj.locate || { x: 0, y: 0, z: 0 },
+          rotate: obj.rotate || { x: 0, y: 0, z: 0 },
+          scale: obj.scale || { x: 1, y: 1, z: 1 },
+          color: obj.color || '#ffffff',
+        } as ModelType;
+        useEditorStore.getState().selectObject(newObj.name);
 
-    addCamera: (parentName, camera) => {
-      const { objects } = get();
-      const count = objects.filter((o) => o.type === "camera").length;
-
-      // Set initial position for the camera
-      const initialCameraPosition = { x: 0, y: 0, z: 5 }; // Example initial position
-
-      // Calculate rotation to look at (0,0,0)
-      const tempObject = new THREE.Object3D();
-      tempObject.position.set(initialCameraPosition.x, initialCameraPosition.y, initialCameraPosition.z);
-      tempObject.lookAt(0, 0, 0);
-
-      const camObj: CameraType = { 
-        ...camera, 
-        name: `${camera.name}-${count}`, 
-        type: "camera",
-        fov: 50,
-        locate: initialCameraPosition,
-        rotate: {
-          x: tempObject.rotation.x,
-          y: tempObject.rotation.y,
-          z: tempObject.rotation.z,
-        },
-      };
-
-      const addToGroup = (items: SceneObject[]): SceneObject[] =>
-        items.map((item) => {
-          if (item.type === "group" && item.name === parentName) {
-            return { ...item, children: [...item.children, camObj] } as GroupType;
+        set((state) => {
+          if (parentName) {
+            const addToGroup = (items: SceneObject[]): void => {
+              for (let i = 0; i < items.length; i++) {
+                if (items[i].type === "group" && items[i].name === parentName) {
+                  (items[i] as GroupType).children.push(newObj);
+                  return;
+                }
+                if (items[i].type === "group") {
+                  addToGroup((items[i] as GroupType).children);
+                }
+              }
+            };
+            addToGroup(state.objects);
+          } else {
+            state.objects.push(newObj);
           }
-          if (item.type === "group") {
-            return { ...item, children: addToGroup(item.children) } as GroupType;
-          }
-          return item;
         });
+      },
 
-      const newObjects = parentName ? addToGroup(objects) : [...objects, camObj];
-      const newState = { objects: newObjects };
-      saveState(newState as any);
-      set(newState);
-    },
+      addGroup: (parentName, groupName) => {
+        const newGroup: GroupType = {
+          name: groupName,
+          type: "group",
+          children: [],
+          locate: { x: 0, y: 0, z: 0 },
+          rotate: { x: 0, y: 0, z: 0 },
+          scale: { x: 1, y: 1, z: 1 },
+        };
 
-    removeObject: (name) => {
-      const { objects, selectedObject } = get();
-      
-      const removeFromGroup = (items: SceneObject[]): SceneObject[] =>
-        items
-          .filter((item) => item.name !== name)
-          .map((item) => {
-            if (item.type === "group") {
-              return { ...item, children: removeFromGroup(item.children) } as GroupType;
+        set((state) => {
+          if (parentName) {
+            const addToGroup = (items: SceneObject[]): void => {
+              for (let i = 0; i < items.length; i++) {
+                if (items[i].type === "group" && items[i].name === parentName) {
+                  (items[i] as GroupType).children.push(newGroup);
+                  return;
+                }
+                if (items[i].type === "group") {
+                  addToGroup((items[i] as GroupType).children);
+                }
+              }
+            };
+            addToGroup(state.objects);
+          } else {
+            state.objects.push(newGroup);
+          }
+        });
+      },
+
+      addLight: (parentName, light) => {
+        const { objects } = get();
+        const count = objects.filter((o) => o.type === "light" && o.name.startsWith(light.name)).length;
+        const lightObj: LightType = {
+          ...light,
+          name: `${light.name}-${count}`,
+          type: "light",
+          color: '#ffffff',
+          intensity: 1,
+          locate: light.locate || { x: 0, y: 2, z: 0 },
+          rotate: light.rotate || { x: 0, y: 0, z: 0 },
+          scale: light.scale || { x: 1, y: 1, z: 1 },
+          angle: light.angle || (light.light === 'spot' ? Math.PI / 6 : undefined),
+        };
+
+        set((state) => {
+          if (parentName) {
+            const addToGroup = (items: SceneObject[]): void => {
+              for (let i = 0; i < items.length; i++) {
+                if (items[i].type === "group" && items[i].name === parentName) {
+                  (items[i] as GroupType).children.push(lightObj);
+                  return;
+                }
+                if (items[i].type === "group") {
+                  addToGroup((items[i] as GroupType).children);
+                }
+              }
+            };
+            addToGroup(state.objects);
+          } else {
+            state.objects.push(lightObj);
+          }
+        });
+        useEditorStore.getState().selectObject(lightObj.name);
+      },
+
+      addCamera: (parentName, camera) => {
+        const { objects } = get();
+        const count = objects.filter((o) => o.type === "camera").length;
+
+        const initialCameraPosition = { x: 0, y: 0, z: 5 };
+
+        const tempObject = new THREE.Object3D();
+        tempObject.position.set(initialCameraPosition.x, initialCameraPosition.y, initialCameraPosition.z);
+        tempObject.lookAt(0, 0, 0);
+
+        const camObj: CameraType = {
+          ...camera,
+          name: `${camera.name}-${count}`,
+          type: "camera",
+          fov: 50,
+          locate: initialCameraPosition,
+          rotate: {
+            x: tempObject.rotation.x,
+            y: tempObject.rotation.y,
+            z: tempObject.rotation.z,
+          },
+        };
+
+        set((state) => {
+          if (parentName) {
+            const addToGroup = (items: SceneObject[]): void => {
+              for (let i = 0; i < items.length; i++) {
+                if (items[i].type === "group" && items[i].name === parentName) {
+                  (items[i] as GroupType).children.push(camObj);
+                  return;
+                }
+                if (items[i].type === "group") {
+                  addToGroup((items[i] as GroupType).children);
+                }
+              }
+            };
+            addToGroup(state.objects);
+          } else {
+            state.objects.push(camObj);
+          }
+        });
+      },
+
+      removeObject: (name) => {
+        set((state) => {
+          const removeFromGroup = (items: SceneObject[]): SceneObject[] =>
+            items
+              .filter((item) => item.name !== name)
+              .map((item) => {
+                if (item.type === "group") {
+                  return { ...item, children: removeFromGroup(item.children) } as GroupType;
+                }
+                return item;
+              });
+
+          state.objects = removeFromGroup(state.objects);
+          if (state.selectedObject === name) {
+            state.selectedObject = null;
+          }
+        });
+      },
+
+      updateObject: (name, updated) => {
+        set((state) => {
+          const updateInGroup = (items: SceneObject[]): void => {
+            for (let i = 0; i < items.length; i++) {
+              if (items[i].name === name) {
+                items[i] = { ...items[i], ...updated } as SceneObject;
+                return;
+              }
+              if (items[i].type === "group") {
+                updateInGroup((items[i] as GroupType).children);
+              }
             }
-            return item;
-          });
-
-      const newObjects = removeFromGroup(objects);
-      const newSelection = selectedObject === name ? null : selectedObject;
-      const newState = { 
-        objects: newObjects,
-        selectedObject: newSelection
-      };
-      saveState(newState);
-      set(newState);
-    },
-
-    updateObject: (name, updated) => {
-      const { objects } = get();
-
-      const updateInGroup = (items: SceneObject[]): SceneObject[] =>
-        items.map((item) => {
-          if (item.name === name) {
-            return { ...item, ...updated } as SceneObject;
-          }
-          if (item.type === "group") {
-            return { ...item, children: updateInGroup(item.children) } as GroupType;
-          }
-          return item;
+          };
+          updateInGroup(state.objects);
         });
+      },
 
-      const newObjects = updateInGroup(objects);
-      const newState = { objects: newObjects };
-      saveState(newState as any);
-      set(newState);
-    },
+      addGltf: (parentName, url) => {
+        const { objects } = get();
+        const count = objects.filter((o) => o.type === "gltf").length;
+        const newObj: GLTFType = {
+          name: `gltf-${count}`,
+          type: 'gltf',
+          url,
+          locate: { x: 0, y: 0, z: 0 },
+          rotate: { x: 0, y: 0, z: 0 },
+          scale: { x: 1, y: 1, z: 1 },
+        };
+        useEditorStore.getState().selectObject(newObj.name);
 
-    addGltf: (parentName, url) => {
-      const { objects } = get();
-      const count = objects.filter((o) => o.type === "gltf").length;
-      const newObj: GLTFType = {
-        name: `gltf-${count}`,
-        type: 'gltf',
-        url,
-        locate: { x: 0, y: 0, z: 0 },
-        rotate: { x: 0, y: 0, z: 0 },
-        scale: { x: 1, y: 1, z: 1 },
-      };
-      useEditorStore.getState().selectObject(newObj.name);
-
-      const addToGroup = (items: SceneObject[]): SceneObject[] =>
-        items.map((item) => {
-          if (item.type === "group" && item.name === parentName) {
-            return { ...item, children: [...item.children, newObj] } as GroupType;
+        set((state) => {
+          if (parentName) {
+            const addToGroup = (items: SceneObject[]): void => {
+              for (let i = 0; i < items.length; i++) {
+                if (items[i].type === "group" && items[i].name === parentName) {
+                  (items[i] as GroupType).children.push(newObj);
+                  return;
+                }
+                if (items[i].type === "group") {
+                  addToGroup((items[i] as GroupType).children);
+                }
+              }
+            };
+            addToGroup(state.objects);
+          } else {
+            state.objects.push(newObj);
           }
-          if (item.type === "group") {
-            return { ...item, children: addToGroup(item.children) } as GroupType;
-          }
-          return item;
         });
+      },
+    })),
+    { limit: 100 }
+  )
+);
 
-      const newObjects = parentName ? addToGroup(objects) : [...objects, newObj];
-      const newState = { objects: newObjects };
-      saveState(newState as any);
-      set(newState);
-    },
-
-    undo,
-    redo,
-  };
-});
-
-// Export undo/redo functions
-export const undo = () => {
-  if ((window as any).__SCENE_STORE__?.undo) {
-    (window as any).__SCENE_STORE__.undo();
-  }
-};
-
-export const redo = () => {
-  if ((window as any).__SCENE_STORE__?.redo) {
-    (window as any).__SCENE_STORE__.redo();
-  }
-};
+export const undo = () => useSceneStore.temporal.getState().undo();
+export const redo = () => useSceneStore.temporal.getState().redo();

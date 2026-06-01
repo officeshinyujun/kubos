@@ -13,7 +13,7 @@ interface CameraRendererProps {
 }
 
 export default function CameraRenderer({ camera }: CameraRendererProps) {
-  const { selectedObjectId, selectObject, setOrbitEnabled, transformMode } = useEditorStore();
+  const { selectedObjectId, selectObject, setOrbitEnabled, activeTool } = useEditorStore();
   const { updateObject } = useSceneStore();
   
   const cameraRef = useRef<THREE.Camera>(null!);
@@ -44,7 +44,7 @@ export default function CameraRenderer({ camera }: CameraRendererProps) {
           object={cameraRef.current} 
           onMouseUp={handleTransform}
           onDraggingChange={(e) => setOrbitEnabled(!e)}
-          mode={transformMode}
+          mode={activeTool === 'rotate' ? 'rotate' : activeTool === 'scale' ? 'scale' : 'translate'}
         />
       )}
       {/* A visible box marker for the camera */}

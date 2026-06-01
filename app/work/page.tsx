@@ -20,7 +20,6 @@ import { useSearchParams } from 'next/navigation';
 import { useTutorialStore } from '@/stores/useTutorialStore';
 
 export default function WorkList() {
-  const { undo, redo } = useSceneStore();
   const { clearSelection } = useEditorStore();
   const mainViewRef = useRef<HTMLDivElement>(null!);
   const renderViewRef = useRef<HTMLDivElement>(null!);

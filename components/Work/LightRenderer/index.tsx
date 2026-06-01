@@ -15,7 +15,7 @@ interface LightRendererProps {
 }
 
 export default function LightRenderer({ light }: LightRendererProps) {
-  const { selectedObjectId, selectObject, setOrbitEnabled, transformMode } = useEditorStore();
+  const { selectedObjectId, selectObject, setOrbitEnabled, activeTool } = useEditorStore();
   const { updateObject } = useSceneStore();
   
   const lightRef = useRef<THREE.Light>(null!);
@@ -94,7 +94,7 @@ export default function LightRenderer({ light }: LightRendererProps) {
       {LightComponent}
       {isSelected && light.light !== 'ambient' && lightRef.current && (
         <TransformControls 
-          mode={transformMode}
+          mode={activeTool === 'rotate' ? 'rotate' : activeTool === 'scale' ? 'scale' : 'translate'}
           object={lightRef.current} 
           onMouseUp={handleTransform} 
           // @ts-ignore

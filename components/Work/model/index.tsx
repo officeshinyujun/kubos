@@ -8,7 +8,8 @@ import { MaterialType } from "@/types/model/MaterialType";
 import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import { useEditorStore } from "@/stores/useEditStore";
-import { useTexture } from '@react-three/drei';
+import { useSceneStore } from "@/stores/useSceneStore";
+import { useTexture, TransformControls } from '@react-three/drei';
 
 interface ModelProps {
   name: string;
@@ -54,8 +55,33 @@ export default function Model({
 
   const selectedObjectId = useEditorStore((s) => s.selectedObjectId);
   const selectObject = useEditorStore((s) => s.selectObject);
+  const activeTool = useEditorStore((s) => s.activeTool);
+  const editorMode = useEditorStore((s) => s.editorMode);
+  const setOrbitEnabled = useEditorStore((s) => s.setOrbitEnabled);
+  const { updateObject } = useSceneStore();
 
   const isSelected = selectedObjectId === name;
+  const showGizmo = isSelected && editorMode === 'object' && ['move', 'rotate', 'scale'].includes(activeTool);
+  const gizmoMode = activeTool === 'rotate' ? 'rotate' : activeTool === 'scale' ? 'scale' : 'translate';
+
+  const [isDragging, setIsDragging] = useState(false);
+
+  useEffect(() => {
+    setOrbitEnabled(!isDragging);
+  }, [isDragging, setOrbitEnabled]);
+
+  const handleTransform = () => {
+    if (groupRef.current) {
+      const pos = groupRef.current.position;
+      const rot = groupRef.current.rotation;
+      const scl = groupRef.current.scale;
+      updateObject(name, {
+        locate: { x: pos.x, y: pos.y, z: pos.z },
+        rotate: { x: rot.x, y: rot.y, z: rot.z },
+        scale: { x: scl.x, y: scl.y, z: scl.z },
+      });
+    }
+  };
 
   // Geometry 크기 계산 (스케일 적용)
   useEffect(() => {
@@ -97,16 +123,25 @@ export default function Model({
         )}
       </mesh>
 
-      {/* 선택된 경우 EdgeBox 표시 (계산된 boxSize 사용) */}
-      {boxSize && isSelected && (
+      {boxSize && isSelected && editorMode === 'object' && activeTool === 'select' && (
         <EdgeBox
-          size={boxSize} // 📍 스케일이 적용된 최종 크기 전달
+          size={boxSize}
           position={[0, 0, 0]}
           color="#ffffff"
           pointSize={0.05}
           onHeightChange={onHeightChange}
           onWidthChange={onWidthChange}
           onDepthChange={onDepthChange}
+        />
+      )}
+
+      {showGizmo && groupRef.current && (
+        <TransformControls
+          object={groupRef.current}
+          mode={gizmoMode}
+          onMouseUp={handleTransform}
+          // @ts-ignore
+          onDraggingChange={setIsDragging}
         />
       )}
     </group>

@@ -74,22 +74,28 @@ const SliderInput = ({ label, value, onChange, min = 0, max = 2, step = 0.1 }: {
 
 // Mode Switcher component
 const ModeSwitcher = () => {
-    const { transformMode, setTransformMode } = useEditorStore();
+    const { activeTool, setActiveTool } = useEditorStore();
     return (
         <div>
             <p className={s.title}>Transform Mode</p>
             <div className={s.modeSwitcher}>
                 <button 
-                    className={`${s.button} ${transformMode === 'translate' ? s.activeButton : ''}`}
-                    onClick={() => setTransformMode('translate')}
+                    className={`${s.button} ${activeTool === 'move' ? s.activeButton : ''}`}
+                    onClick={() => setActiveTool('move')}
                 >
                     Translate
                 </button>
                 <button 
-                    className={`${s.button} ${transformMode === 'rotate' ? s.activeButton : ''}`}
-                    onClick={() => setTransformMode('rotate')}
+                    className={`${s.button} ${activeTool === 'rotate' ? s.activeButton : ''}`}
+                    onClick={() => setActiveTool('rotate')}
                 >
                     Rotate
+                </button>
+                <button 
+                    className={`${s.button} ${activeTool === 'scale' ? s.activeButton : ''}`}
+                    onClick={() => setActiveTool('scale')}
+                >
+                    Scale
                 </button>
             </div>
         </div>

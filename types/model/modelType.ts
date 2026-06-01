@@ -1,3 +1,5 @@
+import type { EditableMesh } from "./editableMesh";
+
 export type ModelType = {
     name: string;
     type: "mesh";
@@ -117,6 +119,15 @@ export type GLTFType = {
     url: string;
 }
 
-export type TypeType = "mesh" | "group" | "light" | "camera" | "gltf";
+export type EditableMeshType = {
+    name: string;
+    type: "editableMesh";
+    locate: { x: number; y: number; z: number };
+    rotate: { x: number; y: number; z: number };
+    scale: { x: number; y: number; z: number };
+    meshData: EditableMesh;
+}
 
-export type SceneObject = ModelType | GroupType | LightType | CameraType | GLTFType; // Define SceneObject here for GroupType children
+export type TypeType = "mesh" | "group" | "light" | "camera" | "gltf" | "editableMesh";
+
+export type SceneObject = ModelType | GroupType | LightType | CameraType | GLTFType | EditableMeshType; // Define SceneObject here for GroupType children
