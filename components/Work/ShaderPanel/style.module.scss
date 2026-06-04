@@ -7,7 +7,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  color: white; // Example text color
+  color: $text-primary; // Example text color
 }
 
 .materialCard {
@@ -56,26 +56,26 @@
 
 .generatedCodeDisplay {
   margin-top: 20px;
-  background-color: #282c34; // Dark background for code
-  color: #abb2bf; // Light text color
+  background-color: $background-third;
+  color: $text-secondary;
   padding: 10px;
   border-radius: 5px;
   font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
   font-size: 0.8em;
-  overflow-x: auto; // Allow horizontal scrolling for long lines
-  max-height: 200px; // Limit height
+  overflow-x: auto;
+  max-height: 200px;
 
   h4 {
-    color: #61dafb; // Highlight for titles
+    color: $accent-secondary;
     margin-top: 0;
     margin-bottom: 5px;
-    border-bottom: 1px solid #3e4451;
+    border-bottom: 1px solid $border-primary;
     padding-bottom: 5px;
   }
 
   pre {
-    white-space: pre-wrap; // Wrap long lines
-    word-break: break-all; // Break words if necessary
+    white-space: pre-wrap;
+    word-break: break-all;
     margin: 0;
   }
 }

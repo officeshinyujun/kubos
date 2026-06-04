@@ -1,0 +1,22 @@
+.focusButton {
+    position: absolute;
+    top: $s8;
+    right: $s8;
+    z-index: 10;
+    padding: $s4 $s8;
+    border-radius: $s4;
+    border: none;
+    cursor: pointer;
+    font-size: $sm;
+    font-weight: $regular;
+    background-color: $background-third;
+    color: $text-secondary;
+    opacity: 0.8;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.focusButtonActive {
+    background-color: $brand-primary;
+    color: $background-primary;
+    font-weight: $semi-bold;
+}

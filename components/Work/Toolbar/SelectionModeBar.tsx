@@ -2,13 +2,19 @@
 
 import { useEffect } from 'react';
 import { useEditorStore } from '@/stores/useEditStore';
+import { useSceneStore } from '@/stores/useSceneStore';
+import s from './style.module.scss';
 
 export default function SelectionModeBar() {
-  const { editorMode, selectionMode, setSelectionMode } = useEditorStore();
+  const { selectionMode, setSelectionMode, selectedObjectId } = useEditorStore();
+  const { objects } = useSceneStore();
+
+  const selectedObject = objects.find(o => o.name === selectedObjectId);
+  const isEditableMesh = selectedObject?.type === 'editableMesh';
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (editorMode !== 'edit') return;
+      if (!isEditableMesh) return;
       const target = e.target as HTMLElement | null;
       if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) return;
 
@@ -26,9 +32,9 @@ export default function SelectionModeBar() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [editorMode, setSelectionMode]);
+  }, [isEditableMesh, setSelectionMode]);
 
-  if (editorMode !== 'edit') return null;
+  if (!isEditableMesh) return null;
 
   const modes = [
     { key: 'vertex' as const, label: 'Vertex', shortcut: '1' },
@@ -37,30 +43,12 @@ export default function SelectionModeBar() {
   ];
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '4px',
-        alignItems: 'center',
-        padding: '4px 8px',
-        background: '#1a1a1a',
-        borderRadius: '6px',
-      }}
-    >
+    <div className={s.container}>
       {modes.map(({ key, label, shortcut }) => (
         <button
           key={key}
           onClick={() => setSelectionMode(key)}
-          style={{
-            padding: '4px 10px',
-            borderRadius: '4px',
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: '11px',
-            fontWeight: selectionMode === key ? 600 : 400,
-            backgroundColor: selectionMode === key ? '#ff6b4a' : '#2a2a2a',
-            color: selectionMode === key ? '#fff' : '#aaa',
-          }}
+          className={`${s.modeButton} ${selectionMode === key ? s.modeButtonActive : ''}`}
           title={`${label} (${shortcut})`}
         >
           {label}

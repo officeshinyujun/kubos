@@ -1,5 +1,8 @@
 import s from "./style.module.scss"
 import ProjectCard from "./projectCard"
+import { VStack } from "@/components/general/VStack"
+import { HStack } from "@/components/general/HStack"
+import Typo from "@/components/general/Typo"
 
 export default function ProjectSection() {
 
@@ -19,13 +22,13 @@ export default function ProjectSection() {
     ]
 
     return (
-        <section className={s.container}>
-            <h1>이전 프로젝트</h1>
-            <div className={s.contents}>
+        <VStack as="section" className={s.container} fullWidth gap={16} align="start">
+            <Typo.BD size={24} color="primary">이전 프로젝트</Typo.BD>
+            <HStack className={s.contents} fullWidth gap={16} align="start">
                 {projects.map((project, index) => (
                     <ProjectCard key={index} title={project.title} editTime={project.editTime}/>
                 ))}
-            </div>
-        </section>
+            </HStack>
+        </VStack>
     )
 }

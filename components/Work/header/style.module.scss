@@ -34,7 +34,7 @@
     padding: $s4 $s12;
     border: none;
     border-radius: $s4;
-    background: $background-secondary;
+    background: $background-third;
     color: $text-secondary;
     cursor: pointer;
     font-size: $sm;
@@ -58,7 +58,7 @@
 }
 
 .activeEdit {
-    background: $background-third;
-    color: $text-primary;
+    background: $accent-primary;
+    color: $background-primary;
     font-weight: $semi-bold;
 }

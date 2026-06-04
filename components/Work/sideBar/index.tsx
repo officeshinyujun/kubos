@@ -13,8 +13,9 @@ import { useEditorStore } from "@/stores/useEditStore";
 import EditPanel from "../EditPanel";
 import CodePanel from "../CodePanel";
 import ShaderPanel from "../ShaderPanel";
+import AISceneInspector from "../AISceneInspector";
 
-type TabType = "구조" | "속성" | "코드" | "쉐이더";
+type TabType = "구조" | "속성" | "코드" | "쉐이더" | "AI";
 
 interface WorkSideBarProps {
     reactCode: string;
@@ -47,6 +48,7 @@ export default function WorkSideBar({ reactCode, vanillaCode }: WorkSideBarProps
                 <TabButton label="속성" onClick={() => setTab("속성")} isActive={tab === "속성"} dataTutorialId="properties-tab"/>
                 <TabButton label="코드" onClick={() => setTab("코드")} isActive={tab === "코드"} />
                 <TabButton label="쉐이더" onClick={() => setTab("쉐이더")} isActive={tab === "쉐이더"} />
+                <TabButton label="AI" onClick={() => setTab("AI")} isActive={tab === "AI"} />
             </div>
             <div className={s.contents}>
                 {tab === "구조" && testData.map((item) => {
@@ -127,6 +129,7 @@ export default function WorkSideBar({ reactCode, vanillaCode }: WorkSideBarProps
                 {tab === "속성" && <EditPanel />}
                 {tab === "코드" && <CodePanel reactCode={reactCode} vanillaCode={vanillaCode} />}
                 {tab === "쉐이더" && <ShaderPanel />}
+                {tab === "AI" && <AISceneInspector />}
             </div>
         </div>
     );

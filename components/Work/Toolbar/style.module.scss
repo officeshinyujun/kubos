@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    gap: $s4;
+    align-items: center;
+    padding: $s4 $s8;
+    background: $background-secondary;
+    border-radius: $s6;
+}
+
+.modeButton {
+    padding: $s4 $s8;
+    border-radius: $s4;
+    border: none;
+    cursor: pointer;
+    font-size: $sm;
+    font-weight: $regular;
+    background-color: $background-third;
+    color: $text-secondary;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.modeButtonActive {
+    font-weight: $semi-bold;
+    background-color: $brand-primary;
+    color: $background-primary;
+}

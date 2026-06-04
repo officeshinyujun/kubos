@@ -1,12 +1,12 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, type ReactNode } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useSceneStore } from '@/stores/useSceneStore';
 import Model from '@/components/Work/model';
 import LightRenderer from '@/components/Work/LightRenderer';
 import CameraRenderer from '@/components/Work/CameraRenderer';
-import { ModelType, LightType, CameraType, GLTFType, EditableMeshType } from '@/types/model/modelType';
+import { ModelType, LightType, CameraType, GLTFType, EditableMeshType, GroupType, SceneObject } from '@/types/model/modelType';
 import { GeometryType } from '@/types/model/modelDefinitions';
 import EditableMeshRenderer from '@/components/Work/model/EditableMeshRenderer';
 
@@ -40,59 +40,79 @@ export const SharedScene = () => {
     updateObject(modelId, { scale: newScale });
   };
 
-  return (
-    <Suspense fallback={null}>
-      {objects.map((obj) => {
-        if (obj.type === 'mesh') {
-          return (
-            <Model
-              key={obj.name}
-              name={obj.name}
-              geometryType={obj.mesh as GeometryType}
-              position={[obj.locate.x, obj.locate.y, obj.locate.z]}
-              scale={[obj.scale.x, obj.scale.y, obj.scale.z]}
-              materialType={obj.shader as any}
-              texturePath={obj.texturePath}
-              materialProps={{ 
-                color: obj.color,
-              }}
-              onHeightChange={(deltaY) => handleHeightChange(obj.name, deltaY)}
-              onWidthChange={(deltaX) => handleWidthChange(obj.name, deltaX)}
-              onDepthChange={(deltaX) => handleDepthChange(obj.name, deltaX)}
-            />
-          )
-        }
-        if (obj.type === 'light') {
-          return <LightRenderer key={obj.name} light={obj as LightType} />
-        }
-        if (obj.type === 'camera') {
-          return <CameraRenderer key={obj.name} camera={obj as CameraType} />
-        }
-        if (obj.type === 'gltf') {
-          const gltfObj = obj as GLTFType;
-          return <GltfModel 
-            key={gltfObj.name} 
-            url={gltfObj.url}
-            position={[gltfObj.locate.x, gltfObj.locate.y, gltfObj.locate.z]}
-            scale={[gltfObj.scale.x, gltfObj.scale.y, gltfObj.scale.z]}
-            rotation={[gltfObj.rotate.x, gltfObj.rotate.y, gltfObj.rotate.z]}
-          />
-        }
-        if (obj.type === 'editableMesh') {
-          const emObj = obj as EditableMeshType;
-          return (
-            <EditableMeshRenderer
-              key={emObj.name}
-              name={emObj.name}
-              meshData={emObj.meshData}
-              position={[emObj.locate.x, emObj.locate.y, emObj.locate.z]}
-              rotation={[emObj.rotate.x, emObj.rotate.y, emObj.rotate.z]}
-              scale={[emObj.scale.x, emObj.scale.y, emObj.scale.z]}
-            />
-          );
-        }
-        return null;
-      })}
-    </Suspense>
-  )
+  const renderSceneObject = (obj: SceneObject): ReactNode => {
+    if (obj.type === 'mesh') {
+      return (
+        <Model
+          key={obj.name}
+          name={obj.name}
+          geometryType={obj.mesh as GeometryType}
+          position={[obj.locate.x, obj.locate.y, obj.locate.z]}
+          scale={[obj.scale.x, obj.scale.y, obj.scale.z]}
+          materialType={obj.shader as any}
+          texturePath={obj.texturePath}
+          materialProps={{
+            color: obj.color,
+          }}
+          onHeightChange={(deltaY) => handleHeightChange(obj.name, deltaY)}
+          onWidthChange={(deltaX) => handleWidthChange(obj.name, deltaX)}
+          onDepthChange={(deltaX) => handleDepthChange(obj.name, deltaX)}
+        />
+      );
+    }
+
+    if (obj.type === 'light') {
+      return <LightRenderer key={obj.name} light={obj as LightType} />;
+    }
+
+    if (obj.type === 'camera') {
+      return <CameraRenderer key={obj.name} camera={obj as CameraType} />;
+    }
+
+    if (obj.type === 'gltf') {
+      const gltfObj = obj as GLTFType;
+      return (
+        <GltfModel
+          key={gltfObj.name}
+          url={gltfObj.url}
+          position={[gltfObj.locate.x, gltfObj.locate.y, gltfObj.locate.z]}
+          scale={[gltfObj.scale.x, gltfObj.scale.y, gltfObj.scale.z]}
+          rotation={[gltfObj.rotate.x, gltfObj.rotate.y, gltfObj.rotate.z]}
+        />
+      );
+    }
+
+    if (obj.type === 'editableMesh') {
+      const emObj = obj as EditableMeshType;
+      return (
+        <EditableMeshRenderer
+          key={emObj.name}
+          name={emObj.name}
+          meshData={emObj.meshData}
+          position={[emObj.locate.x, emObj.locate.y, emObj.locate.z]}
+          rotation={[emObj.rotate.x, emObj.rotate.y, emObj.rotate.z]}
+          scale={[emObj.scale.x, emObj.scale.y, emObj.scale.z]}
+        />
+      );
+    }
+
+    if (obj.type === 'group') {
+      const group = obj as GroupType;
+      return (
+        <group
+          key={group.name}
+          name={group.name}
+          position={[group.locate.x, group.locate.y, group.locate.z]}
+          rotation={[group.rotate.x, group.rotate.y, group.rotate.z]}
+          scale={[group.scale.x, group.scale.y, group.scale.z]}
+        >
+          {group.children.map(renderSceneObject)}
+        </group>
+      );
+    }
+
+    return null;
+  };
+
+  return <Suspense fallback={null}>{objects.map(renderSceneObject)}</Suspense>;
 }

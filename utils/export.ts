@@ -1,7 +1,7 @@
 
 import * as THREE from 'three';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
-import { SceneObject, ModelType, LightType } from '@/types/model/modelType';
+import { SceneObject, ModelType, LightType, GroupType } from '@/types/model/modelType';
 
 function createThreeJsObject(obj: SceneObject): THREE.Object3D | null {
     let threeObj: THREE.Object3D | null = null;
@@ -58,6 +58,16 @@ function createThreeJsObject(obj: SceneObject): THREE.Object3D | null {
                 break;
             // Add other light types if needed
         }
+    } else if (obj.type === 'group') {
+        const group = obj as GroupType;
+        const groupObject = new THREE.Group();
+        group.children.forEach((child) => {
+            const childObject = createThreeJsObject(child);
+            if (childObject) {
+                groupObject.add(childObject);
+            }
+        });
+        threeObj = groupObject;
     }
     
     if (threeObj) {

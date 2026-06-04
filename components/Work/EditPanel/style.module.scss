@@ -1,6 +1,6 @@
 .container {
     padding: 10px;
-    color: white;
+    color: $text-primary;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -10,12 +10,12 @@
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 5px;
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid $border-primary;
     padding-bottom: 5px;
 }
 
 .noObject {
-    color: #888;
+    color: $text-secondary;
     font-style: italic;
 }
 
@@ -27,14 +27,14 @@
     label {
         width: 20px;
         font-weight: bold;
-        color: #aaa;
+        color: $text-secondary;
     }
 
     input {
         width: 60px;
-        background-color: #333;
-        border: 1px solid #555;
-        color: white;
+        background-color: $background-third;
+        border: 1px solid $border-primary;
+        color: $text-primary;
         padding: 5px;
         border-radius: 3px;
         text-align: center;
@@ -58,11 +58,11 @@
 
         &::-webkit-color-swatch {
             border-radius: 5px;
-            border: 1px solid #555;
+            border: 1px solid $border-primary;
         }
         &::-moz-color-swatch {
             border-radius: 5px;
-            border: 1px solid #555;
+            border: 1px solid $border-primary;
         }
     }
 }
@@ -83,9 +83,9 @@
 }
 
 .button {
-    background-color: #444;
-    border: 1px solid #666;
-    color: white;
+    background-color: $background-third;
+    border: 1px solid $border-primary;
+    color: $text-primary;
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
@@ -93,16 +93,16 @@
     transition: background-color 0.2s;
 
     &:hover {
-        background-color: #555;
+        background-color: $border-primary;
     }
 }
 
 .activeButton {
-    background-color: #007acc;
-    border-color: #007acc;
+    background-color: $accent-secondary;
+    border-color: $accent-secondary;
 
     &:hover {
-        background-color: #005f99;
+        background-color: $accent-secondary-hover;
     }
 }
 

@@ -13,9 +13,9 @@
 }
 
 .active{
-    background: #00F000;
+    background: $brand-primary;
     p{
-        color: #111;
+        color: $background-primary;
     }
 }
 

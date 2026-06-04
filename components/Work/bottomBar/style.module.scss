@@ -9,7 +9,7 @@
 .top {
     width: 100%;
     padding: $s8 $s12;
-    gap : 10px;
+    gap: $s8;
     border-top: 1px solid $border-primary;
     display: flex;
     flex-direction: row;
@@ -23,7 +23,42 @@
     background-color: $background-third;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: $s12;
     flex: 1 0 0;
     align-self: stretch;
+}
+
+.toolPalette {
+    width: 100%;
+    display: flex;
+    gap: $s4;
+    padding: $s8;
+    flex-wrap: wrap;
+    border-top: 1px solid $border-primary;
+}
+
+.toolButton {
+    padding: $s6 $s12;
+    border-radius: $s4;
+    border: none;
+    cursor: pointer;
+    font-size: $sm;
+    font-weight: $regular;
+    background-color: $background-third;
+    color: $text-primary;
+    transition: background-color 0.15s, color 0.15s;
+
+    &:hover {
+        background-color: $background-secondary;
+    }
+}
+
+.toolButtonActive {
+    font-weight: $semi-bold;
+    background-color: $brand-primary;
+    color: $background-primary;
+
+    &:hover {
+        background-color: $brand-primary;
+    }
 }

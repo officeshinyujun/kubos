@@ -4,7 +4,7 @@ import s from './style.module.scss';
 import WorkHeader from '@/components/Work/header';
 import WorkSideBar from '@/components/Work/sideBar';
 import WorkBottomBar from '@/components/Work/bottomBar';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { useSceneStore } from '@/stores/useSceneStore';
 import { useEditorStore } from '@/stores/useEditStore';
 import { Canvas } from '@react-three/fiber';
@@ -19,7 +19,7 @@ import { useSearchParams } from 'next/navigation';
 import { useTutorialStore } from '@/stores/useTutorialStore';
 import FocusToggle from '@/components/Work/FocusToggle';
 
-export default function WorkList() {
+function WorkListInner() {
   const { clearSelection } = useEditorStore();
   const mainViewRef = useRef<HTMLDivElement>(null!);
   const renderViewRef = useRef<HTMLDivElement>(null!);
@@ -86,7 +86,7 @@ export default function WorkList() {
           <Canvas
             className={s.canvas}
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
-            eventSource={mainViewRef} // Main view drives events
+            eventSource={mainViewRef}
           >
             {/* Main Editor View */}
             <View index={1} track={mainViewRef}>
@@ -117,5 +117,13 @@ export default function WorkList() {
         {!isFocused && <WorkSideBar reactCode={reactCode} vanillaCode={vanillaCode} />} {/* Pass code props */}
       </div>
     </div>
+  );
+}
+
+export default function WorkList() {
+  return (
+    <Suspense fallback={null}>
+      <WorkListInner />
+    </Suspense>
   );
 }

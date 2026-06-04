@@ -3,25 +3,29 @@ import s from "./page.module.scss";
 import SideBar from "@/components/Main/sideBar";
 import ProjectSection from "@/components/Main/projectSection";
 import TutorialSection from "@/components/Main/tutorialSection";
+import { VStack } from "@/components/general/VStack";
+import { HStack } from "@/components/general/HStack";
+import Typo from "@/components/general/Typo";
 
 export default function Home() {
-
-  const user = "유준"
+  const user = "유준";
 
   return (
-    <div className={s.container}>
+    <VStack className={s.container}>
       <Header/>
-      <div className={s.contentsContainer}>
+      <HStack className={s.contentsContainer} fullWidth fullHeight align="start">
         <SideBar/>
-        <div className={s.contents}>
-          <div>
-            <p className={s.title}>안녕하세요 <span className={s.userName}>{user}</span>님</p>
-            <p className={s.description}>오늘은 어떤 작품을 만드실건가요?</p>
-          </div>
+        <VStack className={s.contents} fullWidth fullHeight gap={16} align="start">
+          <VStack>
+            <Typo.MD size={24} color="primary" style={{lineHeight: '150%'}}>
+              안녕하세요 <Typo.SM as="span" size={24} color="brand">{user}</Typo.SM>님
+            </Typo.MD>
+            <Typo.MD size={16} color="secondary" style={{lineHeight: '150%'}}>오늘은 어떤 작품을 만드실건가요?</Typo.MD>
+          </VStack>
           <ProjectSection/>
           <TutorialSection/>
-        </div>
-      </div>  
-    </div>
+        </VStack>
+      </HStack>
+    </VStack>
   );
 }

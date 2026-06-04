@@ -16,7 +16,7 @@ export default function CameraRenderer({ camera }: CameraRendererProps) {
   const { selectedObjectId, selectObject, setOrbitEnabled, activeTool } = useEditorStore();
   const { updateObject } = useSceneStore();
   
-  const cameraRef = useRef<THREE.Camera>(null!);
+  const cameraRef = useRef<THREE.PerspectiveCamera>(null!);
 
   const isSelected = selectedObjectId === camera.name;
 
@@ -43,7 +43,8 @@ export default function CameraRenderer({ camera }: CameraRendererProps) {
         <TransformControls 
           object={cameraRef.current} 
           onMouseUp={handleTransform}
-          onDraggingChange={(e) => setOrbitEnabled(!e)}
+          // @ts-ignore - onDraggingChange exists at runtime but isn't typed in this drei version
+          onDraggingChange={(e: boolean) => setOrbitEnabled(!e)}
           mode={activeTool === 'rotate' ? 'rotate' : activeTool === 'scale' ? 'scale' : 'translate'}
         />
       )}

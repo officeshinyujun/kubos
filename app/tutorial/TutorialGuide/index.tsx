@@ -107,7 +107,7 @@ const TutorialGuide = () => {
         <p>{description}</p>
         {/* <button onClick={prevStep} disabled={!isTutorialActive}>이전</button> */}
         {!autoAdvance && <button onClick={nextStep}>다음</button>}
-        <button onClick={endTutorial}>튜토리얼 종료</button>
+        <button onClick={() => endTutorial()}>튜토리얼 종료</button>
       </div>
     </div>
   );

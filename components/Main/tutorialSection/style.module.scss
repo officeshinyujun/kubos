@@ -1,16 +1,5 @@
 .container{
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
     padding: $s12 $s20 ;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: $s16;
-    h1 {
-        font-size: $xl;
-        font-weight: $bold;
-        color: $text-primary;
-    }
     background-color: $background-secondary;
     border-radius: $s16;
     border: 1px solid $border-primary;

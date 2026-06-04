@@ -1,0 +1,153 @@
+.container {
+    padding: $s12;
+}
+
+.summaryGrid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $s12;
+}
+
+.metricCard,
+.sectionCard {
+    width: 100%;
+    padding: $s12;
+    border: 1px solid $border-primary;
+    border-radius: $s12;
+    background-color: $background-primary;
+}
+
+.tagBadge,
+.severityBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $s4 $s8;
+    border-radius: $s12;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.tagBadge {
+    color: $text-primary;
+    background-color: $background-secondary;
+    border: 1px solid $border-primary;
+}
+
+.severityBadge {
+    border: 1px solid $border-primary;
+    color: $text-primary;
+}
+
+.low {
+    background-color: $background-secondary;
+}
+
+.medium {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.high {
+    color: $background-primary;
+    background-color: $brand-primary;
+}
+
+.actionButton {
+    width: 100%;
+    border: 1px solid $border-primary;
+    border-radius: $s12;
+    background-color: $background-secondary;
+    color: $text-primary;
+    padding: $s12;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: $background-third;
+    }
+}
+
+.apiKeyInput {
+    width: 100%;
+    padding: $s8 $s12;
+    border: 1px solid $border-primary;
+    border-radius: $s8;
+    background-color: $background-primary;
+    color: $text-primary;
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+        color: $text-secondary;
+    }
+
+    &:focus {
+        border-color: $brand-primary;
+    }
+}
+
+.analyzeButton {
+    width: 100%;
+    padding: $s12;
+    border: none;
+    border-radius: $s8;
+    background-color: $brand-primary;
+    color: $background-primary;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 0.9;
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+.resultSection {
+    padding: $s12;
+    border: 1px solid $border-primary;
+    border-radius: $s12;
+    background-color: $background-primary;
+}
+
+.objectCard {
+    padding: $s8 $s12;
+    border: 1px solid $border-primary;
+    border-radius: $s8;
+    background-color: $background-secondary;
+}
+
+.confidenceBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $s4 $s6;
+    border-radius: $s4;
+    font-size: 11px;
+    font-weight: 600;
+    background-color: $background-third;
+    color: $text-correct;
+    border: 1px solid $border-primary;
+}
+
+.issueItem {
+    padding: $s8 $s12;
+    border-left: 2px solid $brand-primary;
+    background-color: $background-secondary;
+    border-radius: 0 $s8 $s8 0;
+}
+
+.loading {
+    padding: $s16;
+    border: 1px solid $border-primary;
+    border-radius: $s12;
+    background-color: $background-secondary;
+}

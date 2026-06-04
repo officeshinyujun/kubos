@@ -2,49 +2,11 @@
     width: 100vw;
     height: 100vh;
     background-color: $background-primary;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
 }
 
 .contentsContainer {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
 }
 
 .contents{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
     padding : $s24;
-    gap: $s16;
-}
-
-.title{
-    font-size : $s24;
-    font-weight : 500;
-    color : $text-primary;
-    line-height: 150%;
-}
-
-.userName{
-    font-size : $s24;
-    font-weight : 600;
-    color : $brand-primary;
-    line-height: 150%;
-}
-
-.description{
-    color : $text-secondary;
-    font-size: $md;
-    font-weight: $medium;
-    line-height: 150%;
 }

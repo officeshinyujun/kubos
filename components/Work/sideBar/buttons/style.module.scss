@@ -11,7 +11,7 @@
 }
 
 .active{
-    outline: 1px solid #3F3;
+    outline: 1px solid $brand-primary;
 }
 
 .name {
@@ -20,7 +20,7 @@
     justify-content: center;
     gap : $s12;
     p {
-        color: #FFF;
+        color: $text-primary;
         font-size: $s16;
         font-weight: normal;
         line-height: 150%; /* 24px */

@@ -2,11 +2,12 @@ import styles from "./style.module.scss";
 import kubosLogo from "@/assets/images/kubos_logo.svg";
 import kubosLogoText from "@/assets/images/kubos_logo_text.png";
 import Image from 'next/image';
+import { HStack } from "@/components/general/HStack";
 
 export default function Header() {
     return (
-        <header className={styles.container}>
-            <div className={styles.logoContainer}>
+        <HStack as="header" className={styles.container} fullWidth justify="between" align="center" gap={12}>
+            <HStack gap={12} align="center">
                 <Image 
                 src={kubosLogo}
                 alt="Kubos Logo"
@@ -19,8 +20,8 @@ export default function Header() {
                 alt="Kubos Logo Text"
                 width={87}
             />
-            </div>
+            </HStack>
             <div className={styles.userProfile}/>
-        </header>
+        </HStack>
     );
 }

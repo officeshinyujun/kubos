@@ -1,0 +1,8 @@
+- 2026-06-01: three.interactive is object-interaction focused, not face/edge/vertex topology picking.
+- 2026-06-01: no ready-made R3F library was found for Blender-like vertex/edge/face selection; likely requires custom layering over raycasting/BVH.
+- 2026-06-01: `npm exec tsc --noEmit` is currently blocked by unrelated pre-existing type errors in `app/tutorial/TutorialGuide/index.tsx` and `components/Work/CameraRenderer/index.tsx`, so this task's new type files could not be isolated with a clean full-project typecheck.
+  - Replaced the last three `transformMode` references with `activeTool` in `components/Work/EditPanel/index.tsx`, `components/Work/LightRenderer/index.tsx`, and `components/Work/CameraRenderer/index.tsx`.
+  - Repo grep for `transformMode` is clean outside `node_modules`.
+  - `npm run build` is currently blocked by an unrelated TypeScript error in `app/tutorial/TutorialGuide/index.tsx:110` where `endTutorial` is passed to `onClick` but its signature does not match `MouseEventHandler<HTMLButtonElement>`.
+  - `lsp_diagnostics` could not run because `typescript-language-server` is not installed in this workspace.
+- 2026-06-01: `lsp_diagnostics` for `components/Work/bottomBar/index.tsx` could not run because `typescript-language-server` is not installed in this workspace.

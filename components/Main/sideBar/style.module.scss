@@ -1,14 +1,9 @@
 .container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     padding: $s20;
     border-right: 1px solid $border-primary;
 }
 
-.button{
+.button {
     width: 260px;
     height: 50px;
     display: flex;

@@ -7,7 +7,6 @@ import { useSceneStore } from "@/stores/useSceneStore";
 import { exportToGLTF } from "@/utils/export";
 import { useRouter } from "next/navigation";
 import { useRef, useCallback } from "react";
-import ModeToggle from "./ModeToggle";
 import SelectionModeBar from '@/components/Work/Toolbar/SelectionModeBar';
 
 export default function WorkHeader() {
@@ -39,7 +38,6 @@ export default function WorkHeader() {
     return (
         <header className={s.container}>
             <Image src={logo} alt="Logo" width={40} height={40} onClick={() => router.push('/')} />
-            <ModeToggle />
             <SelectionModeBar />
             <p data-tutorial-id="import-button" onClick={handleImportClick}>불러오기</p>
             <input

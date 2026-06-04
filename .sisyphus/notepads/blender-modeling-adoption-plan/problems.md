@@ -1,0 +1,1 @@
+- 2026-06-01: need a dedicated strategy for highlighting selected sub-elements (vertex dots, edge overlays, face fill) in R3F.

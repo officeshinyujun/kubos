@@ -18,6 +18,7 @@ interface SceneState {
   addLight: (parentName: string | null, light: Omit<LightType, "name"> & { name: string }) => void;
   addCamera: (parentName: string | null, camera: Omit<CameraType, "name"> & { name: string }) => void;
   addGltf: (parentName: string | null, url: string) => void;
+  groupObjectsAtRoot: (groupName: string, objectNames: string[]) => boolean;
   removeObject: (name: string) => void;
   updateObject: (name: string, updated: Partial<SceneObject>) => void;
   convertToEditable: (name: string) => void;
@@ -261,6 +262,76 @@ export const useSceneStore = create<SceneState>()(
             state.objects.push(newObj);
           }
         });
+      },
+
+      groupObjectsAtRoot: (groupName, objectNames) => {
+        if (objectNames.length < 2) {
+          return false;
+        }
+
+        const collectNames = (items: SceneObject[]): string[] => {
+          return items.flatMap((item) => {
+            if (item.type === 'group') {
+              return [item.name, ...collectNames((item as GroupType).children)];
+            }
+
+            return [item.name];
+          });
+        };
+
+        const existingNames = new Set(collectNames(get().objects));
+        let resolvedGroupName = groupName;
+        let suffix = 1;
+
+        while (existingNames.has(resolvedGroupName)) {
+          resolvedGroupName = `${groupName}-${suffix}`;
+          suffix += 1;
+        }
+
+        let didGroup = false;
+
+        set((state) => {
+          const targetNames = new Set(objectNames);
+          const groupedChildren: SceneObject[] = [];
+          const remainingObjects: SceneObject[] = [];
+          let insertionIndex = -1;
+
+          state.objects.forEach((item) => {
+            if (targetNames.has(item.name)) {
+              if (insertionIndex === -1) {
+                insertionIndex = remainingObjects.length;
+              }
+              groupedChildren.push(item);
+              return;
+            }
+
+            remainingObjects.push(item);
+          });
+
+          if (groupedChildren.length < 2) {
+            return;
+          }
+
+          const newGroup: GroupType = {
+            name: resolvedGroupName,
+            type: 'group',
+            locate: { x: 0, y: 0, z: 0 },
+            rotate: { x: 0, y: 0, z: 0 },
+            scale: { x: 1, y: 1, z: 1 },
+            children: groupedChildren,
+          };
+
+          remainingObjects.splice(insertionIndex === -1 ? remainingObjects.length : insertionIndex, 0, newGroup);
+          state.objects = remainingObjects;
+          state.selectedObject = resolvedGroupName;
+          didGroup = true;
+        });
+
+        if (didGroup) {
+          useEditorStore.getState().selectObject(resolvedGroupName);
+        }
+
+        return didGroup;
       },
 
       updateMeshSelection: (name, updates, additive = false) => {
