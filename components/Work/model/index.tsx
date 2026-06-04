@@ -3,6 +3,7 @@
 import GeometryFactory from "./GeometryFactory";
 import MaterialFactory from "./MaterialFactory";
 import EdgeBox from "./EdgeBox";
+import GizmoOverlay from "./GizmoOverlay";
 import { GeometryType } from "@/types/model/GeometryType";
 import { MaterialType } from "@/types/model/MaterialType";
 import { useRef, useState, useEffect } from "react";
@@ -146,6 +147,10 @@ export default function Model({
           onWidthChange={onWidthChange}
           onDepthChange={onDepthChange}
         />
+      )}
+
+      {showGizmo && (
+        <GizmoOverlay visible={true} />
       )}
 
       {showGizmo && groupRef.current && (

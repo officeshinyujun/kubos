@@ -8,6 +8,7 @@ import { TransformControls } from '@react-three/drei';
 import { snapVector3 } from '@/hooks/useSnapping';
 import type { EditableMesh } from '@/types/model/editableMesh';
 import SelectionOverlay from './SelectionOverlay';
+import GizmoOverlay from '../GizmoOverlay';
 
 interface EditableMeshRendererProps {
   name: string;
@@ -209,6 +210,10 @@ export default function EditableMeshRenderer({
 
       {isSelected && editorMode === 'edit' && (
         <SelectionOverlay meshData={meshData} selectionMode={selectionMode as 'vertex' | 'edge' | 'face'} />
+      )}
+
+      {showGizmo && (
+        <GizmoOverlay visible={true} />
       )}
 
       {showGizmo && groupRef.current && (
