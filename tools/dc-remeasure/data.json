@@ -1,0 +1,5519 @@
+{
+  "scenarios": {
+    "A": [
+      {
+        "name": "box-0",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -11,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#e6194b"
+      },
+      {
+        "name": "box-1",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -8.8,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#3cb44b"
+      },
+      {
+        "name": "box-2",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -6.6000000000000005,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#ffe119"
+      },
+      {
+        "name": "box-3",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -4.4,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#4363d8"
+      },
+      {
+        "name": "box-4",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -2.2,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#f58231"
+      },
+      {
+        "name": "box-5",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#911eb4"
+      },
+      {
+        "name": "box-6",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 2.2,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#46f0f0"
+      },
+      {
+        "name": "box-7",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 4.4,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#f032e6"
+      },
+      {
+        "name": "box-8",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 6.6000000000000005,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#bcf60c"
+      },
+      {
+        "name": "box-9",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 8.8,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#fabebe"
+      },
+      {
+        "name": "sphere-0",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": -11,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#008080"
+      },
+      {
+        "name": "sphere-1",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": -8.8,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "color": "#9a6324"
+      },
+      {
+        "name": "dir-0",
+        "type": "light",
+        "light": "directional",
+        "color": "#ffffff",
+        "intensity": 1,
+        "locate": {
+          "x": 5,
+          "y": 5,
+          "z": 5
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      }
+    ],
+    "B": [
+      {
+        "name": "box-0",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -11,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-1",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -8.8,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-2",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -6.6000000000000005,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-3",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -4.4,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-4",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -2.2,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-5",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-6",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 2.2,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-7",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 4.4,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-8",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 6.6000000000000005,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-9",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 8.8,
+          "y": 0,
+          "z": -4.4
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-10",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -11,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-11",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -8.8,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-0",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": -6.6000000000000005,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-1",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": -4.4,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-2",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": -2.2,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-3",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-4",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": 2.2,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-5",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": 4.4,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-6",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": 6.6000000000000005,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-7",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": 8.8,
+          "y": 0,
+          "z": -2.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "dir-0",
+        "type": "light",
+        "light": "directional",
+        "color": "#ffffff",
+        "intensity": 1,
+        "locate": {
+          "x": 5,
+          "y": 8,
+          "z": 5
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "dir-1",
+        "type": "light",
+        "light": "directional",
+        "color": "#ffffff",
+        "intensity": 1,
+        "locate": {
+          "x": -5,
+          "y": 8,
+          "z": -5
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      }
+    ],
+    "C": [
+      {
+        "name": "box-0",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -10.8,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-1",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -9,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-2",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -7.2,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-3",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -5.4,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-4",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -3.6,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-5",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -1.8,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-6",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-7",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 1.8,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-8",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 3.6,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-9",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 5.4,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-10",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 7.2,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-11",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 9,
+          "y": 0,
+          "z": -3.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-12",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -10.8,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-13",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -9,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-14",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -7.2,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-15",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -5.4,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-16",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -3.6,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-17",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -1.8,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-18",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-19",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 1.8,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-0",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": 3.6,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-1",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": 5.4,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-2",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": 7.2,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-3",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": 9,
+          "y": 0,
+          "z": -1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-4",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": -10.8,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-5",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": -9,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-6",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": -7.2,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-7",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": -5.4,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-8",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": -3.6,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-9",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": -1.8,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-10",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "sphere-11",
+        "type": "mesh",
+        "mesh": "구",
+        "shader": "standard",
+        "locate": {
+          "x": 1.8,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "cyl-0",
+        "type": "mesh",
+        "mesh": "원기둥",
+        "shader": "standard",
+        "locate": {
+          "x": 3.6,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "cyl-1",
+        "type": "mesh",
+        "mesh": "원기둥",
+        "shader": "standard",
+        "locate": {
+          "x": 5.4,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "cyl-2",
+        "type": "mesh",
+        "mesh": "원기둥",
+        "shader": "standard",
+        "locate": {
+          "x": 7.2,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "cyl-3",
+        "type": "mesh",
+        "mesh": "원기둥",
+        "shader": "standard",
+        "locate": {
+          "x": 9,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "cyl-4",
+        "type": "mesh",
+        "mesh": "원기둥",
+        "shader": "standard",
+        "locate": {
+          "x": -10.8,
+          "y": 0,
+          "z": 1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "cyl-5",
+        "type": "mesh",
+        "mesh": "원기둥",
+        "shader": "standard",
+        "locate": {
+          "x": -9,
+          "y": 0,
+          "z": 1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "cyl-6",
+        "type": "mesh",
+        "mesh": "원기둥",
+        "shader": "standard",
+        "locate": {
+          "x": -7.2,
+          "y": 0,
+          "z": 1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "cyl-7",
+        "type": "mesh",
+        "mesh": "원기둥",
+        "shader": "standard",
+        "locate": {
+          "x": -5.4,
+          "y": 0,
+          "z": 1.8
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "g1",
+        "type": "group",
+        "children": [
+          {
+            "name": "g2",
+            "type": "group",
+            "children": [
+              {
+                "name": "g3",
+                "type": "group",
+                "children": [
+                  {
+                    "name": "g4",
+                    "type": "group",
+                    "children": [
+                      {
+                        "name": "g5",
+                        "type": "group",
+                        "children": [
+                          {
+                            "name": "misc-0",
+                            "type": "mesh",
+                            "mesh": "도넛",
+                            "shader": "standard",
+                            "locate": {
+                              "x": -3.6,
+                              "y": 0,
+                              "z": 1.8
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          },
+                          {
+                            "name": "misc-1",
+                            "type": "mesh",
+                            "mesh": "도넛",
+                            "shader": "standard",
+                            "locate": {
+                              "x": -1.8,
+                              "y": 0,
+                              "z": 1.8
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          },
+                          {
+                            "name": "misc-2",
+                            "type": "mesh",
+                            "mesh": "12면체",
+                            "shader": "standard",
+                            "locate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 1.8
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          },
+                          {
+                            "name": "misc-3",
+                            "type": "mesh",
+                            "mesh": "12면체",
+                            "shader": "standard",
+                            "locate": {
+                              "x": 1.8,
+                              "y": 0,
+                              "z": 1.8
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          },
+                          {
+                            "name": "misc-4",
+                            "type": "mesh",
+                            "mesh": "8면체",
+                            "shader": "standard",
+                            "locate": {
+                              "x": 3.6,
+                              "y": 0,
+                              "z": 1.8
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          },
+                          {
+                            "name": "misc-5",
+                            "type": "mesh",
+                            "mesh": "8면체",
+                            "shader": "standard",
+                            "locate": {
+                              "x": 5.4,
+                              "y": 0,
+                              "z": 1.8
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          },
+                          {
+                            "name": "misc-6",
+                            "type": "mesh",
+                            "mesh": "20면체",
+                            "shader": "standard",
+                            "locate": {
+                              "x": 7.2,
+                              "y": 0,
+                              "z": 1.8
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          },
+                          {
+                            "name": "misc-7",
+                            "type": "mesh",
+                            "mesh": "20면체",
+                            "shader": "standard",
+                            "locate": {
+                              "x": 9,
+                              "y": 0,
+                              "z": 1.8
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          },
+                          {
+                            "name": "misc-8",
+                            "type": "mesh",
+                            "mesh": "평면",
+                            "shader": "standard",
+                            "locate": {
+                              "x": -10.8,
+                              "y": 0,
+                              "z": 3.6
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          },
+                          {
+                            "name": "misc-9",
+                            "type": "mesh",
+                            "mesh": "평면",
+                            "shader": "standard",
+                            "locate": {
+                              "x": -9,
+                              "y": 0,
+                              "z": 3.6
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          },
+                          {
+                            "name": "asset-0",
+                            "type": "mesh",
+                            "mesh": "꼬인 도넛",
+                            "shader": "standard",
+                            "locate": {
+                              "x": -7.2,
+                              "y": 0,
+                              "z": 3.6
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          },
+                          {
+                            "name": "asset-1",
+                            "type": "mesh",
+                            "mesh": "꼬인 도넛",
+                            "shader": "standard",
+                            "locate": {
+                              "x": -5.4,
+                              "y": 0,
+                              "z": 3.6
+                            },
+                            "rotate": {
+                              "x": 0,
+                              "y": 0,
+                              "z": 0
+                            },
+                            "scale": {
+                              "x": 1,
+                              "y": 1,
+                              "z": 1
+                            }
+                          }
+                        ],
+                        "locate": {
+                          "x": 0,
+                          "y": 0,
+                          "z": 0
+                        },
+                        "rotate": {
+                          "x": 0,
+                          "y": 0,
+                          "z": 0
+                        },
+                        "scale": {
+                          "x": 1,
+                          "y": 1,
+                          "z": 1
+                        }
+                      }
+                    ],
+                    "locate": {
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
+                    },
+                    "rotate": {
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
+                    },
+                    "scale": {
+                      "x": 1,
+                      "y": 1,
+                      "z": 1
+                    }
+                  }
+                ],
+                "locate": {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                },
+                "rotate": {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                },
+                "scale": {
+                  "x": 1,
+                  "y": 1,
+                  "z": 1
+                }
+              }
+            ],
+            "locate": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotate": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            }
+          }
+        ],
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "dir-0",
+        "type": "light",
+        "light": "directional",
+        "color": "#ffffff",
+        "intensity": 1,
+        "locate": {
+          "x": 6,
+          "y": 9,
+          "z": 6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "dir-1",
+        "type": "light",
+        "light": "directional",
+        "color": "#ffffff",
+        "intensity": 1,
+        "locate": {
+          "x": -6,
+          "y": 9,
+          "z": -6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "point-0",
+        "type": "light",
+        "light": "point",
+        "color": "#ffffff",
+        "intensity": 1,
+        "locate": {
+          "x": 0,
+          "y": 6,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "point-1",
+        "type": "light",
+        "light": "point",
+        "color": "#ffffff",
+        "intensity": 1,
+        "locate": {
+          "x": 6,
+          "y": 4,
+          "z": -6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "point-2",
+        "type": "light",
+        "light": "point",
+        "color": "#ffffff",
+        "intensity": 1,
+        "locate": {
+          "x": -6,
+          "y": 4,
+          "z": 6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "amb-0",
+        "type": "light",
+        "light": "ambient",
+        "color": "#ffffff",
+        "intensity": 1,
+        "locate": {
+          "x": 5,
+          "y": 5,
+          "z": 5
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "cam-0",
+        "type": "camera",
+        "camera": "perspective",
+        "fov": 50,
+        "locate": {
+          "x": 0,
+          "y": 6,
+          "z": 14
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "cam-1",
+        "type": "camera",
+        "camera": "perspective",
+        "fov": 50,
+        "locate": {
+          "x": 10,
+          "y": 6,
+          "z": 10
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      }
+    ],
+    "D": [
+      {
+        "name": "box-0",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -8,
+          "y": 0,
+          "z": -3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-1",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -6.4,
+          "y": 0,
+          "z": -3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-2",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -4.800000000000001,
+          "y": 0,
+          "z": -3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-3",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -3.2,
+          "y": 0,
+          "z": -3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-4",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -1.6,
+          "y": 0,
+          "z": -3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-5",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": -3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-6",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 1.6,
+          "y": 0,
+          "z": -3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-7",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 3.2,
+          "y": 0,
+          "z": -3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-8",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 4.800000000000001,
+          "y": 0,
+          "z": -3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-9",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 6.4,
+          "y": 0,
+          "z": -3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-10",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -8,
+          "y": 0,
+          "z": -1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-11",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -6.4,
+          "y": 0,
+          "z": -1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-12",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -4.800000000000001,
+          "y": 0,
+          "z": -1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-13",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -3.2,
+          "y": 0,
+          "z": -1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-14",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -1.6,
+          "y": 0,
+          "z": -1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-15",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": -1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-16",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 1.6,
+          "y": 0,
+          "z": -1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-17",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 3.2,
+          "y": 0,
+          "z": -1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-18",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 4.800000000000001,
+          "y": 0,
+          "z": -1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-19",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 6.4,
+          "y": 0,
+          "z": -1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-20",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -8,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-21",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -6.4,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-22",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -4.800000000000001,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-23",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -3.2,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-24",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -1.6,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-25",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-26",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 1.6,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-27",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 3.2,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-28",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 4.800000000000001,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-29",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 6.4,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-30",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -8,
+          "y": 0,
+          "z": 1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-31",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -6.4,
+          "y": 0,
+          "z": 1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-32",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -4.800000000000001,
+          "y": 0,
+          "z": 1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-33",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -3.2,
+          "y": 0,
+          "z": 1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-34",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -1.6,
+          "y": 0,
+          "z": 1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-35",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": 1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-36",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 1.6,
+          "y": 0,
+          "z": 1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-37",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 3.2,
+          "y": 0,
+          "z": 1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-38",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 4.800000000000001,
+          "y": 0,
+          "z": 1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-39",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 6.4,
+          "y": 0,
+          "z": 1.6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-40",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -8,
+          "y": 0,
+          "z": 3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-41",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -6.4,
+          "y": 0,
+          "z": 3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-42",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -4.800000000000001,
+          "y": 0,
+          "z": 3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-43",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -3.2,
+          "y": 0,
+          "z": 3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-44",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": -1.6,
+          "y": 0,
+          "z": 3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-45",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 0,
+          "y": 0,
+          "z": 3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-46",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 1.6,
+          "y": 0,
+          "z": 3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-47",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 3.2,
+          "y": 0,
+          "z": 3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-48",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 4.800000000000001,
+          "y": 0,
+          "z": 3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "box-49",
+        "type": "mesh",
+        "mesh": "정육면체",
+        "shader": "standard",
+        "locate": {
+          "x": 6.4,
+          "y": 0,
+          "z": 3.2
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "name": "dir-0",
+        "type": "light",
+        "light": "directional",
+        "color": "#ffffff",
+        "intensity": 1,
+        "locate": {
+          "x": 6,
+          "y": 10,
+          "z": 6
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      }
+    ]
+  },
+  "analysis": {
+    "A": {
+      "estimatedDrawCalls": 24,
+      "breakdown": {
+        "meshes": 12,
+        "lights": 12,
+        "cameras": 0,
+        "postProcessing": 0
+      },
+      "bottlenecks": [],
+      "optimizedEstimate": 24,
+      "savings": 0,
+      "candidateSavings": []
+    },
+    "B": {
+      "estimatedDrawCalls": 60,
+      "breakdown": {
+        "meshes": 20,
+        "lights": 40,
+        "cameras": 0,
+        "postProcessing": 0
+      },
+      "bottlenecks": [
+        {
+          "type": "duplicate-materials",
+          "severity": "high",
+          "description": "1 material group(s) with 3+ identical meshes could be batched or instanced.",
+          "affectedObjects": [
+            "box-0",
+            "box-1",
+            "box-2",
+            "box-3",
+            "box-4",
+            "box-5",
+            "box-6",
+            "box-7",
+            "box-8",
+            "box-9",
+            "box-10",
+            "box-11",
+            "sphere-0",
+            "sphere-1",
+            "sphere-2",
+            "sphere-3",
+            "sphere-4",
+            "sphere-5",
+            "sphere-6",
+            "sphere-7"
+          ]
+        }
+      ],
+      "optimizedEstimate": 41,
+      "savings": 32,
+      "candidateSavings": [
+        {
+          "sig": "정육면체|standard|default-color",
+          "n": 12,
+          "drawCalls": 11,
+          "vertexMemoryKB": 34
+        },
+        {
+          "sig": "구|standard|default-color",
+          "n": 8,
+          "drawCalls": 7,
+          "vertexMemoryKB": 22
+        }
+      ]
+    },
+    "C": {
+      "estimatedDrawCalls": 157,
+      "breakdown": {
+        "meshes": 52,
+        "lights": 104,
+        "cameras": 1,
+        "postProcessing": 0
+      },
+      "bottlenecks": [
+        {
+          "type": "duplicate-materials",
+          "severity": "high",
+          "description": "1 material group(s) with 3+ identical meshes could be batched or instanced.",
+          "affectedObjects": [
+            "box-0",
+            "box-1",
+            "box-2",
+            "box-3",
+            "box-4",
+            "box-5",
+            "box-6",
+            "box-7",
+            "box-8",
+            "box-9",
+            "box-10",
+            "box-11",
+            "box-12",
+            "box-13",
+            "box-14",
+            "box-15",
+            "box-16",
+            "box-17",
+            "box-18",
+            "box-19",
+            "sphere-0",
+            "sphere-1",
+            "sphere-2",
+            "sphere-3",
+            "sphere-4",
+            "sphere-5",
+            "sphere-6",
+            "sphere-7",
+            "sphere-8",
+            "sphere-9",
+            "sphere-10",
+            "sphere-11",
+            "cyl-0",
+            "cyl-1",
+            "cyl-2",
+            "cyl-3",
+            "cyl-4",
+            "cyl-5",
+            "cyl-6",
+            "cyl-7",
+            "misc-0",
+            "misc-1",
+            "misc-2",
+            "misc-3",
+            "misc-4",
+            "misc-5",
+            "misc-6",
+            "misc-7",
+            "misc-8",
+            "misc-9",
+            "asset-0",
+            "asset-1"
+          ]
+        },
+        {
+          "type": "excessive-lights",
+          "severity": "medium",
+          "description": "6 lights detected. Shadow-casting lights multiply draw calls per mesh.",
+          "affectedObjects": [
+            "dir-0",
+            "dir-1",
+            "point-0",
+            "point-1",
+            "point-2",
+            "amb-0"
+          ]
+        },
+        {
+          "type": "deep-hierarchy",
+          "severity": "medium",
+          "description": "Scene hierarchy depth of 5 increases traversal cost. Consider flattening.",
+          "affectedObjects": [
+            "misc-0",
+            "misc-1",
+            "misc-2",
+            "misc-3",
+            "misc-4",
+            "misc-5",
+            "misc-6",
+            "misc-7",
+            "misc-8",
+            "misc-9",
+            "asset-0",
+            "asset-1"
+          ]
+        }
+      ],
+      "optimizedEstimate": 106,
+      "savings": 32,
+      "candidateSavings": [
+        {
+          "sig": "정육면체|standard|default-color",
+          "n": 20,
+          "drawCalls": 19,
+          "vertexMemoryKB": 59
+        },
+        {
+          "sig": "구|standard|default-color",
+          "n": 12,
+          "drawCalls": 11,
+          "vertexMemoryKB": 34
+        },
+        {
+          "sig": "원기둥|standard|default-color",
+          "n": 8,
+          "drawCalls": 7,
+          "vertexMemoryKB": 22
+        }
+      ]
+    },
+    "D": {
+      "estimatedDrawCalls": 100,
+      "breakdown": {
+        "meshes": 50,
+        "lights": 50,
+        "cameras": 0,
+        "postProcessing": 0
+      },
+      "bottlenecks": [
+        {
+          "type": "duplicate-materials",
+          "severity": "high",
+          "description": "1 material group(s) with 3+ identical meshes could be batched or instanced.",
+          "affectedObjects": [
+            "box-0",
+            "box-1",
+            "box-2",
+            "box-3",
+            "box-4",
+            "box-5",
+            "box-6",
+            "box-7",
+            "box-8",
+            "box-9",
+            "box-10",
+            "box-11",
+            "box-12",
+            "box-13",
+            "box-14",
+            "box-15",
+            "box-16",
+            "box-17",
+            "box-18",
+            "box-19",
+            "box-20",
+            "box-21",
+            "box-22",
+            "box-23",
+            "box-24",
+            "box-25",
+            "box-26",
+            "box-27",
+            "box-28",
+            "box-29",
+            "box-30",
+            "box-31",
+            "box-32",
+            "box-33",
+            "box-34",
+            "box-35",
+            "box-36",
+            "box-37",
+            "box-38",
+            "box-39",
+            "box-40",
+            "box-41",
+            "box-42",
+            "box-43",
+            "box-44",
+            "box-45",
+            "box-46",
+            "box-47",
+            "box-48",
+            "box-49"
+          ]
+        }
+      ],
+      "optimizedEstimate": 51,
+      "savings": 49,
+      "candidateSavings": [
+        {
+          "sig": "정육면체|standard|default-color",
+          "n": 50,
+          "drawCalls": 49,
+          "vertexMemoryKB": 153
+        }
+      ]
+    }
+  },
+  "candidates": {
+    "A": [],
+    "B": [
+      {
+        "meshSignature": "정육면체|standard|default-color",
+        "geometryType": "정육면체",
+        "materialType": "standard",
+        "color": "default-color",
+        "instances": [
+          {
+            "name": "box-0",
+            "position": [
+              -11,
+              0,
+              -4.4
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-1",
+            "position": [
+              -8.8,
+              0,
+              -4.4
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-2",
+            "position": [
+              -6.6000000000000005,
+              0,
+              -4.4
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-3",
+            "position": [
+              -4.4,
+              0,
+              -4.4
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-4",
+            "position": [
+              -2.2,
+              0,
+              -4.4
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-5",
+            "position": [
+              0,
+              0,
+              -4.4
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-6",
+            "position": [
+              2.2,
+              0,
+              -4.4
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-7",
+            "position": [
+              4.4,
+              0,
+              -4.4
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-8",
+            "position": [
+              6.6000000000000005,
+              0,
+              -4.4
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-9",
+            "position": [
+              8.8,
+              0,
+              -4.4
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-10",
+            "position": [
+              -11,
+              0,
+              -2.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-11",
+            "position": [
+              -8.8,
+              0,
+              -2.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        ],
+        "estimatedDrawCallReduction": 11
+      },
+      {
+        "meshSignature": "구|standard|default-color",
+        "geometryType": "구",
+        "materialType": "standard",
+        "color": "default-color",
+        "instances": [
+          {
+            "name": "sphere-0",
+            "position": [
+              -6.6000000000000005,
+              0,
+              -2.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-1",
+            "position": [
+              -4.4,
+              0,
+              -2.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-2",
+            "position": [
+              -2.2,
+              0,
+              -2.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-3",
+            "position": [
+              0,
+              0,
+              -2.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-4",
+            "position": [
+              2.2,
+              0,
+              -2.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-5",
+            "position": [
+              4.4,
+              0,
+              -2.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-6",
+            "position": [
+              6.6000000000000005,
+              0,
+              -2.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-7",
+            "position": [
+              8.8,
+              0,
+              -2.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        ],
+        "estimatedDrawCallReduction": 7
+      }
+    ],
+    "C": [
+      {
+        "meshSignature": "정육면체|standard|default-color",
+        "geometryType": "정육면체",
+        "materialType": "standard",
+        "color": "default-color",
+        "instances": [
+          {
+            "name": "box-0",
+            "position": [
+              -10.8,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-1",
+            "position": [
+              -9,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-2",
+            "position": [
+              -7.2,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-3",
+            "position": [
+              -5.4,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-4",
+            "position": [
+              -3.6,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-5",
+            "position": [
+              -1.8,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-6",
+            "position": [
+              0,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-7",
+            "position": [
+              1.8,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-8",
+            "position": [
+              3.6,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-9",
+            "position": [
+              5.4,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-10",
+            "position": [
+              7.2,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-11",
+            "position": [
+              9,
+              0,
+              -3.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-12",
+            "position": [
+              -10.8,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-13",
+            "position": [
+              -9,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-14",
+            "position": [
+              -7.2,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-15",
+            "position": [
+              -5.4,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-16",
+            "position": [
+              -3.6,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-17",
+            "position": [
+              -1.8,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-18",
+            "position": [
+              0,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-19",
+            "position": [
+              1.8,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        ],
+        "estimatedDrawCallReduction": 19
+      },
+      {
+        "meshSignature": "구|standard|default-color",
+        "geometryType": "구",
+        "materialType": "standard",
+        "color": "default-color",
+        "instances": [
+          {
+            "name": "sphere-0",
+            "position": [
+              3.6,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-1",
+            "position": [
+              5.4,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-2",
+            "position": [
+              7.2,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-3",
+            "position": [
+              9,
+              0,
+              -1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-4",
+            "position": [
+              -10.8,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-5",
+            "position": [
+              -9,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-6",
+            "position": [
+              -7.2,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-7",
+            "position": [
+              -5.4,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-8",
+            "position": [
+              -3.6,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-9",
+            "position": [
+              -1.8,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-10",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "sphere-11",
+            "position": [
+              1.8,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        ],
+        "estimatedDrawCallReduction": 11
+      },
+      {
+        "meshSignature": "원기둥|standard|default-color",
+        "geometryType": "원기둥",
+        "materialType": "standard",
+        "color": "default-color",
+        "instances": [
+          {
+            "name": "cyl-0",
+            "position": [
+              3.6,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "cyl-1",
+            "position": [
+              5.4,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "cyl-2",
+            "position": [
+              7.2,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "cyl-3",
+            "position": [
+              9,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "cyl-4",
+            "position": [
+              -10.8,
+              0,
+              1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "cyl-5",
+            "position": [
+              -9,
+              0,
+              1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "cyl-6",
+            "position": [
+              -7.2,
+              0,
+              1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "cyl-7",
+            "position": [
+              -5.4,
+              0,
+              1.8
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        ],
+        "estimatedDrawCallReduction": 7
+      }
+    ],
+    "D": [
+      {
+        "meshSignature": "정육면체|standard|default-color",
+        "geometryType": "정육면체",
+        "materialType": "standard",
+        "color": "default-color",
+        "instances": [
+          {
+            "name": "box-0",
+            "position": [
+              -8,
+              0,
+              -3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-1",
+            "position": [
+              -6.4,
+              0,
+              -3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-2",
+            "position": [
+              -4.800000000000001,
+              0,
+              -3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-3",
+            "position": [
+              -3.2,
+              0,
+              -3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-4",
+            "position": [
+              -1.6,
+              0,
+              -3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-5",
+            "position": [
+              0,
+              0,
+              -3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-6",
+            "position": [
+              1.6,
+              0,
+              -3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-7",
+            "position": [
+              3.2,
+              0,
+              -3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-8",
+            "position": [
+              4.800000000000001,
+              0,
+              -3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-9",
+            "position": [
+              6.4,
+              0,
+              -3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-10",
+            "position": [
+              -8,
+              0,
+              -1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-11",
+            "position": [
+              -6.4,
+              0,
+              -1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-12",
+            "position": [
+              -4.800000000000001,
+              0,
+              -1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-13",
+            "position": [
+              -3.2,
+              0,
+              -1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-14",
+            "position": [
+              -1.6,
+              0,
+              -1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-15",
+            "position": [
+              0,
+              0,
+              -1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-16",
+            "position": [
+              1.6,
+              0,
+              -1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-17",
+            "position": [
+              3.2,
+              0,
+              -1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-18",
+            "position": [
+              4.800000000000001,
+              0,
+              -1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-19",
+            "position": [
+              6.4,
+              0,
+              -1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-20",
+            "position": [
+              -8,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-21",
+            "position": [
+              -6.4,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-22",
+            "position": [
+              -4.800000000000001,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-23",
+            "position": [
+              -3.2,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-24",
+            "position": [
+              -1.6,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-25",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-26",
+            "position": [
+              1.6,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-27",
+            "position": [
+              3.2,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-28",
+            "position": [
+              4.800000000000001,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-29",
+            "position": [
+              6.4,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-30",
+            "position": [
+              -8,
+              0,
+              1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-31",
+            "position": [
+              -6.4,
+              0,
+              1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-32",
+            "position": [
+              -4.800000000000001,
+              0,
+              1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-33",
+            "position": [
+              -3.2,
+              0,
+              1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-34",
+            "position": [
+              -1.6,
+              0,
+              1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-35",
+            "position": [
+              0,
+              0,
+              1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-36",
+            "position": [
+              1.6,
+              0,
+              1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-37",
+            "position": [
+              3.2,
+              0,
+              1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-38",
+            "position": [
+              4.800000000000001,
+              0,
+              1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-39",
+            "position": [
+              6.4,
+              0,
+              1.6
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-40",
+            "position": [
+              -8,
+              0,
+              3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-41",
+            "position": [
+              -6.4,
+              0,
+              3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-42",
+            "position": [
+              -4.800000000000001,
+              0,
+              3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-43",
+            "position": [
+              -3.2,
+              0,
+              3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-44",
+            "position": [
+              -1.6,
+              0,
+              3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-45",
+            "position": [
+              0,
+              0,
+              3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-46",
+            "position": [
+              1.6,
+              0,
+              3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-47",
+            "position": [
+              3.2,
+              0,
+              3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-48",
+            "position": [
+              4.800000000000001,
+              0,
+              3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "box-49",
+            "position": [
+              6.4,
+              0,
+              3.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        ],
+        "estimatedDrawCallReduction": 49
+      }
+    ]
+  }
+}

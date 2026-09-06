@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<title>KUBOS Draw Call 재측정</title>
+<style>
+ body{font:14px/1.7 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;margin:32px;color:#111}
+ table{border-collapse:collapse;margin:16px 0;font-variant-numeric:tabular-nums}
+ th,td{border:1px solid #d4d4d4;padding:6px 10px;text-align:right}
+ th:first-child,td:first-child{text-align:left}
+ thead th{background:#f4f4f4}
+ pre{background:#f7f7f7;padding:12px;overflow:auto;font-size:12px}
+ h1{font-size:18px} h2{font-size:15px;margin-top:28px}
+</style></head>
+<body>
+<h1>KUBOS Draw Call 재측정</h1>
+<p><code>engine/drawCallAnalyzer.ts</code> 의 추정값과 <code>renderer.info.render.calls</code> 실측값을 나란히 잽니다.</p>
+<div id="out">측정 중…</div>
+<script type="module">
+import { run } from './harness.js';
+const DATA = await (await fetch('./data.json')).json();
+const r = await run(DATA);
+const pct = (a,b)=> a===0 ? '—' : Math.round((a-b)/a*100)+'%';
+const kb = (n)=> (n/1024).toFixed(1);
+const rows = r.rows.map(x=>`<tr>
+ <td>${x.key}</td><td>${x.meshes}</td><td>${x.lights}</td>
+ <td>${x.est}</td><td>${x.before}</td><td>${x.est-x.before}</td><td>${(x.est/x.before).toFixed(2)}배</td>
+ <td>${x.estAfter}</td><td>${x.after}</td>
+ <td>${x.estSavings}%</td><td>${pct(x.before,x.after)}</td>
+ <td>${kb(x.bytesBefore)}</td><td>${kb(x.bytesAfter)}</td><td>${pct(x.bytesBefore,x.bytesAfter)}</td>
+</tr>`).join('');
+document.getElementById('out').innerHTML = `
+<h2>측정 환경</h2><pre>${Object.entries(r.env).map(([k,v])=>k+': '+v).join('\n')}</pre>
+<h2>결과</h2>
+<table><thead><tr>
+ <th>시나리오</th><th>메시</th><th>광원</th>
+ <th>추정 DC</th><th>실측 DC</th><th>오차</th><th>배율</th>
+ <th>추정 DC(후)</th><th>실측 DC(후)</th>
+ <th>추정 감소율</th><th>실측 감소율</th>
+ <th>정점 KB(전)</th><th>정점 KB(후)</th><th>절감</th>
+</tr></thead><tbody>${rows}</tbody></table>
+<h2>원자료</h2><pre>${JSON.stringify(r,null,2)}</pre>`;
+</script>
+</body></html>
